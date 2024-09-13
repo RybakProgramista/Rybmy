@@ -1,6 +1,3 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![Issues][issues-shield]][issues-url]
-
 <br />
 <div align="center">
   <a href="https://github.com/RybakProgramista/Rybmy">
