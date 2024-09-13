@@ -12,8 +12,7 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
   @ViewChild('mainScene', { static: true }) mainScene!: ElementRef;
   app!: PIXI.Application;
   test!: PIXI.Sprite;
-  mousePos!: {x: number, y: number};
-
+  
   constructor() {}
 
   ngOnInit(): void {}
@@ -31,6 +30,6 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
         this.test.pivot.set(50, 50);
         this.app.stage.addChild(this.test);
       });
-});
+    });
   }
 }
