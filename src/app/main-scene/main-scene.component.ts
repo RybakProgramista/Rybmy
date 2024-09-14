@@ -12,7 +12,7 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
   @ViewChild('mainScene', { static: true }) mainScene!: ElementRef;
   app!: PIXI.Application;
   nextState!: string;
-  gameobjectList: Map<string, PIXI.Sprite> = new Map<string, PIXI.Sprite>();
+  gameobjectList: string[] = [];
   fishOn!: boolean;
 
   constructor() {}
@@ -33,14 +33,14 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
       this.nextState = "ciągnij";
 
       this.loadSprite("spławik.png")
-      this.app.ticker.add(() => {
-        if(this.random(0, 100) == 69){
-          this.removeSprite("spławik");
-          this.fishOn = true;
-          console.log("TNIJ");
-          this.app.ticker.stop();
-        }
-      });
+      // this.app.ticker.add(() => {
+      //   if(this.random(0, 100) == 69){
+      //     this.removeSprite("spławik");
+      //     this.fishOn = true;
+      //     console.log("TNIJ");
+      //     this.app.ticker.stop();
+      //   }
+      // });
     }
     else if(this.nextState == "ciągnij"){
       this.app.ticker.stop();
@@ -60,13 +60,17 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
       loadedSprite.position.set(this.app.canvas.width / 2, this.app.canvas.height / 2);
       loadedSprite.pivot.set(50, 50);
       this.app.stage.addChild(loadedSprite);
-      this.gameobjectList.set(path.split(".")[0], loadedSprite);
+      this.gameobjectList.push(path.split(".")[0]);
     });
   }
   removeSprite(name : string){ //usuwanie spritea ze sceny
-    let sprt : PIXI.Sprite = this.gameobjectList.get(name) ?? new PIXI.Sprite();
-    this.app.stage.removeChild(sprt);
-    this.gameobjectList.delete(name);
+    for(let a = 0; a < this.gameobjectList.length; a++){
+      if(this.gameobjectList[a] == name){
+        this.app.stage.getChildAt(a).destroy();
+        this.gameobjectList.splice(a);
+        return;
+      }
+    }
   }
   random(min : number, max : number):number{ //random dla leniwych fiutów jak ja
     return Math.floor(Math.random() * (max - min + 1) + min);
