@@ -13,20 +13,27 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
   app!: PIXI.Application;
   nextState!: string;
   fishOn!: boolean;
+  pullingFish! : boolean;
+
+  idleSplawikY! : number;
+  pullOutSplawikY! : number;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
   ngAfterViewInit(): void {
     // Tworzenie instancji aplikacji Pixi
     this.app = new PIXI.Application();
-
     // Dodanie widoku Pixi do kontenera w HTML
     this.app.init({ width: window.innerWidth, height: window.innerHeight /2 , background : "0x0032FF" }).then(()=>{
       this.mainScene.nativeElement.appendChild(this.app.canvas);
       this.loadSprite("spławik.png");
       this.nextState = "zarzuć";
-      
+
+      this.idleSplawikY = window.innerWidth / 2;
+      this.pullOutSplawikY = this.idleSplawikY - 10;
+
       this.app.ticker.add(() => {
         this.update();
       });
@@ -38,15 +45,15 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
       this.changeSpriteVisibility("spławik", true);
     }
     else if(this.nextState == "ciągnij"){
-      if(this.fishOn){
-        console.log("Złowiłeś karasia");
-        this.fishOn = false;
-      }
-      else{
+      if(!this.fishOn){
+        this.nextState = "zarzuć";
         this.changeSpriteVisibility("spławik", false);
-
       }
-      this.nextState = "zarzuć";
+    }
+  }
+  changePulling(newState : boolean) : void{
+    if(this.fishOn){
+      this.pullingFish = newState;
     }
   }
   loadSprite(path : string): void{ //funkcja do ładowania spriteu na scenę
@@ -60,22 +67,34 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
     });
   }
   changeSpriteVisibility(name : string, newVisibility : boolean) : void{
-    for(let x : number = 0; x < this.app.stage.children.length; x++){
-      if(this.app.stage.getChildAt(x).label == name){
-        this.app.stage.getChildAt(x).visible = newVisibility;
-        return;
-      }
-    }
+    this.getSprite(name).visible = newVisibility;
+  }
+  getSprite(name : string) : PIXI.Container{
+    return this.app.stage.getChildByLabel(name) as PIXI.Container;
   }
   random(min : number, max : number):number{ //random dla leniwych fiutów jak ja
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
-
+  fishPulledOut() : void{ //ryba złowiona
+    console.log("Złowiłeś karasia");
+    this.changeSpriteVisibility("spławik", false);
+    this.nextState = "zarzuć";
+    this.fishOn = false;
+  }
   update() : void{ //WAŻNE GÓWNO FUNKCJA CO SIĘ ROBI CO TICKA
     if(this.nextState == "ciągnij"){
-      if(this.random(0, 1000) == 69){
+      if(this.random(0, 100) == 69){
         this.fishOn = true;
         this.changeSpriteVisibility("spławik", false);
+      }
+    }
+
+    if(this.fishOn){ //ciągnięcie ryby
+      if(this.pullingFish){
+        
+      }
+      else{
+
       }
     }
   }
