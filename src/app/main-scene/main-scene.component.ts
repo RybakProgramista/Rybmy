@@ -12,7 +12,6 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
   @ViewChild('mainScene', { static: true }) mainScene!: ElementRef;
   app!: PIXI.Application;
   nextState!: string;
-  gameobjectList: string[] = [];
   fishOn!: boolean;
 
   constructor() {}
@@ -25,31 +24,27 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
     // Dodanie widoku Pixi do kontenera w HTML
     this.app.init({ width: window.innerWidth, height: window.innerHeight /2 , background : "0x0032FF" }).then(()=>{
       this.mainScene.nativeElement.appendChild(this.app.canvas);
-      this.nextState = "zarzuć";      
+      this.loadSprite("spławik.png");
+      this.nextState = "zarzuć";
+      
+      this.app.ticker.add(() => {
+        this.update();
+      });
     });
   }
   interact() : void{
-    if(this.nextState == "zarzuć"){
+    if(this.nextState == "zarzuć"){ //zarzucenie
       this.nextState = "ciągnij";
-
-      this.loadSprite("spławik.png")
-      // this.app.ticker.add(() => {
-      //   if(this.random(0, 100) == 69){
-      //     this.removeSprite("spławik");
-      //     this.fishOn = true;
-      //     console.log("TNIJ");
-      //     this.app.ticker.stop();
-      //   }
-      // });
+      this.changeSpriteVisibility("spławik", true);
     }
     else if(this.nextState == "ciągnij"){
-      this.app.ticker.stop();
       if(this.fishOn){
         console.log("Złowiłeś karasia");
         this.fishOn = false;
       }
       else{
-        this.removeSprite("spławik");
+        this.changeSpriteVisibility("spławik", false);
+
       }
       this.nextState = "zarzuć";
     }
@@ -59,20 +54,29 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
       let loadedSprite = new PIXI.Sprite(temp);
       loadedSprite.position.set(this.app.canvas.width / 2, this.app.canvas.height / 2);
       loadedSprite.pivot.set(50, 50);
+      loadedSprite.label = "spławik";
+      loadedSprite.visible = false;
       this.app.stage.addChild(loadedSprite);
-      this.gameobjectList.push(path.split(".")[0]);
     });
   }
-  removeSprite(name : string){ //usuwanie spritea ze sceny
-    for(let a = 0; a < this.gameobjectList.length; a++){
-      if(this.gameobjectList[a] == name){
-        this.app.stage.getChildAt(a).destroy();
-        this.gameobjectList.splice(a);
+  changeSpriteVisibility(name : string, newVisibility : boolean) : void{
+    for(let x : number = 0; x < this.app.stage.children.length; x++){
+      if(this.app.stage.getChildAt(x).label == name){
+        this.app.stage.getChildAt(x).visible = newVisibility;
         return;
       }
     }
   }
   random(min : number, max : number):number{ //random dla leniwych fiutów jak ja
     return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
+  update() : void{ //WAŻNE GÓWNO FUNKCJA CO SIĘ ROBI CO TICKA
+    if(this.nextState == "ciągnij"){
+      if(this.random(0, 1000) == 69){
+        this.fishOn = true;
+        this.changeSpriteVisibility("spławik", false);
+      }
+    }
   }
 }
