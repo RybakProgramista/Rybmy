@@ -11,6 +11,6 @@
   </p>
 
   <p align="center">
-    <img src="https://i.pinimg.com/originals/78/ba/a2/78baa2e81a730433b691204ae40ccc83.gif" alt="Logo" width="80" height="80">
+    <img src="https://i.pinimg.com/originals/78/ba/a2/78baa2e81a730433b691204ae40ccc83.gif">
   </p>
 </div>
