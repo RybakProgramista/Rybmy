@@ -10,17 +10,19 @@ export class GameObject{
     public getSprite() : PIXI.Sprite{
         return this.sprite;
     }
-    public changeSprite(sprite : PIXI.Sprite) : void{
-        sprite.position.set(this.sprite.position.x, this.sprite.position.y);
+    public changeSprite(path : string) : void{
+        PIXI.Assets.load("../assets/Sprites/" + path).then(temp =>{
+            temp.position.set(this.sprite.position.x, this.sprite.position.y);
+            this.sprite = temp;
+            console.log("załadowało " + path);
+          });
+    }
+
+    constructor(name : string, sprite : PIXI.Sprite){
+        this.name = name;
         this.sprite = sprite;
     }
 
-    constructor(name : string, sprite : PIXI.Sprite, positionX : number, positionY : number){
-        this.name = name;
-        this.sprite = sprite;
-        this.sprite.position.set(positionX, positionY);
-    }
-    
     public show() : void{
         this.sprite.visible = true;
     }
