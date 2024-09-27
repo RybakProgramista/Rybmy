@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import * as PIXI from 'pixi.js';
+import { GameObjectsManager } from '../Managers/gameobjectsManager';
 
 @Component({
   selector: 'app-main-scene',
@@ -14,6 +15,7 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
   nextState!: string;
   fishOn!: boolean;
   pullingFish! : boolean;
+  gameObjManager! : GameObjectsManager;
 
   idleSplawikY! : number;
   pullOutSplawikY! : number;

@@ -15,11 +15,12 @@ export class GameObject{
         this.sprite = sprite;
     }
 
-    constructor(name : string, sprite : PIXI.Sprite){
+    constructor(name : string, sprite : PIXI.Sprite, positionX : number, positionY : number){
         this.name = name;
         this.sprite = sprite;
+        this.sprite.position.set(positionX, positionY);
     }
-
+    
     public show() : void{
         this.sprite.visible = true;
     }
