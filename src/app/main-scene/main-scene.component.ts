@@ -18,6 +18,8 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
   fishOn!: boolean;
   pullingFish! : boolean;
   isPodbierable! : boolean;
+  isDuringEvent!: boolean;
+
   gameObjManager! : GameObjectsManager;
 
   idleSplawikY! : number;
@@ -33,6 +35,7 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
   ngOnInit(): void {
     
   }
+  //test bota
   ngAfterViewInit(): void {
     // Tworzenie instancji aplikacji Pixi
     this.app = new PIXI.Application();
@@ -42,6 +45,8 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
       this.gameObjManager = GameObjectsManager.getInstance();
       this.isPodbierable = false;
       this.fishOn = false;
+      this.isDuringEvent = false;
+
       this.timer = 0;
       this.maxDurability = 100;
       this.durability = this.maxDurability;
