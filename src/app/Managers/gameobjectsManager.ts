@@ -15,15 +15,14 @@ export class GameObjectsManager {
         return GameObjectsManager.instance;
     }
 
-    public findGameObject(name : string) : GameObject | null{
-        console.log(this.gameobjects);
-        console.log(this.gameobjects.length);
+    public findGameObject(name : string) : GameObject{
+        let temp = new GameObject();
         for(let x = 0; x < this.gameobjects.length; x++){
             if(this.gameobjects[x].getName() == name){
-                return this.gameobjects[x];
+                temp = this.gameobjects[x];
             }
         }
-        return null;
+        return temp;
     }
 
     public addGameObject(newObj : GameObject) : void{

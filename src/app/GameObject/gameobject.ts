@@ -17,10 +17,18 @@ export class GameObject{
             console.log("załadowało " + path);
           });
     }
-
-    constructor(name : string, sprite : PIXI.Sprite){
-        this.name = name;
-        this.sprite = sprite;
+    public changeYPos(change : number) : void{
+        this.sprite.position.set(
+            this.sprite.position.x,
+            this.sprite.position.y + change
+        );
+    }
+    public setYPos(newPos : number): void{
+        this.sprite.position.set(this.sprite.position.x, newPos);
+    }
+    constructor(name? : string, sprite? : PIXI.Sprite){
+        this.name = name ?? "";
+        this.sprite = sprite ?? new PIXI.Sprite();
     }
 
     public show() : void{
