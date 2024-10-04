@@ -26,11 +26,13 @@ export class GameObject{
     public setYPos(newPos : number): void{
         this.sprite.position.set(this.sprite.position.x, newPos);
     }
+    public setSize(newSize : number) : void{
+        this.sprite.setSize(newSize);
+    }
     constructor(name? : string, sprite? : PIXI.Sprite){
         this.name = name ?? "";
         this.sprite = sprite ?? new PIXI.Sprite();
     }
-
     public show() : void{
         this.sprite.visible = true;
     }

@@ -35,7 +35,6 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
   ngOnInit(): void {
     
   }
-  //test 
   ngAfterViewInit(): void {
     // Tworzenie instancji aplikacji Pixi
     this.app = new PIXI.Application();
@@ -125,6 +124,8 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
     this.durability = this.maxDurability;
   }
   update(time : any) : void{ //WAŻNE GÓWNO FUNKCJA CO SIĘ ROBI CO TICKA
+    this.gameObjManager.findGameObject("spławik").setSize(this.gameObjManager.findGameObject("spławik").getSprite().position.y / this.idleSplawikY);
+    console.log(this.gameObjManager.findGameObject("spławik").getSprite().getSize());
     if(this.currState == "ciągnij" && !this.fishOn){
       if(this.random(0, 69) == 1){ //tutaj trzeba będzie zrobić logikę za szansami na złowienie konkretnej ryby
         this.currState = "zatnij";
@@ -137,6 +138,7 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
       console.log(this.timer);
       if(this.timer >= 200){
         this.currState = "ciągnij";
+        this.timer = 0;
       }
     }
 
