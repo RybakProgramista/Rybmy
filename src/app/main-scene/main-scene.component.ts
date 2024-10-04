@@ -35,7 +35,7 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
   ngOnInit(): void {
     
   }
-  //test bota
+
   ngAfterViewInit(): void {
     // Tworzenie instancji aplikacji Pixi
     this.app = new PIXI.Application();
