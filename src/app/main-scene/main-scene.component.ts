@@ -23,6 +23,8 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
   idleSplawikY! : number;
   pullOutSplawikY! : number;
   timer! : number;
+  maxDurability! : number;
+  durability! : number;
 
   updateTicker!: PIXI.Ticker;
 
@@ -41,6 +43,8 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
       this.isPodbierable = false;
       this.fishOn = false;
       this.timer = 0;
+      this.maxDurability = 100;
+      this.durability = this.maxDurability;
 
       this.loadSprite("spławik.png", this.app.canvas.width / 2, this.app.canvas.height / 2, false);
       this.currState = "zarzuć";
@@ -98,16 +102,26 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
   fishPulledOut() : void{ //ryba złowiona
-    console.log("Złowiłeś karasia");
+    alert("Złowiłeś karasia");
     this.gameObjManager.findGameObject("spławik").setYPos(this.idleSplawikY)
     this.isPodbierable = false;
     this.gameObjManager.findGameObject("spławik").hide();
     this.currState = "zarzuć";
     this.fishOn = false;
+    this.durability = this.maxDurability;
+  }
+  fishLost(): void{
+    alert("Zerwałeś Zestaw");
+    this.gameObjManager.findGameObject("spławik").setYPos(this.idleSplawikY)
+    this.isPodbierable = false;
+    this.gameObjManager.findGameObject("spławik").hide();
+    this.currState = "zarzuć";
+    this.fishOn = false;
+    this.durability = this.maxDurability;
   }
   update(time : any) : void{ //WAŻNE GÓWNO FUNKCJA CO SIĘ ROBI CO TICKA
     if(this.currState == "ciągnij" && !this.fishOn){
-      if(this.random(0, 1) == 1){
+      if(this.random(0, 69) == 1){ //tutaj trzeba będzie zrobić logikę za szansami na złowienie konkretnej ryby
         this.currState = "zatnij";
         //TU WYŻEJ WSTAW ANIMACJĘ SPRITEA NA BRANIE
       }
@@ -122,14 +136,28 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
     }
 
     if(this.fishOn){ //ciągnięcie ryby
+      console.log(this.durability);
       if(this.pullingFish){
         if(this.gameObjManager.findGameObject("spławik").getSprite().position.y < this.pullOutSplawikY){
           this.gameObjManager.findGameObject("spławik").changeYPos(time.deltaTime);
+          this.durability -= time.deltaTime / 1.5;
+          if(this.durability <= 0){ 
+            /*
+            W przyszłości będą potrzebne dokładniejsze wyliczenia odnośnie zużycia sprzętu. Trzeba będzie jakoś sensownie w tej logice uwzględnić za duży luz na żyłce powodujący stracenie ryby
+            Istotną kwestią będą funkcje matematyczne wyliczające takie rzeczy jak prędkość ryby czy też jej siłę na bazie wartości z bazy danych\
+            Od chuja i jeszcze trochę szczurowej roboty dla backednowca
+            kurwa
+            czyli mnie
+            Schizofrenia Update
+            */
+            this.fishLost();
+          }
         }
       }
       else{
         if(this.gameObjManager.findGameObject("spławik").getSprite().position.y > this.idleSplawikY){
           this.gameObjManager.findGameObject("spławik").changeYPos(-time.deltaTime * this.random(1, 1.3));
+          this.durability += time.deltaTime;
         }
       }
       this.isPodbierable = this.gameObjManager.findGameObject("spławik").getSprite().position.y >= this.pullOutSplawikY - 50;
