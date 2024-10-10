@@ -37,9 +37,10 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
   }
   ngAfterViewInit(): void {
     // Tworzenie instancji aplikacji Pixi
+    const divSizes = this.mainScene.nativeElement;
     this.app = new PIXI.Application();
     // Dodanie widoku Pixi do kontenera w HTML
-    this.app.init({ width: window.innerWidth, height: window.innerHeight /2 , background : "0x0032FF" }).then(()=>{
+    this.app.init({ width: divSizes.offsetWidth, height: divSizes.offsetHeight , background : "0x0032FF" }).then(()=>{
       this.mainScene.nativeElement.appendChild(this.app.canvas);
       this.gameObjManager = GameObjectsManager.getInstance();
       this.isPodbierable = false;
@@ -134,7 +135,6 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
 
     if(this.currState == "zatnij"){
       this.timer += time.deltaTime;
-      console.log(this.timer);
       if(this.timer >= 200){
         this.currState = "ciągnij";
         this.timer = 0;
@@ -142,7 +142,6 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
     }
 
     if(this.fishOn){ //ciągnięcie ryby
-      console.log(this.durability);
       if(this.pullingFish){
         if(this.gameObjManager.findGameObject("spławik").getSprite().position.y < this.pullOutSplawikY){
           this.gameObjManager.findGameObject("spławik").changeYPos(time.deltaTime);

@@ -1,1 +1,14 @@
+<<<<<<< Updated upstream
 /* You can add global styles to this file, and also import other style files */
+=======
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+.blue { background-color: blue; height: 100vh; }
+.red { background-color: red; height: 100vh; }
+.green { background-color: limegreen; height: 100vh; }
+.yellow { background-color: yellow; height: 100vh; }
+.pink { background-color: fuchsia; height: 50px; }
+*{
+    margin: 0;
+    padding: 0;
+}
+>>>>>>> Stashed changes
