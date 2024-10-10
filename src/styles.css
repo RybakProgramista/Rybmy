@@ -1,1 +1,10 @@
-@import "../node_modules/bootstrap/dist/css/bootstrap.css"
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+.blue { background-color: blue; height: 100vh; }
+.red { background-color: red; height: 100vh; }
+.green { background-color: limegreen; height: 100vh; }
+.yellow { background-color: yellow; height: 100vh; }
+.pink { background-color: fuchsia; height: 50px; }
+*{
+    margin: 0;
+    padding: 0;
+}
