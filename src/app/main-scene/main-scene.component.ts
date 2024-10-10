@@ -124,8 +124,7 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
     this.durability = this.maxDurability;
   }
   update(time : any) : void{ //WAŻNE GÓWNO FUNKCJA CO SIĘ ROBI CO TICKA
-    this.gameObjManager.findGameObject("spławik").setSize(this.gameObjManager.findGameObject("spławik").getSprite().position.y / this.idleSplawikY);
-    console.log(this.gameObjManager.findGameObject("spławik").getSprite().getSize());
+    this.gameObjManager.findGameObject("spławik").setSize(this.gameObjManager.findGameObject("spławik").getSprite().position.y / this.idleSplawikY * 64);
     if(this.currState == "ciągnij" && !this.fishOn){
       if(this.random(0, 69) == 1){ //tutaj trzeba będzie zrobić logikę za szansami na złowienie konkretnej ryby
         this.currState = "zatnij";
