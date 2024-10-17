@@ -1,7 +1,11 @@
 <div class="container full-height d-flex flex-column">
     <div class="row flex-fill">
       <div class="col border d-flex">
-        
+        <button (click)="changeItem()">prev</button>
+        <p>{{currItem}}</p>
+        <button (click)="changeItem()">next</button>
+        <br>
+        <button (click)="use()">{{checkItemState()}}</button>
       </div>
     </div>
     <div class="row flex-fill">
