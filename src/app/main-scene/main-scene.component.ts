@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, NgZone, Input } from '@angular/core';
 import * as PIXI from 'pixi.js';
 import { GameObjectsManager } from '../Managers/gameobjectsManager';
 import { GameObject } from '../GameObject/gameobject';
@@ -25,6 +25,9 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
   idleSplawikY! : number;
   pullOutSplawikY! : number;
   timer! : number;
+  @Input() setNewMaxDurability(newVal : number) : void{
+    
+  }
   maxDurability! : number;
   durability! : number;
 

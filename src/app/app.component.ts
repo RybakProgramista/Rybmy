@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MainSceneComponent } from './main-scene/main-scene.component';
 import { ShopComponent } from './shop/shop.component';
@@ -11,5 +11,7 @@ import { ShopComponent } from './shop/shop.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent{
-  
+  changeMaxDurability(newVal : number){
+
+  }
 }

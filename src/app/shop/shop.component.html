@@ -1,13 +1,16 @@
 <div class="container full-height d-flex flex-column">
     <div class="row flex-fill">
+      <! ODTĄD>
       <div class="col border d-flex">
-        <button (click)="changeItem()">prev</button>
-        <p>{{currItem}}</p>
-        <button (click)="changeItem()">next</button>
+        <button (click)="changeItem('Wędka', -1)">prev</button> <! POPRZEDNI ITEM>
+        <p>{{getCurrItemOfType('Wędka').getName()}}</p> <! OBECNY ITEM, TU BĘDZIE ZDJĘCIE JAK DRZAŁA JE OGARNIE>
+        <button (click)="changeItem('Wędka', 1)">next</button> <! NASTĘPNY ITEM>
         <br>
-        <button (click)="use()">{{checkItemState()}}</button>
+        <button (click)="useItem('Wędka')">{{checkItemState('Wędka')}}</button> <! KUPOWANIE/UŻYWANiE>
       </div>
     </div>
+    <! DOTĄD>
+    <! Jak będziesz dodawał następne sekcje to zwiększ o 1 pierwsze wartości w changeItem i wartość w funkcjach getCurrItemOfType i checkItemState, oraz useItem>
     <div class="row flex-fill">
       <div class="col border d-flex justify-content-center align-items-center">Element 2</div>
     </div>

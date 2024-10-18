@@ -3,13 +3,13 @@ export abstract class Item{
     private name : string;
     private value : number;
     private isBought : boolean;
-    private isUsed : boolean;
+    private isEquipped : boolean;
 
     constructor(name : string, value : number){
         this.name = name;
         this.value = value;
         this.isBought = false;
-        this.isUsed = false;
+        this.isEquipped = false;
     }
 
     public getName() : string{
@@ -21,14 +21,14 @@ export abstract class Item{
     public getIsBought() : boolean{
         return this.isBought;
     }
-    public getIsUsed() : boolean{
-        return this.isUsed;
+    public getIsEquipped() : boolean{
+        return this.isEquipped;
     }
 
     public buy() : void{
         this.isBought = true;
     }
-    public changeIsUsed(newState : boolean) : void{
-        this.isUsed = newState;
+    public changeIsEquipped(newState : boolean) : void{
+        this.isEquipped = newState;
     }
 }
