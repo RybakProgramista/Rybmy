@@ -11,7 +11,8 @@ import { ShopComponent } from './shop/shop.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent{
+  maxDurability : number = 0;
   changeMaxDurability(newVal : number){
-
+    this.maxDurability = newVal;
   }
 }

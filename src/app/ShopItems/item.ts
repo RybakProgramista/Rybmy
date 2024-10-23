@@ -10,6 +10,9 @@ export abstract class Item{
         this.value = value;
         this.isBought = false;
         this.isEquipped = false;
+        if(this.value < 0){
+            console.error("Item cannot be worth less than 0 you dumb fuck");
+        }
     }
 
     public getName() : string{

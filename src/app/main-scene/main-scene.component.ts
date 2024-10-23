@@ -3,6 +3,8 @@ import * as PIXI from 'pixi.js';
 import { GameObjectsManager } from '../Managers/gameobjectsManager';
 import { GameObject } from '../GameObject/gameobject';
 
+type state = "ZARZUĆ" | "ZATNIJ" | "CIĄGNIJ";
+
 @Component({
   selector: 'app-main-scene',
   standalone: true,
@@ -14,7 +16,7 @@ import { GameObject } from '../GameObject/gameobject';
 export class MainSceneComponent implements OnInit, AfterViewInit  {
   @ViewChild('mainScene', { static: true }) mainScene!: ElementRef;
   app!: PIXI.Application;
-  currState!: string;
+  currState!: state;
   fishOn!: boolean;
   pullingFish! : boolean;
   isPodbierable! : boolean;
@@ -25,10 +27,7 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
   idleSplawikY! : number;
   pullOutSplawikY! : number;
   timer! : number;
-  @Input() setNewMaxDurability(newVal : number) : void{
-    
-  }
-  maxDurability! : number;
+  @Input() maxDurability! : number;
   durability! : number;
 
   updateTicker!: PIXI.Ticker;
@@ -51,11 +50,11 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
       this.isDuringEvent = false;
 
       this.timer = 0;
-      this.maxDurability = 100;
+      this.maxDurability = 0;
       this.durability = this.maxDurability;
 
       this.loadSprite("spławik.png", this.app.canvas.width / 2, this.app.canvas.height / 2, false);
-      this.currState = "zarzuć";
+      this.currState = "ZARZUĆ";
 
       this.idleSplawikY = this.app.canvas.height / 2;
       this.pullOutSplawikY = this.idleSplawikY + 200;
@@ -69,19 +68,19 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
     });
   }
   interact() : void{
-    if(this.currState == "zarzuć"){ //zarzucenie
-      this.currState = "ciągnij";
+    if(this.currState == "ZARZUĆ"){ //zarzucenie
+      this.currState = "CIĄGNIJ";
       this.gameObjManager.findGameObject("spławik")?.show();
     }
-    else if(this.currState == "ciągnij"){
+    else if(this.currState == "CIĄGNIJ"){
       if(!this.fishOn){
-        this.currState = "zarzuć";
+        this.currState = "ZARZUĆ";
         this.gameObjManager.findGameObject("spławik")?.hide();
       }
     }
-    else if(this.currState == "zatnij"){
+    else if(this.currState == "ZATNIJ"){
       this.fishOn = true;
-      this.currState = "ciągnij";
+      this.currState = "CIĄGNIJ";
       this.timer = 0;
     }
   }
@@ -114,7 +113,7 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
     this.gameObjManager.findGameObject("spławik").setYPos(this.idleSplawikY)
     this.isPodbierable = false;
     this.gameObjManager.findGameObject("spławik").hide();
-    this.currState = "zarzuć";
+    this.currState = "ZARZUĆ";
     this.fishOn = false;
     this.durability = this.maxDurability;
   }
@@ -123,23 +122,24 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
     this.gameObjManager.findGameObject("spławik").setYPos(this.idleSplawikY)
     this.isPodbierable = false;
     this.gameObjManager.findGameObject("spławik").hide();
-    this.currState = "zarzuć";
+    this.currState = "ZARZUĆ";
     this.fishOn = false;
     this.durability = this.maxDurability;
   }
   update(time : any) : void{ //WAŻNE GÓWNO FUNKCJA CO SIĘ ROBI CO TICKA
+
     this.gameObjManager.findGameObject("spławik").setSize(this.gameObjManager.findGameObject("spławik").getSprite().position.y / this.idleSplawikY * 64);
-    if(this.currState == "ciągnij" && !this.fishOn){
+    if(this.currState == "CIĄGNIJ" && !this.fishOn){
       if(this.random(0, 69) == 1){ //tutaj trzeba będzie zrobić logikę za szansami na złowienie konkretnej ryby
-        this.currState = "zatnij";
+        this.currState = "ZATNIJ";
         //TU WYŻEJ WSTAW ANIMACJĘ SPRITEA NA BRANIE
       }
     }
 
-    if(this.currState == "zatnij"){
+    if(this.currState == "ZATNIJ"){
       this.timer += time.deltaTime;
       if(this.timer >= 200){
-        this.currState = "ciągnij";
+        this.currState = "CIĄGNIJ";
         this.timer = 0;
       }
     }

@@ -1,7 +1,10 @@
 import { Component, Output, EventEmitter, numberAttribute } from '@angular/core';
 import { Item } from '../ShopItems/item';
 import { BaseItem } from '../ShopItems/baseItem';
-type typEkwipunku = "Wędka" | "Kołowrotek";
+
+type typEkwipunku = "Wędka" | "Kołowrotek" | "Żyłka";
+const equipmentTypeArray : typEkwipunku[] = ["Wędka", "Kołowrotek", "Żyłka"];
+
 @Component({
   selector: 'app-shop',
   standalone: true,
@@ -12,7 +15,9 @@ type typEkwipunku = "Wędka" | "Kołowrotek";
 export class ShopComponent{
   currIds: Map<typEkwipunku, number> = new Map(
     [
-      ["Wędka", 0]
+      ["Wędka", 0],
+      // ["Kołowrotek", 0],
+      // ["Żyłka", 0]
     ]
   )
 
@@ -20,8 +25,9 @@ export class ShopComponent{
 
   itemList : Map<typEkwipunku, Array<Item>> = new Map(
     [
-      ["Wędka", new Array<Item>(
-        new BaseItem("Bambus", 0, 50),
+      ["Wędka", new Array<BaseItem>(
+        new BaseItem("Bambus", 50, 0),
+        new BaseItem("Zafirrka", 80, 20)
       )]
     ]
   );
@@ -29,19 +35,16 @@ export class ShopComponent{
   calculateMaxDurability() : void{
     let outVal : number = 0;
 
-    for(let type = 0; type <= 2; type++){
-      for(let id = 0; id <= this.itemList[type].length; id++){
-        if(this.itemList[type][id].getIsEquipped()){
-          outVal += (this.itemList[type][id] as BaseItem).getDurability();
-        }
-      }
+    for(let x = 0; x < this.currIds.size ; x++){
+      console.log(this.getItemOfTypeAtID(equipmentTypeArray[x]) as BaseItem);
+      outVal += (this.getItemOfTypeAtID(equipmentTypeArray[x]) as BaseItem).getDurability();
     }
     
     this.onDurabilityChanged.emit(outVal);
   }
   checkItemState(type : typEkwipunku) : string{
     let returnVal : string;
-    let temp = this.itemList.get(type)[this.currIds.get(type)];
+    let temp = this.getItemOfTypeAtID(type);
 
     if(temp.getIsBought()){
       if(temp.getIsEquipped()){
@@ -59,23 +62,35 @@ export class ShopComponent{
   }
 
   changeItem(type : typEkwipunku, val : number) : void{
-    this.currIds.set(type, this.currIds.get(type) ?? 0 + val);
+    let newID = (this.currIds.get(type) ?? 0) + val;
+    console.log(newID);
+    if(newID >= (this.itemList.get(type)?.length ?? 0)){
+      newID = 0;
+    }
+    else if(newID < 0){
+      newID = (this.itemList.get(type)?.length ?? 0) - 1;
+    }
+    this.currIds.set(type, newID);
+    console.log(newID);
   }
 
-  getCurrItemOfType(type : typEkwipunku) : Item{
-    return this.itemList[type ?? 0][this.currIds[type]];
+  getItemOfTypeAtID(type : typEkwipunku, id? : number) : Item{ //jeśli puste to pobiera obecnie wybrany
+    let itemListForType = this.itemList.get(type) ?? [];
+    let currIdForType =  id ?? this.currIds.get(type) ?? 0;
+
+    return itemListForType[currIdForType];
   }
 
   useItem(type : typEkwipunku) : void{
     let temp = this.checkItemState(type);
-    let currItem = this.getCurrItemOfType(type);
+    let currItem = this.getItemOfTypeAtID(type);
     if(temp == "EQUIP"){
       currItem.changeIsEquipped(true);
+      this.calculateMaxDurability();
     }
     else if(temp.endsWith("zł") && this.cash >= Number.parseInt(temp.substring(0, temp.length - 2))){
       currItem.buy();
       this.cash -= currItem.getVal();
     }
-    this.calculateMaxDurability();
   }
 }
