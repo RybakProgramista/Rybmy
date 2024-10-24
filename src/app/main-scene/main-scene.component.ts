@@ -50,7 +50,6 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
       this.isDuringEvent = false;
 
       this.timer = 0;
-      this.maxDurability = 0;
       this.durability = this.maxDurability;
 
       this.loadSprite("spławik.png", this.app.canvas.width / 2, this.app.canvas.height / 2, false);
@@ -69,6 +68,7 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
   }
   interact() : void{
     if(this.currState == "ZARZUĆ"){ //zarzucenie
+      this.durability = this.maxDurability;
       this.currState = "CIĄGNIJ";
       this.gameObjManager.findGameObject("spławik")?.show();
     }
@@ -115,7 +115,6 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
     this.gameObjManager.findGameObject("spławik").hide();
     this.currState = "ZARZUĆ";
     this.fishOn = false;
-    this.durability = this.maxDurability;
   }
   fishLost(): void{
     alert("Zerwałeś Zestaw");
@@ -124,10 +123,8 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
     this.gameObjManager.findGameObject("spławik").hide();
     this.currState = "ZARZUĆ";
     this.fishOn = false;
-    this.durability = this.maxDurability;
   }
   update(time : any) : void{ //WAŻNE GÓWNO FUNKCJA CO SIĘ ROBI CO TICKA
-
     this.gameObjManager.findGameObject("spławik").setSize(this.gameObjManager.findGameObject("spławik").getSprite().position.y / this.idleSplawikY * 64);
     if(this.currState == "CIĄGNIJ" && !this.fishOn){
       if(this.random(0, 69) == 1){ //tutaj trzeba będzie zrobić logikę za szansami na złowienie konkretnej ryby

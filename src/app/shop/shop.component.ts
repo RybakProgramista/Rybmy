@@ -43,8 +43,8 @@ export class ShopComponent{
   calculateMaxDurability() : void{
     let outVal : number = 0;
 
-    for(let x = 0; x <= 3 ; x++){
-      for(let y = 0; y <= (this.itemList.get(equipmentTypeArray[x])?.length ?? 0); y++){
+    for(let x = 0; x < 3 ; x++){
+      for(let y = 0; y < (this.itemList.get(equipmentTypeArray[x])?.length ?? 0); y++){
         if((this.itemList.get(equipmentTypeArray[x]) ?? new Array<BaseItem>)[y].getIsEquipped()){
           outVal += ((this.itemList.get(equipmentTypeArray[x]) ?? new Array<BaseItem>)[y] as BaseItem).getDurability();
           continue;
