@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, NgZone, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, NgZone, Input, Output, EventEmitter } from '@angular/core';
 import * as PIXI from 'pixi.js';
 import { GameObjectsManager } from '../Managers/gameobjectsManager';
 import { GameObject } from '../GameObject/gameobject';
@@ -69,6 +69,7 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
   interact() : void{
     if(this.currState == "ZARZUĆ"){ //zarzucenie
       this.durability = this.maxDurability;
+      this.durabilityChanged();
       this.currState = "CIĄGNIJ";
       this.gameObjManager.findGameObject("spławik")?.show();
     }
@@ -143,9 +144,9 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
 
     if(this.fishOn){ //ciągnięcie ryby
       if(this.pullingFish){
+        this.durability -= time.deltaTime / 1.5;
         if(this.gameObjManager.findGameObject("spławik").getSprite().position.y < this.pullOutSplawikY){
           this.gameObjManager.findGameObject("spławik").changeYPos(time.deltaTime);
-          this.durability -= time.deltaTime / 1.5;
           if(this.durability <= 0){ 
             /*
             W przyszłości będą potrzebne dokładniejsze wyliczenia odnośnie zużycia sprzętu. Trzeba będzie jakoś sensownie w tej logice uwzględnić za duży luz na żyłce powodujący stracenie ryby
@@ -160,12 +161,21 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
         }
       }
       else{
+        this.durability += time.deltaTime;
         if(this.gameObjManager.findGameObject("spławik").getSprite().position.y > this.idleSplawikY){
           this.gameObjManager.findGameObject("spławik").changeYPos(-time.deltaTime * this.random(1, 1.3));
-          this.durability += time.deltaTime;
         }
       }
+      this.durabilityChanged();
       this.isPodbierable = this.gameObjManager.findGameObject("spławik").getSprite().position.y >= this.pullOutSplawikY - 50;
     }
+  }
+  @Output() calculatePercentOnDurabilityChanged = new EventEmitter<number>();
+  durabilityChanged() : void{
+    if(this.durability > this.maxDurability){
+      this.durability = this.maxDurability;
+    }
+    console.log(this.durability + " " + this.maxDurability);
+    this.calculatePercentOnDurabilityChanged.emit(this.durability / this.maxDurability * 100);
   }
 }
