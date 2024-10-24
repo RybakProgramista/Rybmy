@@ -1,8 +1,10 @@
 .gauge {
-    width: 30em;
-    height: 2em;
+    width: 40%;
+    height: 90%;
     position: relative;
     background-color: #ccc;
+    left: 50%;
+    transform: translateX(-50%);
   }
   
   .gauge > * {
@@ -14,7 +16,7 @@
   }
   
   .meter-gauge {
-    background-image: linear-gradient(to bottom,
+    background-image: linear-gradient(to top,
         #70f600 20%,
         #0e0 20%,
         #0e0 40%,
@@ -27,7 +29,7 @@
   }
   
   .negative-space {
-    background-image: linear-gradient(to bottom,
+    background-image: linear-gradient(to top,
         #ddd 20%,
         #ccc 20%,
         #ccc 40%,
@@ -37,6 +39,8 @@
         #aaa 80%,
         #999 80%,
         #999 100%);
-    clip-path: inset(0 0 0 30%);
+    clip-path: inset(0 0 50% 0); /*tu jest wartość do zmiany zapełnienia wskaźnika!!! */
   }
+
+  
   
