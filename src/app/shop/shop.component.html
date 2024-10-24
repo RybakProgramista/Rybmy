@@ -1,11 +1,11 @@
 <div class="container full-height d-flex flex-column">
     <div class="row flex-fill">
       <! ODTĄD>
-      <div class="col border d-flex">
+      <div class="col border x1">
         <button (click)="changeItem('Wędka', -1)">prev</button> <! POPRZEDNI ITEM>
         <p>{{getItemOfTypeAtID('Wędka').getName()}}</p> <! OBECNY ITEM, TU BĘDZIE ZDJĘCIE JAK DRZAŁA JE OGARNIE>
         <button (click)="changeItem('Wędka', 1)">next</button> <! NASTĘPNY ITEM>
-        <br>
+
         <button (click)="useItem('Wędka')">{{checkItemState('Wędka')}}</button> <! KUPOWANIE/UŻYWANiE>
       </div>
     </div>
