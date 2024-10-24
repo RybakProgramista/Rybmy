@@ -39,7 +39,7 @@ export class ShopComponent{
       )]
     ]
   );
-  @Output() onDurabilityChanged = new EventEmitter<number>();
+  @Output() onMaxDurabilityChanged = new EventEmitter<number>();
   calculateMaxDurability() : void{
     let outVal : number = 0;
 
@@ -52,7 +52,7 @@ export class ShopComponent{
       }
     }
     
-    this.onDurabilityChanged.emit(outVal);
+    this.onMaxDurabilityChanged.emit(outVal);
   }
   checkItemState(type : typEkwipunku) : string{
     let returnVal : string;

@@ -13,7 +13,11 @@ import { LineComponent } from './line/line.component';
 })
 export class AppComponent{
   maxDurability : number = 0;
-  changeMaxDurability(newVal : number){
+  currDurabilityPercent : number = 0;
+  maxDurabilityChanged(newVal : number){
     this.maxDurability = newVal;
+  }
+  changeCurrDurability(newVal : number){
+    this.currDurabilityPercent = newVal;
   }
 }

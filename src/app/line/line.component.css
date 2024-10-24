@@ -39,7 +39,7 @@
         #aaa 80%,
         #999 80%,
         #999 100%);
-    clip-path: inset(0 0 50% 0); /*tu jest wartość do zmiany zapełnienia wskaźnika!!! */
+    clip-path: inset(0 0 var(--cos, 50%) 0); /*tu jest wartość do zmiany zapełnienia wskaźnika!!! */
   }
 
   

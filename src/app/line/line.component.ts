@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Input, AfterViewInit } from '@angular/core';
+import { Ticker } from 'pixi.js';
 
 @Component({
   selector: 'app-line',
@@ -7,6 +8,16 @@ import { Component } from '@angular/core';
   templateUrl: './line.component.html',
   styleUrl: './line.component.css'
 })
-export class LineComponent {
-
+export class LineComponent implements AfterViewInit{
+  @Input() durabilityPercent : number = 100;
+  lineTicker! : Ticker;
+  constructor(private eel: ElementRef){}
+  ngAfterViewInit(): void {
+    this.lineTicker = new Ticker();
+    this.lineTicker.add(() =>{
+      this.eel.nativeElement.style.setProperty("--cos", this.durabilityPercent + "%");
+      console.log(this.durabilityPercent);
+    });
+    this.lineTicker.start();
+  }
 }

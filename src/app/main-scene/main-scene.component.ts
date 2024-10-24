@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, NgZone, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, NgZone, Input, Output, EventEmitter } from '@angular/core';
 import * as PIXI from 'pixi.js';
 import { GameObjectsManager } from '../Managers/gameobjectsManager';
 import { GameObject } from '../GameObject/gameobject';
@@ -69,6 +69,7 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
   interact() : void{
     if(this.currState == "ZARZUĆ"){ //zarzucenie
       this.durability = this.maxDurability;
+      this.durabilityChanged();
       this.currState = "CIĄGNIJ";
       this.gameObjManager.findGameObject("spławik")?.show();
     }
@@ -165,7 +166,15 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
           this.durability += time.deltaTime;
         }
       }
+      this.durabilityChanged();
       this.isPodbierable = this.gameObjManager.findGameObject("spławik").getSprite().position.y >= this.pullOutSplawikY - 50;
     }
+  }
+  @Output() calculatePercentOnDurabilityChanged = new EventEmitter<number>();
+  durabilityChanged() : void{
+    if(this.durability > this.maxDurability){
+      this.durability = this.maxDurability;
+    }
+    this.calculatePercentOnDurabilityChanged.emit(this.durability / this.maxDurability * 100);
   }
 }
