@@ -16,8 +16,8 @@ export class ShopComponent{
   currIds: Map<typEkwipunku, number> = new Map(
     [
       ["Wędka", 0],
-      // ["Kołowrotek", 0],
-      // ["Żyłka", 0]
+      ["Kołowrotek", 0],
+      ["Żyłka", 0]
     ]
   )
 
@@ -28,6 +28,14 @@ export class ShopComponent{
       ["Wędka", new Array<BaseItem>(
         new BaseItem("Bambus", 50, 0),
         new BaseItem("Zafirrka", 80, 20)
+      )],
+      ["Kołowrotek", new Array<BaseItem>(
+        new BaseItem("Ręka", 30, 0),
+        new BaseItem("Jaxon Bonzo PRI 300", 60, 20)
+      )],
+      ["Żyłka", new Array<BaseItem>(
+        new BaseItem("Sznurówka", 20, 0),
+        new BaseItem("Dragon CARP MONO", 30, 20)
       )]
     ]
   );
@@ -35,9 +43,13 @@ export class ShopComponent{
   calculateMaxDurability() : void{
     let outVal : number = 0;
 
-    for(let x = 0; x < this.currIds.size ; x++){
-      console.log(this.getItemOfTypeAtID(equipmentTypeArray[x]) as BaseItem);
-      outVal += (this.getItemOfTypeAtID(equipmentTypeArray[x]) as BaseItem).getDurability();
+    for(let x = 0; x <= 3 ; x++){
+      for(let y = 0; y <= (this.itemList.get(equipmentTypeArray[x])?.length ?? 0); y++){
+        if((this.itemList.get(equipmentTypeArray[x]) ?? new Array<BaseItem>)[y].getIsEquipped()){
+          outVal += ((this.itemList.get(equipmentTypeArray[x]) ?? new Array<BaseItem>)[y] as BaseItem).getDurability();
+          continue;
+        }
+      }
     }
     
     this.onDurabilityChanged.emit(outVal);
@@ -91,6 +103,10 @@ export class ShopComponent{
     else if(temp.endsWith("zł") && this.cash >= Number.parseInt(temp.substring(0, temp.length - 2))){
       currItem.buy();
       this.cash -= currItem.getVal();
+    }
+    else if(temp == "EQUIPPED"){
+      currItem.changeIsEquipped(false);
+      this.calculateMaxDurability;
     }
   }
 }

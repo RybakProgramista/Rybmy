@@ -11,10 +11,26 @@
     </div>
     <! DOTĄD>
     <div class="row flex-fill">
-      <div class="col border d-flex justify-content-center align-items-center">Element 2</div>
+      <div class="col border d-flex justify-content-center align-items-center">
+        <div class="col border d-flex">
+          <button (click)="changeItem('Kołowrotek', -1)">prev</button> <! POPRZEDNI ITEM>
+          <p>{{getItemOfTypeAtID('Kołowrotek').getName()}}</p> <! OBECNY ITEM, TU BĘDZIE ZDJĘCIE JAK DRZAŁA JE OGARNIE>
+          <button (click)="changeItem('Kołowrotek', 1)">next</button> <! NASTĘPNY ITEM>
+          <br>
+          <button (click)="useItem('Kołowrotek')">{{checkItemState('Kołowrotek')}}</button> <! KUPOWANIE/UŻYWANiE>
+        </div>
+      </div>
     </div>
     <div class="row flex-fill">
-      <div class="col border d-flex justify-content-center align-items-center">Element 3</div>
+      <div class="col border d-flex justify-content-center align-items-center">
+        <div class="col border d-flex">
+          <button (click)="changeItem('Żyłka', -1)">prev</button> <! POPRZEDNI ITEM>
+          <p>{{getItemOfTypeAtID('Żyłka').getName()}}</p> <! OBECNY ITEM, TU BĘDZIE ZDJĘCIE JAK DRZAŁA JE OGARNIE>
+          <button (click)="changeItem('Żyłka', 1)">next</button> <! NASTĘPNY ITEM>
+          <br>
+          <button (click)="useItem('Żyłka')">{{checkItemState('Żyłka')}}</button> <! KUPOWANIE/UŻYWANiE>
+        </div>
+      </div>
     </div>
     <div class="row flex-fill">
       <div class="col border d-flex justify-content-center align-items-center">Element 4</div>
