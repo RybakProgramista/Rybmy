@@ -6,7 +6,7 @@
       <div class="col-9">
         <div class="row">
           <div class="col-10 green">
-            <app-main-scene></app-main-scene>
+            <app-main-scene [maxDurability]="maxDurability"></app-main-scene>
           </div>
           <div class="col-2 yellow">
             PASEK KACPRA
@@ -14,9 +14,8 @@
           </div>
         </div>
       </div>
-      
       <div class="col-2 red">
-        SKLEP
+        <app-shop (onDurabilityChanged)="changeMaxDurability($event)"></app-shop>
       </div>
     </div>
 </div>
