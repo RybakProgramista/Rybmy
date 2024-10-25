@@ -1,3 +1,24 @@
 .full-height {
     height: 100vh; /* 100% wysokości widoku */
   }
+
+.upper-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.bottom-row{
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.containers-placement{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 20%;
+  height: 100vh; 
+}
+
+.containero{
+  display: grid;
+}
