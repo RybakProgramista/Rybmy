@@ -1,0 +1,79 @@
+{
+  "hash": "1923ff01",
+  "configHash": "2ef6d8d8",
+  "lockfileHash": "609c37b7",
+  "browserHash": "e115956b",
+  "optimized": {
+    "@angular/core": {
+      "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "d3e59869",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "c402c555",
+      "needsInterop": false
+    },
+    "@angular/router": {
+      "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
+      "file": "@angular_router.js",
+      "fileHash": "dfade964",
+      "needsInterop": false
+    },
+    "pixi.js": {
+      "src": "../../../../../node_modules/pixi.js/lib/index.mjs",
+      "file": "pixi__js.js",
+      "fileHash": "f4d58a29",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-WQ3DZVEW": {
+      "file": "chunk-WQ3DZVEW.js"
+    },
+    "chunk-LGGNAV7W": {
+      "file": "chunk-LGGNAV7W.js"
+    },
+    "browserAll-DGM6Z6KV": {
+      "file": "browserAll-DGM6Z6KV.js"
+    },
+    "chunk-UGZRWVSE": {
+      "file": "chunk-UGZRWVSE.js"
+    },
+    "webworkerAll-SO2XQ2BX": {
+      "file": "webworkerAll-SO2XQ2BX.js"
+    },
+    "chunk-MFWCWW46": {
+      "file": "chunk-MFWCWW46.js"
+    },
+    "chunk-XYGGB2JN": {
+      "file": "chunk-XYGGB2JN.js"
+    },
+    "WebGPURenderer-3H25LEES": {
+      "file": "WebGPURenderer-3H25LEES.js"
+    },
+    "chunk-Q2H3BWCN": {
+      "file": "chunk-Q2H3BWCN.js"
+    },
+    "chunk-REVMUJ3R": {
+      "file": "chunk-REVMUJ3R.js"
+    },
+    "WebGLRenderer-XT5ELZWL": {
+      "file": "WebGLRenderer-XT5ELZWL.js"
+    },
+    "chunk-3JWMVLXI": {
+      "file": "chunk-3JWMVLXI.js"
+    },
+    "chunk-ZT4WG52D": {
+      "file": "chunk-ZT4WG52D.js"
+    },
+    "chunk-2ABCISNK": {
+      "file": "chunk-2ABCISNK.js"
+    },
+    "chunk-ASLTLD6L": {
+      "file": "chunk-ASLTLD6L.js"
+    }
+  }
+}
