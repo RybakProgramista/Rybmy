@@ -175,7 +175,6 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
     if(this.durability > this.maxDurability){
       this.durability = this.maxDurability;
     }
-    console.log(this.durability + " " + this.maxDurability);
     this.calculatePercentOnDurabilityChanged.emit(this.durability / this.maxDurability * 100);
   }
 }
