@@ -1,4 +1,66 @@
 import {
+  BUFFER_TYPE,
+  GL_FORMATS,
+  GL_TARGETS,
+  GL_TYPES,
+  GL_WRAP_MODES,
+  GlBackBufferSystem,
+  GlBatchAdaptor,
+  GlBuffer,
+  GlBufferSystem,
+  GlColorMaskSystem,
+  GlContextSystem,
+  GlEncoderSystem,
+  GlGeometrySystem,
+  GlGraphicsAdaptor,
+  GlMeshAdaptor,
+  GlProgramData,
+  GlRenderTarget,
+  GlRenderTargetAdaptor,
+  GlRenderTargetSystem,
+  GlShaderSystem,
+  GlStateSystem,
+  GlStencilSystem,
+  GlTexture,
+  GlTextureSystem,
+  GlUboSystem,
+  GlUniformGroupSystem,
+  IGLUniformData,
+  UNIFORM_TO_ARRAY_SETTERS,
+  UNIFORM_TO_SINGLE_SETTERS,
+  WGSL_TO_STD40_SIZE,
+  WebGLRenderer,
+  applyStyleParams,
+  compareModeToGlCompare,
+  compileShader,
+  createUboElementsSTD40,
+  createUboSyncFunctionSTD40,
+  defaultValue,
+  extractAttributesFromGlProgram,
+  generateArraySyncSTD40,
+  generateProgram,
+  generateShaderSyncCode,
+  generateUniformsSync,
+  getGlTypeFromFormat,
+  getUboData,
+  getUniformData,
+  glUploadBufferImageResource,
+  glUploadCompressedTextureResource,
+  glUploadImageResource,
+  glUploadVideoResource,
+  logProgramError,
+  mapFormatToGlFormat,
+  mapFormatToGlInternalFormat,
+  mapFormatToGlType,
+  mapGlToVertexFormat,
+  mapType,
+  mapWebGLBlendModesToPixi,
+  mipmapScaleModeToGlFilter,
+  scaleModeToGlFilter,
+  unpremultiplyAlpha,
+  wrapModeToGlAddress
+} from "./chunk-3JWMVLXI.js";
+import {
   AccessibilitySystem,
   EventBoundary,
   EventSystem,
@@ -170,74 +232,7 @@ import {
   gpuUploadCompressedTextureResource,
   gpuUploadImageResource,
   gpuUploadVideoResource
-} from "./chunk-Q2H3BWCN.js";
-import {
-  CanvasPool,
-  CanvasPoolClass,
-  getTextureBatchBindGroup
-} from "./chunk-REVMUJ3R.js";
-import {
-  BUFFER_TYPE,
-  GL_FORMATS,
-  GL_TARGETS,
-  GL_TYPES,
-  GL_WRAP_MODES,
-  GlBackBufferSystem,
-  GlBatchAdaptor,
-  GlBuffer,
-  GlBufferSystem,
-  GlColorMaskSystem,
-  GlContextSystem,
-  GlEncoderSystem,
-  GlGeometrySystem,
-  GlGraphicsAdaptor,
-  GlMeshAdaptor,
-  GlProgramData,
-  GlRenderTarget,
-  GlRenderTargetAdaptor,
-  GlRenderTargetSystem,
-  GlShaderSystem,
-  GlStateSystem,
-  GlStencilSystem,
-  GlTexture,
-  GlTextureSystem,
-  GlUboSystem,
-  GlUniformGroupSystem,
-  IGLUniformData,
-  UNIFORM_TO_ARRAY_SETTERS,
-  UNIFORM_TO_SINGLE_SETTERS,
-  WGSL_TO_STD40_SIZE,
-  WebGLRenderer,
-  applyStyleParams,
-  compareModeToGlCompare,
-  compileShader,
-  createUboElementsSTD40,
-  createUboSyncFunctionSTD40,
-  defaultValue,
-  extractAttributesFromGlProgram,
-  generateArraySyncSTD40,
-  generateProgram,
-  generateShaderSyncCode,
-  generateUniformsSync,
-  getGlTypeFromFormat,
-  getUboData,
-  getUniformData,
-  glUploadBufferImageResource,
-  glUploadCompressedTextureResource,
-  glUploadImageResource,
-  glUploadVideoResource,
-  logProgramError,
-  mapFormatToGlFormat,
-  mapFormatToGlInternalFormat,
-  mapFormatToGlType,
-  mapGlToVertexFormat,
-  mapType,
-  mapWebGLBlendModesToPixi,
-  mipmapScaleModeToGlFilter,
-  scaleModeToGlFilter,
-  unpremultiplyAlpha,
-  wrapModeToGlAddress
-} from "./chunk-3JWMVLXI.js";
+} from "./chunk-EMKP3YEF.js";
 import {
   AbstractRenderer,
   AlphaMaskPipe,
@@ -305,6 +300,11 @@ import {
   validateRenderables,
   vertex
 } from "./chunk-ZT4WG52D.js";
+import {
+  CanvasPool,
+  CanvasPoolClass,
+  getTextureBatchBindGroup
+} from "./chunk-REVMUJ3R.js";
 import {
   BLEND_TO_NPM,
   Batch,
@@ -6361,7 +6361,7 @@ function autoDetectRenderer(options) {
     for (let i = 0; i < preferredOrder.length; i++) {
       const rendererType = preferredOrder[i];
       if (rendererType === "webgpu" && (yield isWebGPUSupported())) {
-        const { WebGPURenderer: WebGPURenderer2 } = yield import("./WebGPURenderer-3H25LEES.js");
+        const { WebGPURenderer: WebGPURenderer2 } = yield import("./WebGPURenderer-IO57YZTQ.js");
         RendererClass = WebGPURenderer2;
         finalOptions = __spreadValues(__spreadValues({}, options), options.webgpu);
         break;

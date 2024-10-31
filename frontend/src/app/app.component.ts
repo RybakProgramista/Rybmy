@@ -1,8 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MainSceneComponent } from './main-scene/main-scene.component';
 import { ShopComponent } from './shop/shop.component';
 import { LineComponent } from './line/line.component';
+import { DataService } from './Client Handler/data.service';
+
 
 @Component({
   selector: 'app-root',
@@ -12,6 +14,15 @@ import { LineComponent } from './line/line.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent{
+
+  //SERWER
+  constructor(private dataService: DataService){}
+  ngOnInit(){
+    this.dataService.getFishByID(0).subscribe(fish => console.log(fish));
+  }
+
+
+  //Reszta
   maxDurability : number = 0;
   currDurabilityPercent : number = 0;
   maxDurabilityChanged(newVal : number){
