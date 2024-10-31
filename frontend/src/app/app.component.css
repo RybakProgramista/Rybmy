@@ -1,4 +1,17 @@
-body{
+/* body{
     height: 960px;
     width: 960px;
-}
+} */
+ .field{
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr 2fr;
+ }
+
+ .left-panel{
+    background-color: brown;
+ }
+ 
+ .middle-panel{
+    display: grid;
+    grid-template-rows: 10% 90%;
+ }
