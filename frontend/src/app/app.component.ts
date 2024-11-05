@@ -4,6 +4,7 @@ import { MainSceneComponent } from './main-scene/main-scene.component';
 import { ShopComponent } from './shop/shop.component';
 import { LineComponent } from './line/line.component';
 import { DataService } from './Client Handler/data.service';
+import { response } from 'express';
 
 
 @Component({
@@ -18,7 +19,11 @@ export class AppComponent{
   //SERWER
   constructor(private dataService: DataService){}
   ngOnInit(){
-    this.dataService.getFishByID(0).subscribe(fish => console.log(fish));
+    const server = 'http://localhost:3000/'
+    // this.dataService.getFishByID(0).subscribe(fish => console.log(fish));
+    fetch(server+'fishes')
+      .then(response => response.json())
+      .then(fishes => console.log(fishes))
   }
 
 
