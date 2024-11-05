@@ -29,6 +29,13 @@ app.get('/fishes', (req, res) => {
   })
 })
 
+app.get('/login/:login.:password', (req, res) => {
+  db.query('SELECT `id` FROM `dane` WHERE `login` = "'+req.params.login+'" AND `haslo` = "'+req.params.password+'";', function (error, results) {
+    if (error) throw error;
+    res.send(results);
+  })
+})
+
 // const fishes = ["karp", "lin", "leszcz"];
 
 // app.get('/fishes', (req, res) => {

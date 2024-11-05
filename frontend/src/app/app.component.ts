@@ -21,7 +21,14 @@ export class AppComponent{
   ngOnInit(){
     const server = 'http://localhost:3000/'
     // this.dataService.getFishByID(0).subscribe(fish => console.log(fish));
+    //getting fishes
     fetch(server+'fishes')
+      .then(response => response.json())
+      .then(fishes => console.log(fishes))
+
+    //login if successfully it gives u id
+    let login = 'ja', password = 'ja'
+    fetch(server+'login/'+login+'.'+password)
       .then(response => response.json())
       .then(fishes => console.log(fishes))
   }
