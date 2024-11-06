@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Paź 25, 2024 at 03:04 PM
+-- Generation Time: Lis 06, 2024 at 05:17 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -40,7 +40,8 @@ CREATE TABLE `dane` (
 INSERT INTO `dane` (`id`, `login`, `haslo`) VALUES
 (1, '[value-2]', '[value-3]'),
 (4, 'ja', 'ja'),
-(5, 'kacper', 'aaaa');
+(5, 'kacper', 'aaaa'),
+(6, 'jacek', '123');
 
 --
 -- Wyzwalacze `dane`
@@ -49,6 +50,9 @@ DELIMITER $$
 CREATE TRIGGER `dodawanie` AFTER INSERT ON `dane` FOR EACH ROW BEGIN
         INSERT INTO gracz(gracz.idGracz, gracz.nazwa)
         VALUES(new.id, new.login) ;
+        
+        INSERT INTO znajomi(znajomi.idGracz)
+        VALUES (new.id);
 END
 $$
 DELIMITER ;
@@ -72,7 +76,8 @@ CREATE TABLE `gracz` (
 INSERT INTO `gracz` (`idGracz`, `nazwa`, `doswiadczenie`) VALUES
 (1, '', 0),
 (4, '', 0),
-(5, 'kacper', 0);
+(5, 'kacper', 0),
+(6, 'jacek', 0);
 
 -- --------------------------------------------------------
 
@@ -155,6 +160,24 @@ INSERT INTO `wedka` (`idWedka`, `nazwa`, `wytrzymalosc`, `cena`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `znajomi`
+--
+
+CREATE TABLE `znajomi` (
+  `idGracz` int(11) NOT NULL,
+  `idZnajomy` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Dumping data for table `znajomi`
+--
+
+INSERT INTO `znajomi` (`idGracz`, `idZnajomy`) VALUES
+(6, '0');
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `zylka`
 --
 
@@ -222,7 +245,7 @@ ALTER TABLE `zylka`
 -- AUTO_INCREMENT for table `dane`
 --
 ALTER TABLE `dane`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `kolowrotek`
