@@ -83,6 +83,13 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
       this.fishOn = true;
       this.currState = "CIĄGNIJ";
       this.timer = 0;
+      Ryba: String;
+      
+
+
+
+
+
     }
   }
   changePulling(newState : boolean) : void{
