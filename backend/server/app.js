@@ -48,6 +48,30 @@ app.get('/id', (req, res) =>{
   res.send(id);
 })
 
+app.get('/znajomi', (req, res) =>{
+  db.query('SELECT `idZnajomy` FROM `znajomi` WHERE `idGracz`="'+id+'"', function (error, results) {
+    if (error) throw error
+    let table = results[0]
+    let tableOfFriends = table["idZnajomy"].toString().split(";")
+    if (tableOfFriends.length>0) {
+      let query = 'SELECT `nazwa` FROM `gracz` WHERE '
+      let isFirst = true
+      tableOfFriends.forEach(idFriend => {
+        if (!isFirst) {
+          query += 'OR '
+          isFirst = false
+        }
+        query += '`idGracz`="'+idFriend+'"'
+      });
+      db.query(query, function (error, results) {
+        if (error) throw error
+        res.send(results.json())
+      })}
+    else
+      res.send(null)
+  })
+})
+
 app.listen(port, () =>{
   console.log("Nasłuchuje na porcie " + port)
 })
