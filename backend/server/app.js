@@ -48,6 +48,4 @@ app.get('/login/:login.:password', (req, res) => {
 // })
 
 // const port = 2115;
-app.listen(port, () =>{
-    console.log("Nasłuchuje na porcie " + port);
-});
+const port = 2115;
