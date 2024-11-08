@@ -4,7 +4,6 @@ import { MainSceneComponent } from './main-scene/main-scene.component';
 import { ShopComponent } from './shop/shop.component';
 import { LineComponent } from './line/line.component';
 import { DataService } from './Client Handler/data.service';
-import { response } from 'express';
 import { FriendsComponent } from './Friends/Friends.component';
 
 
@@ -28,10 +27,14 @@ export class AppComponent{
       .then(fishes => console.log(fishes))
 
     //login, if successfully it gives u id
-    let login = 'ja', password = 'ja'
-    fetch(server+'login/'+login+'.'+password)
-      .then(response => response.json())
-      .then(fishes => console.log(fishes))
+    let login = 'kacper', password = 'aaaa'
+      let isLoad
+    do{
+      fetch(server+'login/'+login+'.'+password)
+      .then(result => isLoad = result)
+    }while(!isLoad)
+      fetch(server+'id').then(id => console.log(id))
+      
   }
 
 
