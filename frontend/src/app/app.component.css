@@ -8,10 +8,20 @@
  }
 
  .left-panel{
-    background-color: brown;
+    background-color: rgb(75, 118, 199);
  }
  
  .middle-panel{
     display: grid;
     grid-template-rows: 10% 90%;
+    background-color: cornflowerblue;
+ }
+
+ .line-panel{
+   background-color: rgb(75, 118, 199);
+   text-align: center;
+ }
+
+ .store-panel{
+   background-color: rgb(65, 103, 173);
  }
