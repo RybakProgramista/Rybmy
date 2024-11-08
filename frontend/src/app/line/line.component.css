@@ -1,31 +1,29 @@
 .gauge {
-    width: 40%;
-    height: 90%;
-    position: relative;
-    background-color: #ccc;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 7px solid;
-    border-image: repeating-linear-gradient(60deg, hsl(30, 50%, 15%), hsl(20, 50%, 30%), hsl(25, 40%, 20%) 8px) 60;
-    border-image-width:200px 0px 200px 200px;
-  }
+  width: 60%;
+  height: 95%;
+  position: relative;
+  background-color: #5c4d00;
+  background-image: url(http://www.transparenttextures.com/patterns/wood-pattern.png);
+  left: 50%;
+  transform: translateX(-50%);
+ }
   
-  .gauge > * {
-    top:0;
-    right:0;
-    bottom:0;
-    left:0;
-    position: absolute;
-  }
+.gauge > * {
+  top:15px;
+  right:15px;
+  bottom:15px;
+  left:15px;
+  position: absolute;
+}
   
-  .meter-gauge {
-    background: linear-gradient(red,orange, yellow, lightgreen, green, green, lightgreen, yellow, orange, red);  
-  }
+.meter-gauge {
+  background: linear-gradient(red,orange, yellow, lightgreen, green, green, lightgreen, yellow, orange, red);  
+}
   
-  .negative-space {
-    background: black;
-    clip-path: inset(0 0 var(--cos, 50%) 0); /*tu jest wartość do zmiany zapełnienia wskaźnika!!! */
-  }
+.negative-space {
+  background: black;
+  clip-path: inset(0 0 var(--cos, 50%) 0); /*tu jest wartość do zmiany zapełnienia wskaźnika!!! */
+}
 
   
   
