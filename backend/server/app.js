@@ -34,12 +34,13 @@ app.get('/fishes', (req, res) => {
 app.get('/login/:login.:password', (req, res) => {
   db.query('SELECT `id` FROM `dane` WHERE `login` = "'+req.params.login+'" AND `haslo` = "'+req.params.password+'";', function (error, results) {
     if (error) throw error
-    
+
     let table = results[0]
     if(table === null)
       res.send(false)
     else{
       id = table["id"]
+
       res.send(true)
     }
   })
@@ -61,15 +62,15 @@ app.get('/znajomi', (req, res) =>{
 
       tableOfFriends.forEach(idFriend => {
         if (!isFirst) {
-          query += 'OR '
-          isFirst = false
+          query += 'OR'
         }
+        isFirst = false
         query += '`idGracz`="'+idFriend+'"'
       });
 
       db.query(query, function (error, results) {
         if (error) throw error
-        res.send(results.json())
+        res.send(results)
       })}
 
     else

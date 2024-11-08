@@ -26,14 +26,11 @@ export class AppComponent{
       .then(response => response.json())
       .then(fishes => console.log(fishes))
 
-    //login, if successfully it gives u id
+    //login, if successfully it gives true
     let login = 'kacper', password = 'aaaa'
-      let isLoad
-    do{
       fetch(server+'login/'+login+'.'+password)
-      .then(result => isLoad = result)
-    }while(!isLoad)
-      fetch(server+'id').then(id => console.log(id))
+      .then(result => console.log(result+"aaaaa"))
+    
       
   }
 
