@@ -5,6 +5,7 @@ import { ShopComponent } from './shop/shop.component';
 import { LineComponent } from './line/line.component';
 import { DataService } from './Client Handler/data.service';
 import { FriendsComponent } from './Friends/Friends.component';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -17,20 +18,54 @@ import { FriendsComponent } from './Friends/Friends.component';
 export class AppComponent{
 
   //SERWER
-  constructor(private dataService: DataService){}
+  constructor(private dataService: DataService, private http: HttpClient){}
   ngOnInit(){
     const server = 'http://localhost:3000/'
-    // this.dataService.getFishByID(0).subscribe(fish => console.log(fish));
-    //getting fishes
-    fetch(server+'fishes')
-      .then(response => response.json())
-      .then(fishes => console.log(fishes))
-
-    //login, if successfully it gives true
-    let login = 'kacper', password = 'aaaa'
-      fetch(server+'login/'+login+'.'+password)
-      .then(result => console.log(result+"aaaaa"))
     
+    //pobiera tablicy z rybami i wypisywanie ich nazw
+    this.http.get<Array<Fish>>(server+'fishes').subscribe(e => {
+      e.forEach(row => {
+        console.log(row.nazwa);
+        
+      })
+    })
+
+    //login
+    let id: number | null = null
+    let login = 'kacper', password = 'aaaa'
+    this.http.get<{id: number}|null>(server+'login?login='+login+'&password='+password)
+      .subscribe(e => {
+        if (e!==null) {
+          id = e.id
+          console.log(e.id);
+          console.log("logowanie udalo sie");
+
+          this.http.get<Array<Player>|null>(server+'znajomi?id='+id)
+            .subscribe(e => {
+              if(e===null)  console.log("nie masz znajomych");
+              else{
+                e.forEach(friend => {
+                  console.log(friend);
+                })
+              }
+            })
+            
+        }else console.log("logowanie nie udalo sie");
+    })
+    
+    //   fetch(server+'login?login='+login+'&password='+password)
+    //   .then(result => console.log(result))
+    
+
+    
+  
+    
+    // fetch(server+'znajomi?id='+id)
+    //   .then(response => response.json())
+    //   .then(friends => friends.array.forEach((name: any) => {
+    //     console.log(name);
+        
+    //   }))
       
   }
 
@@ -44,4 +79,15 @@ export class AppComponent{
   changeCurrDurability(newVal : number){
     this.currDurabilityPercent = newVal;
   }
+}
+
+
+interface Player {
+  nazwa: string
+  doswiadczenie: number
+}
+
+interface Fish {
+  id: number;
+  nazwa: string
 }

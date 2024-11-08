@@ -7,8 +7,6 @@ const port = 3000
 app.use(cors())
 app.use(express.json())
 
-let id = null
-
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -27,37 +25,44 @@ db.connect((err) => {
 app.get('/fishes', (req, res) => {
   db.query('SELECT * FROM `ryby`', function (error, results) {
     if (error) throw error
-    res.send(results)
+    res.json(results)
   })
 })
 
-app.get('/login/:login.:password', (req, res) => {
-  db.query('SELECT `id` FROM `dane` WHERE `login` = "'+req.params.login+'" AND `haslo` = "'+req.params.password+'";', function (error, results) {
+app.get('/login', (req, res) => {
+  const { login, password } = req.query;
+  db.query('SELECT `id` FROM `dane` WHERE `login` = ? AND `haslo` = ?;',[login, password], function (error, results) {
     if (error) throw error
 
-    let table = results[0]
-    if(table === null)
-      res.send(false)
+    console.log(results);
+    
+    let table = JSON.parse(JSON.stringify(results))
+    if(table == null)
+      res.json(null)
     else{
-      id = table["id"]
-
-      res.send(true)
+      res.json(table[0])
+      
     }
   })
 })
 
-app.get('/id', (req, res) =>{
-  res.send(id);
-})
-
 app.get('/znajomi', (req, res) =>{
-  db.query('SELECT `idZnajomy` FROM `znajomi` WHERE `idGracz`="'+id+'"', function (error, results) {  //pobiera liste znajomych
+
+  console.log(req.query);
+  
+  const id = req.query.id;
+  console.log(id);
+  
+  db.query('SELECT `idZnajomy` FROM `znajomi` WHERE `idGracz`= ?',[id], function (error, results) {  //pobiera liste znajomych
     if (error) throw error
 
-    let table = results[0]
-    let tableOfFriends = table["idZnajomy"].toString().split(";")
+    let table = JSON.parse(JSON.stringify(results))
+    console.log(table);
+    
+    let tableOfFriends = table[0].idZnajomy.split(";")
+    
     if (tableOfFriends.length>0) {
-      let query = 'SELECT `nazwa` FROM `gracz` WHERE '
+      let query = 'SELECT `nazwa`, `doswiadczenie` FROM `gracz` WHERE '
       let isFirst = true
 
       tableOfFriends.forEach(idFriend => {
@@ -70,11 +75,11 @@ app.get('/znajomi', (req, res) =>{
 
       db.query(query, function (error, results) {
         if (error) throw error
-        res.send(results)
+        res.json(results)
       })}
 
     else
-      res.send(null)
+      res.json(null)
   })
 })
 
