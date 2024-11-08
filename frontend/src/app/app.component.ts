@@ -21,8 +21,9 @@ export class AppComponent{
   constructor(private dataService: DataService, private http: HttpClient){}
   ngOnInit(){
     const server = 'http://localhost:3000/'
+    let id: number | null = null
     
-    //pobiera tablicy z rybami i wypisywanie ich nazw
+    //pobiera tablicy z rybami i wypisuje ich nazwy
     this.http.get<Array<Fish>>(server+'fishes').subscribe(e => {
       e.forEach(row => {
         console.log(row.nazwa);
@@ -30,8 +31,7 @@ export class AppComponent{
       })
     })
 
-    //login
-    let id: number | null = null
+    //logowanie
     let login = 'kacper', password = 'aaaa'
     this.http.get<{id: number}|null>(server+'login?login='+login+'&password='+password)
       .subscribe(e => {
@@ -40,6 +40,7 @@ export class AppComponent{
           console.log(e.id);
           console.log("logowanie udalo sie");
 
+          //pobiera i wyświetla znajomych
           this.http.get<Array<Player>|null>(server+'znajomi?id='+id)
             .subscribe(e => {
               if(e===null)  console.log("nie masz znajomych");
@@ -49,7 +50,7 @@ export class AppComponent{
                 })
               }
             })
-            
+
         }else console.log("logowanie nie udalo sie");
     })
     
@@ -83,6 +84,7 @@ export class AppComponent{
 
 
 interface Player {
+  id: number
   nazwa: string
   doswiadczenie: number
 }
@@ -90,4 +92,13 @@ interface Player {
 interface Fish {
   id: number;
   nazwa: string
+  obrazek: string
+  minKg: number
+  maxKg:  number
+  minWymiar: number
+  maxWymiar: number
+  cena: number
+  doswiadczenie: number
+  wystepowanie: string
+  opis: string
 }
