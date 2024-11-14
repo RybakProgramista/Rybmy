@@ -3,10 +3,11 @@
   height: 95%;
   position: relative;
   background-color: #5c4d00;
-  background-image: url(http://www.transparenttextures.com/patterns/wood-pattern.png);
+  background-image: url("drewno.png");
   left: 50%;
   transform: translateX(-50%);
   border-radius: 20px;
+  /* http://www.transparenttextures.com/patterns/wood-pattern.png */
  }
   
 .gauge > * {
@@ -23,7 +24,8 @@
 }
   
 .negative-space {
-  background: black;
+  background-image: url("marmur.png");
+  background-size: cover;
   clip-path: inset(0 0 var(--cos, 50%) 0); /*tu jest wartość do zmiany zapełnienia wskaźnika!!! */
 }
 
