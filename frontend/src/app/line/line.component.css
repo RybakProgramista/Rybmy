@@ -6,6 +6,7 @@
   background-image: url(http://www.transparenttextures.com/patterns/wood-pattern.png);
   left: 50%;
   transform: translateX(-50%);
+  border-radius: 20px;
  }
   
 .gauge > * {
@@ -14,6 +15,7 @@
   bottom:15px;
   left:15px;
   position: absolute;
+  border-radius: 20px;
 }
   
 .meter-gauge {
