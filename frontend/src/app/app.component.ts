@@ -24,16 +24,20 @@ export class AppComponent{
     let id: number | null = null
     
     //pobiera tablicy z rybami i wypisuje ich nazwy
-    this.http.get<Array<Fish>>(server+'fishes').subscribe(e => {
-      e.forEach(row => {
-        console.log(row.nazwa);
+    this.http.get<Array<Fish>/*wpisjes jakiego typu będzie pobierana wartość z servera */>(server+'fishes'/*ścieżka do servera*/).subscribe(e => {
+      e.forEach(row => {  
+        console.log(row.nazwa); //jest wysylana jako json więc możesz z każdego wiersz wybrać wartość przypisaną do 'nazwa'
         
       })
     })
 
+
+
+
+
     //logowanie
     let login = 'kacper', password = 'aaaa'
-    this.http.get<{id: number}|null>(server+'login?login='+login+'&password='+password)
+    this.http.get<{id: number}|null>(server+'api/get/login?login='+login+'&password='+password)
       .subscribe(e => {
         if (e!==null) {
           id = e.id
