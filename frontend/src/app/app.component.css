@@ -30,7 +30,7 @@
    height: 100%;
    width: 67%;
    background-color: red;
-   display: block;
+   display: none;
 }
 
 .line-panel{
@@ -65,6 +65,6 @@
 
 .field:has(.left-panel>#test:checked) {
    &>.middle-panel>.poppin {
-      display: none;
+      display: block;
    }
 }
