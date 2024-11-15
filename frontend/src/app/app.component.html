@@ -15,7 +15,12 @@
         </div>
       </div>
       <div class="col-2 red">
-        <app-shop (demandItemEvent)="" [returnedItem]="PRZEDMIOT ZWRÓCONY"></app-shop>
+        <app-shop 
+        (demandItemEvent)="returnedItemChanged($event)"
+        (buyItemEvent)="buyItem($event)" 
+        [returnedItem]="returnedItem"
+        >
+        </app-shop>
       </div>
     </div>
 </div>

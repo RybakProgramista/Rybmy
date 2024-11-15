@@ -33,7 +33,24 @@ export class AppComponent{
       .then(fishes => console.log(fishes))
   }
 
+  returnedItem = ["NAZWA", "WYTRZYMAŁOŚĆ", "CZY KUPIONY"]; //<- TU MA BYĆ KURWA ZWRACANY OLEK
+  returnedItemChanged(input : string){
+    let typeOfEq = input.split("-|-")[0];
+    let idOfEq = input.split("-|-")[1];
 
+    //TU MA BYĆ WCZYTYWANIE NOWEGO PRZEDMIOTU
+    //Wstawiasz typeOfEq i idOfEq do kwerendy i ma wynik być zwracany do zmiennej returnedItem, zgodnie z templatem już wstawionym
+    //powodzenia
+  }
+
+  buyItem(input : string){
+    let typeOfEq = input.split("-|-")[0];
+    let idOfEq = input.split("-|-")[1];
+
+    //TU MA BYĆ FUNKCJA KTÓRA PRZEKAZUJE BACKENDOWI ZAPYTANIE CZY GRACZA STAĆ NA TEN PRZEDMIOT
+    //Jeśli tak to kupuje, jak nie to nie
+    //Wytłumaczenie argumentów podobne co powyżej
+  }
   //Reszta
   maxDurability : number = 0;
   currDurabilityPercent : number = 0;
