@@ -4,8 +4,9 @@ export abstract class Item{
     private value : number;
     private isBought : boolean;
     private isEquipped : boolean;
+    private imageURL : string;
 
-    constructor(name : string, value : number){
+    constructor(name : string, value : number, imageURL : string){
         this.name = name;
         this.value = value;
         this.isBought = false;
@@ -13,6 +14,7 @@ export abstract class Item{
         if(this.value < 0){
             console.error("Item cannot be worth less than 0 you dumb fuck");
         }
+        this.imageURL = imageURL;
     }
 
     public getName() : string{
@@ -26,6 +28,9 @@ export abstract class Item{
     }
     public getIsEquipped() : boolean{
         return this.isEquipped;
+    }
+    public getImageURL() : string{
+        return this.imageURL;
     }
 
     public buy() : void{
