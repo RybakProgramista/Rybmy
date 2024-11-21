@@ -83,6 +83,13 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
       this.fishOn = true;
       this.currState = "CIĄGNIJ";
       this.timer = 0;
+      Ryba: String;
+      
+
+
+
+
+
     }
   }
   changePulling(newState : boolean) : void{
@@ -175,7 +182,6 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
     if(this.durability > this.maxDurability){
       this.durability = this.maxDurability;
     }
-    console.log(this.durability + " " + this.maxDurability);
     this.calculatePercentOnDurabilityChanged.emit(this.durability / this.maxDurability * 100);
   }
 }
