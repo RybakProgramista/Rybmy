@@ -60,62 +60,19 @@ export class AppComponent{
     })
 
     
-    //pobiera tablicy z rybami i wypisuje ich nazwy
-    // this.http.get<Array<Fish>/*wpisjes jakiego typu będzie pobierana wartość z servera */>(server+'fishes'/*ścieżka do servera*/).subscribe(e => {
-    //   e.forEach(row => {  
-    //     console.log(row.nazwa); //jest wysylana jako json więc możesz z każdego wiersz wybrać wartość przypisaną do 'nazwa'
-        
-    //   })
-    // })
-
-
-
-
-
-    //logowanie
-    // let login = 'kacper', password = 'aaaa'
-    // this.http.get<{id: number}|null>(server+'api/get/login?login='+login+'&password='+password)
-    //   .subscribe(e => {
-    //     if (e!==null) {
-    //       id = e.id
-    //       console.log(e.id);
-    //       console.log("logowanie udalo sie");
-
-    //       //pobiera i wyświetla znajomych
-    //       this.http.get<Array<Player>|null>(server+'znajomi?id='+id)
-    //         .subscribe(e => {
-    //           if(e===null)  console.log("nie masz znajomych");
-    //           else{
-    //             e.forEach(friend => {
-    //               console.log(friend);
-    //             })
-    //           }
-    //         })
-
-    //     }else console.log("logowanie nie udalo sie");
-    // })
-    
-    //   fetch(server+'login?login='+login+'&password='+password)
-    //   .then(result => console.log(result))
-    
-
-    
-  
-    
-    // fetch(server+'znajomi?id='+id)
-    //   .then(response => response.json())
-    //   .then(friends => friends.array.forEach((name: any) => {
-    //     console.log(name);
-        
-    //   }))
       
   }
+
+  server = 'http://localhost:3000/'
 
   returnedItem = ["NAZWA", "WYTRZYMAŁOŚĆ", "CZY KUPIONY"]; //<- TU MA BYĆ KURWA ZWRACANY OLEK
   returnedItemChanged(input : string){
     let typeOfEq = input.split("-|-")[0];
     let idOfEq = input.split("-|-")[1];
-
+    this.http.get<string[]>(this.server+'api/getTable/'+typeOfEq+'?id='+idOfEq)
+    .subscribe(e => {
+      console.log(e)
+    })
     //TU MA BYĆ WCZYTYWANIE NOWEGO PRZEDMIOTU
     //Wstawiasz typeOfEq i idOfEq do kwerendy i ma wynik być zwracany do zmiennej returnedItem, zgodnie z templatem już wstawionym
     //powodzenia
