@@ -36,6 +36,9 @@
     }
   },
   "chunks": {
+    "WebGPURenderer-IO57YZTQ": {
+      "file": "WebGPURenderer-IO57YZTQ.js"
+    },
     "WebGLRenderer-XT5ELZWL": {
       "file": "WebGLRenderer-XT5ELZWL.js"
     },
@@ -48,8 +51,8 @@
     "chunk-A3LTE4ZH": {
       "file": "chunk-A3LTE4ZH.js"
     },
-    "chunk-LGGNAV7W": {
-      "file": "chunk-LGGNAV7W.js"
+    "chunk-OBCKPMKI": {
+      "file": "chunk-OBCKPMKI.js"
     },
     "browserAll-DGM6Z6KV": {
       "file": "browserAll-DGM6Z6KV.js"
@@ -65,15 +68,6 @@
     },
     "chunk-XYGGB2JN": {
       "file": "chunk-XYGGB2JN.js"
-    },
-    "WebGPURenderer-IO57YZTQ": {
-      "file": "WebGPURenderer-IO57YZTQ.js"
-    },
-    "chunk-EMKP3YEF": {
-      "file": "chunk-EMKP3YEF.js"
-    },
-    "chunk-ZT4WG52D": {
-      "file": "chunk-ZT4WG52D.js"
     },
     "chunk-REVMUJ3R": {
       "file": "chunk-REVMUJ3R.js"
