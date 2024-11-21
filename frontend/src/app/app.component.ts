@@ -71,7 +71,7 @@ export class AppComponent{
     let idOfEq = input.split("-|-")[1];
     this.http.get<string[]>(this.server+'api/getTable/'+typeOfEq+'?id='+idOfEq)
     .subscribe(e => {
-      console.log(e)
+      this.returnedItem = e
     })
     //TU MA BYĆ WCZYTYWANIE NOWEGO PRZEDMIOTU
     //Wstawiasz typeOfEq i idOfEq do kwerendy i ma wynik być zwracany do zmiennej returnedItem, zgodnie z templatem już wstawionym
