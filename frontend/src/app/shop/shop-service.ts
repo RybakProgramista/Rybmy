@@ -8,7 +8,7 @@ import { Equip } from '../app.component';
 })
 export class ShopService{
     _http = inject(HttpClient);
-    _server = 'https://localhost:3000/';
+    _server = 'http://localhost:3000/';
 
     getItem(type : string, id : number){
         return this._http.get<Equip>(this._server+"api/get/equip?id=" + id + "&type=" + type);
