@@ -14,9 +14,9 @@ const equipmentTypeArray : equipmentType[] = ["wedka", "kolowrotek", "zylka"];
 })
 export class ShopComponent{
   currIds : Map<equipmentType, number> = new Map([
-    ["wedka", 0],
-    ["kolowrotek", 0],
-    ["zylka", 0]
+    ["wedka", 1],
+    ["kolowrotek", 1],
+    ["zylka", 1]
   ])
   currItems : Map<equipmentType, Item> = new Map([
     ["wedka", new BaseItem("", 0, 0, "")],
