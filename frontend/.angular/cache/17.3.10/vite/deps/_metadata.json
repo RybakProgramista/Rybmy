@@ -4,6 +4,12 @@
   "lockfileHash": "609c37b7",
   "browserHash": "82071f5f",
   "optimized": {
+    "@angular/common/http": {
+      "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
+      "file": "@angular_common_http.js",
+      "fileHash": "23ec2551",
+      "needsInterop": false
+    },
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
@@ -30,8 +36,17 @@
     }
   },
   "chunks": {
-    "chunk-WQ3DZVEW": {
-      "file": "chunk-WQ3DZVEW.js"
+    "WebGLRenderer-XT5ELZWL": {
+      "file": "WebGLRenderer-XT5ELZWL.js"
+    },
+    "chunk-QIQS55LB": {
+      "file": "chunk-QIQS55LB.js"
+    },
+    "chunk-3JWMVLXI": {
+      "file": "chunk-3JWMVLXI.js"
+    },
+    "chunk-A3LTE4ZH": {
+      "file": "chunk-A3LTE4ZH.js"
     },
     "chunk-LGGNAV7W": {
       "file": "chunk-LGGNAV7W.js"
@@ -51,23 +66,17 @@
     "chunk-XYGGB2JN": {
       "file": "chunk-XYGGB2JN.js"
     },
-    "WebGPURenderer-3H25LEES": {
-      "file": "WebGPURenderer-3H25LEES.js"
+    "WebGPURenderer-IO57YZTQ": {
+      "file": "WebGPURenderer-IO57YZTQ.js"
     },
-    "chunk-Q2H3BWCN": {
-      "file": "chunk-Q2H3BWCN.js"
-    },
-    "chunk-REVMUJ3R": {
-      "file": "chunk-REVMUJ3R.js"
-    },
-    "WebGLRenderer-XT5ELZWL": {
-      "file": "WebGLRenderer-XT5ELZWL.js"
-    },
-    "chunk-3JWMVLXI": {
-      "file": "chunk-3JWMVLXI.js"
+    "chunk-EMKP3YEF": {
+      "file": "chunk-EMKP3YEF.js"
     },
     "chunk-ZT4WG52D": {
       "file": "chunk-ZT4WG52D.js"
+    },
+    "chunk-REVMUJ3R": {
+      "file": "chunk-REVMUJ3R.js"
     },
     "chunk-2ABCISNK": {
       "file": "chunk-2ABCISNK.js"

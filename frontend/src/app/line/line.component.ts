@@ -16,7 +16,6 @@ export class LineComponent implements AfterViewInit{
     this.lineTicker = new Ticker();
     this.lineTicker.add(() =>{
       this.eel.nativeElement.style.setProperty("--cos", this.durabilityPercent + "%");
-      console.log(this.durabilityPercent);
     });
     this.lineTicker.start();
   }
