@@ -26,7 +26,7 @@ export class ShopComponent{
   loadedEquipment : equipmentType[] = []
 
   //returned item
-  @Input() returnedItem : String[] = [];
+  @Input() returnedItem : string[] = [];
 
   //asking for item at current id of demanded type
   @Output() demandItemEvent = new EventEmitter<string>();
@@ -56,6 +56,12 @@ export class ShopComponent{
     else{
       return "BUY";
     }
+  }
+
+  changeItem(type : equipmentType, val : number){
+    this.currIds.set(type, (this.currIds.get(type) ?? 0) + val);
+    this.demandItem(type);
+    this.currItems.set(type, new BaseItem(this.returnedItem[1], parseInt(this.returnedItem[2]), parseInt(this.returnedItem[3]), ""));
   }
 
   getItemName(type : equipmentType): string{
