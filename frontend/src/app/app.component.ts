@@ -37,7 +37,7 @@ export class AppComponent{
       console.log(e)
       console.log('nazwa:'+e.nazwa);
     })
-    this.http.get<Equip>(server+'api/get/equip?id='+id+'&type='+'zylka'))
+    this.http.get<Equip>(server+'api/get/equip?id='+id+'&type='+'zylka')
     .subscribe(e => {
       console.log(e)
       console.log('nazwa:'+e.nazwa);
