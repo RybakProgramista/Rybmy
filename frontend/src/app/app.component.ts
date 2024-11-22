@@ -26,18 +26,18 @@ export class AppComponent{
 
     //pobieranie z JSON
     id = 2
-    this.http.get<Equip>(server+'api/get/kolowrotek?id='+id)
+    this.http.get<Equip>(server+'api/get/equip?id='+id+'&type='+'kolowrotek')
     .subscribe(e => {
       console.log(e)
       console.log('nazwa:'+e.nazwa);
       
     })
-    this.http.get<Equip>(server+'api/get/wedka?id='+id)
+    this.http.get<Equip>(server+'api/get/equip?id='+id+'&type='+'wedka')
     .subscribe(e => {
       console.log(e)
       console.log('nazwa:'+e.nazwa);
     })
-    this.http.get<Equip>(server+'api/get/zylka?id='+id)
+    this.http.get<Equip>(server+'api/get/equip?id='+id+'&type='+'zylka'))
     .subscribe(e => {
       console.log(e)
       console.log('nazwa:'+e.nazwa);
@@ -45,16 +45,16 @@ export class AppComponent{
 
 
     //pobieranie z tablicą 
-    this.http.get<Equip>(server+'api/getTable/kolowrotek?id='+id)
+    this.http.get<Equip>(server+'api/getTable/equip?id='+id+'&type='+'kolowrotek')
     .subscribe(e => {
       console.log(e)
       
     })
-    this.http.get<Equip>(server+'api/getTable/wedka?id='+id)
+    this.http.get<Equip>(server+'api/getTable/equip?id='+id+'&type='+'wedka')
     .subscribe(e => {
       console.log(e)
     })
-    this.http.get<Equip>(server+'api/getTable/zylka?id='+id)
+    this.http.get<Equip>(server+'api/getTable/equip?id='+id+'&type='+'zylka')
     .subscribe(e => {
       console.log(e)
     })
@@ -69,7 +69,7 @@ export class AppComponent{
   returnedItemChanged(input : string){
     let typeOfEq = input.split("-|-")[0];
     let idOfEq = input.split("-|-")[1];
-    this.http.get<string[]>(this.server+'api/getTable/'+typeOfEq+'?id='+idOfEq)
+    this.http.get<string[]>(this.server+'api/getTable/equip?id='+idOfEq+'&type='+typeOfEq)
     .subscribe(e => {
       this.returnedItem = e
     })
