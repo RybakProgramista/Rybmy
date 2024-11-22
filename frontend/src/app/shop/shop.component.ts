@@ -61,7 +61,7 @@ export class ShopComponent{
   changeItem(type : equipmentType, val : number){
     this.currIds.set(type, (this.currIds.get(type) ?? 0) + val);
     this.demandItem(type);
-    console.log(this.returnedItem[0]);
+    console.log(this.currIds);
     this.currItems.set(type, new BaseItem(this.returnedItem[1], parseInt(this.returnedItem[2]), parseInt(this.returnedItem[3]), ""));
   }
 
