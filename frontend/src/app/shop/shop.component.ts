@@ -2,8 +2,8 @@ import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { Item } from '../ShopItems/item';
 import { BaseItem } from '../ShopItems/baseItem';
 
-type equipmentType = "Wedka" | "Kolowrotek" | "Zylka";
-const equipmentTypeArray : equipmentType[] = ["Wedka", "Kolowrotek", "Zylka"];
+type equipmentType = "wedka" | "kolowrotek" | "zylka";
+const equipmentTypeArray : equipmentType[] = ["wedka", "kolowrotek", "zylka"];
 
 @Component({
   selector: 'app-shop',
@@ -14,14 +14,14 @@ const equipmentTypeArray : equipmentType[] = ["Wedka", "Kolowrotek", "Zylka"];
 })
 export class ShopComponent{
   currIds : Map<equipmentType, number> = new Map([
-    ["Wedka", 0],
-    ["Kolowrotek", 0],
-    ["Zylka", 0]
+    ["wedka", 0],
+    ["kolowrotek", 0],
+    ["zylka", 0]
   ])
   currItems : Map<equipmentType, Item> = new Map([
-    ["Wedka", new BaseItem("", 0, 0, "")],
-    ["Kolowrotek", new BaseItem("", 0, 0, "")],
-    ["Zylka", new BaseItem("", 0, 0, "")]
+    ["wedka", new BaseItem("", 0, 0, "")],
+    ["kolowrotek", new BaseItem("", 0, 0, "")],
+    ["zylka", new BaseItem("", 0, 0, "")]
   ])
   loadedEquipment : equipmentType[] = []
 
