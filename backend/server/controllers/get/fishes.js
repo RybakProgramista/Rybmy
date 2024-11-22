@@ -1,10 +1,8 @@
-import config from '../../config.js'
-import mysql from 'mysql'
+import database from '../../database.js'
 
 
 export const fishes = (req, res) =>{
-    const connection = mysql.createConnection(config.db)
-    connection.query('SELECT * FROM `ryby`', function (error, results) {
+    database.query('SELECT * FROM `ryby`', function (error, results) {
         if (error) throw error
         res.json(results)
     })
