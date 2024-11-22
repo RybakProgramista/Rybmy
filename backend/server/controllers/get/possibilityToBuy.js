@@ -6,6 +6,8 @@ export const possibilityToBuy = (req, res) =>{
     let cena
     database.query('SELECT `cena` FROM `'+type+'` WHERE `id` = ?;',[id], function (error, results) {
         if (error) res.json(null)
-        cena = results[0]
+        else{
+            cena = results[0]
+        }
     })
 }

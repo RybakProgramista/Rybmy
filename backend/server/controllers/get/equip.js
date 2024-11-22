@@ -5,6 +5,8 @@ export const equip = (req, res) =>{
     const {id, type} = req.query
     database.query('SELECT * FROM `'+type+'` WHERE `id` = ?;',[id], function (error, results) {
         if (error) res.json(null)
-        res.json(results[0])
+        else{
+            res.json(results[0])
+        }
     })
 }
