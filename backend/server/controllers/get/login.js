@@ -5,7 +5,7 @@ export const login = (req, res) => {
     const { login, password } = req.query;
 
     database.query('SELECT `id` FROM `dane` WHERE `login` = ? AND `haslo` = ?;',[login, password], function (error, results) {
-      if (error) throw error
+      if (error) res.json(null)
   
     //   console.log(results);
       

@@ -6,7 +6,7 @@ export const friends =(req, res) =>{
     // console.log(id);
     
     database.query('SELECT `idZnajomy` FROM `znajomi` WHERE `idGracz`= ?',[id], function (error, results) {  //pobiera liste znajomych
-      if (error) throw error
+      if (error) res.json(null)
   
       let table = JSON.parse(JSON.stringify(results))
     //   console.log(table);
@@ -26,7 +26,7 @@ export const friends =(req, res) =>{
         });
   
         database.query(query, function (error, results) {
-          if (error) throw error
+          if (error) res.json(null)
           res.json(results)
         })}
   
