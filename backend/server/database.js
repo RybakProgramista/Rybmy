@@ -1,4 +1,5 @@
-import config from '../../config.js'
+import config from './config.js'
 import mysql from 'mysql'
 
-export const database = mysql.createConnection(config.db)
+const database = mysql.createConnection(config.db)
+export default database
