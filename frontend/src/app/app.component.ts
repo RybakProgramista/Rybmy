@@ -20,44 +20,44 @@ export class AppComponent{
   //SERWER
   constructor(private dataService: DataService, private http: HttpClient){}
   ngOnInit(){
-    const server = 'http://localhost:3000/'
-    let id: number | null = null
+    // const server = 'http://localhost:3000/'
+    // let id: number | null = null
 
 
     //pobieranie z JSON
-    id = 2
-    this.http.get<Equip>(server+'api/get/equip?id='+id+'&type='+'kolowrotek')
-    .subscribe(e => {
-      console.log(e)
-      console.log('nazwa:'+e.nazwa);
+    // id = 2
+    // this.http.get<Equip>(server+'api/get/equip?id='+id+'&type='+'kolowrotek')
+    // .subscribe(e => {
+    //   console.log(e)
+    //   console.log('nazwa:'+e.nazwa);
       
-    })
-    this.http.get<Equip>(server+'api/get/equip?id='+id+'&type='+'wedka')
-    .subscribe(e => {
-      console.log(e)
-      console.log('nazwa:'+e.nazwa);
-    })
-    this.http.get<Equip>(server+'api/get/equip?id='+id+'&type='+'zylka')
-    .subscribe(e => {
-      console.log(e)
-      console.log('nazwa:'+e.nazwa);
-    })
+    // })
+    // this.http.get<Equip>(server+'api/get/equip?id='+id+'&type='+'wedka')
+    // .subscribe(e => {
+    //   console.log(e)
+    //   console.log('nazwa:'+e.nazwa);
+    // })
+    // this.http.get<Equip>(server+'api/get/equip?id='+id+'&type='+'zylka')
+    // .subscribe(e => {
+    //   console.log(e)
+    //   console.log('nazwa:'+e.nazwa);
+    // })
 
 
     //pobieranie z tablicą 
-    this.http.get<Equip>(server+'api/getTable/equip?id='+id+'&type='+'kolowrotek')
-    .subscribe(e => {
-      console.log(e)
+    // this.http.get<Equip>(server+'api/getTable/equip?id='+id+'&type='+'kolowrotek')
+    // .subscribe(e => {
+    //   console.log(e)
       
-    })
-    this.http.get<Equip>(server+'api/getTable/equip?id='+id+'&type='+'wedka')
-    .subscribe(e => {
-      console.log(e)
-    })
-    this.http.get<Equip>(server+'api/getTable/equip?id='+id+'&type='+'zylka')
-    .subscribe(e => {
-      console.log(e)
-    })
+    // })
+    // this.http.get<Equip>(server+'api/getTable/equip?id='+id+'&type='+'wedka')
+    // .subscribe(e => {
+    //   console.log(e)
+    // })
+    // this.http.get<Equip>(server+'api/getTable/equip?id='+id+'&type='+'zylka')
+    // .subscribe(e => {
+    //   console.log(e)
+    // })
 
     
       
@@ -69,9 +69,9 @@ export class AppComponent{
   returnedItemChanged(input : string){
     let typeOfEq = input.split("-|-")[0];
     let idOfEq = input.split("-|-")[1];
-    this.http.get<string[]>(this.server+'api/getTable/equip?id='+idOfEq+'&type='+typeOfEq)
+    this.http.get<string[]|null>(this.server+'api/getTable/equip?id='+idOfEq+'&type='+typeOfEq)
     .subscribe(e => {
-      this.returnedItem = e
+      if(e!=null)   this.returnedItem = e
     })
     //TU MA BYĆ WCZYTYWANIE NOWEGO PRZEDMIOTU
     //Wstawiasz typeOfEq i idOfEq do kwerendy i ma wynik być zwracany do zmiennej returnedItem, zgodnie z templatem już wstawionym
