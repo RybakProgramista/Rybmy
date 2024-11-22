@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, numberAttribute, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { Item } from '../ShopItems/item';
 import { BaseItem } from '../ShopItems/baseItem';
 
@@ -61,10 +61,17 @@ export class ShopComponent{
   changeItem(type : equipmentType, val : number){
     this.currIds.set(type, (this.currIds.get(type) ?? 0) + val);
     this.demandItem(type);
+    console.log(this.returnedItem[0]);
     this.currItems.set(type, new BaseItem(this.returnedItem[1], parseInt(this.returnedItem[2]), parseInt(this.returnedItem[3]), ""));
   }
 
   getItemName(type : equipmentType): string{
     return this.currItems.get(type)?.getName() ?? "ZJEBAŁO SIĘ";
+  }
+
+  ngOnInit(){
+    equipmentTypeArray.forEach(type => {
+      this.changeItem(type, 0);
+    });
   }
 }
