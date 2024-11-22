@@ -118,7 +118,7 @@ interface Fish {
   opis: string
 }
 
-interface Equip {
+export interface Equip {
   id: number
   nazwa: string
   wytrzymalosc: number
