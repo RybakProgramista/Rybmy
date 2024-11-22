@@ -1,6 +1,7 @@
-import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit, inject } from '@angular/core';
 import { Item } from '../ShopItems/item';
 import { BaseItem } from '../ShopItems/baseItem';
+import { ShopService } from './shop-service';
 
 type equipmentType = "wedka" | "kolowrotek" | "zylka";
 const equipmentTypeArray : equipmentType[] = ["wedka", "kolowrotek", "zylka"];
@@ -13,6 +14,8 @@ const equipmentTypeArray : equipmentType[] = ["wedka", "kolowrotek", "zylka"];
   styleUrl: './shop.component.css'
 })
 export class ShopComponent{
+  _service = inject(ShopService);
+
   currIds : Map<equipmentType, number> = new Map([
     ["wedka", 1],
     ["kolowrotek", 1],
@@ -61,10 +64,13 @@ export class ShopComponent{
   changeItem(type : equipmentType, val : number){
     this.currIds.set(type, (this.currIds.get(type) ?? 0) + val);
     this.demandItem(type);
-    console.log(this.currIds);
-    this.currItems.set(type, new BaseItem(this.returnedItem[1], parseInt(this.returnedItem[2]), parseInt(this.returnedItem[3]), ""));
-  }
+    this._service.getItem(type.toString(), this.currIds.get(type) ?? 0).subscribe(
+      e => {
+        this.currItems.set(type, new BaseItem(e.nazwa, e.wytrzymalosc, e.cena, ""));
 
+      }
+    )
+  }
   getItemName(type : equipmentType): string{
     return this.currItems.get(type)?.getName() ?? "ZJEBAŁO SIĘ";
   }
