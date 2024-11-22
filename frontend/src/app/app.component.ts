@@ -72,6 +72,9 @@ export class AppComponent{
     this.http.get<string[]|null>(this.server+'api/getTable/equip?id='+idOfEq+'&type='+typeOfEq)
     .subscribe(e => {
       if(e!=null)   this.returnedItem = e
+      else {
+        
+      }
     })
     //TU MA BYĆ WCZYTYWANIE NOWEGO PRZEDMIOTU
     //Wstawiasz typeOfEq i idOfEq do kwerendy i ma wynik być zwracany do zmiennej returnedItem, zgodnie z templatem już wstawionym
