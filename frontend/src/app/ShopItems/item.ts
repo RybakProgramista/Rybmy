@@ -1,42 +1,35 @@
+export type itemState = "Equipped" | "Bought" | "NotBought";
+
 export abstract class Item{
 
     private name : string;
     private value : number;
-    private isBought : boolean;
-    private isEquipped : boolean;
+    private currState : itemState;
     private imageURL : string;
 
-    constructor(name : string, value : number, imageURL : string){
+    constructor(name : string, value : number, currState : itemState, imageURL : string){
         this.name = name;
         this.value = value;
-        this.isBought = false;
-        this.isEquipped = false;
+        this.currState = currState;
         if(this.value < 0){
             console.error("Item cannot be worth less than 0 you dumb fuck");
         }
         this.imageURL = imageURL;
     }
-
+    public changeCurrState(newState : itemState) : void{
+        this.currState = newState;
+    }
     public getName() : string{
         return this.name;
     }
     public getVal() : number{
         return this.value;
     }
-    public getIsBought() : boolean{
-        return this.isBought;
-    }
-    public getIsEquipped() : boolean{
-        return this.isEquipped;
+    public getState() : itemState{
+        return this.currState;
     }
     public getImageURL() : string{
         return this.imageURL;
     }
 
-    public buy() : void{
-        this.isBought = true;
-    }
-    public changeIsEquipped(newState : boolean) : void{
-        this.isEquipped = newState;
-    }
 }
