@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lis 22, 2024 at 02:35 PM
+-- Generation Time: Lis 28, 2024 at 01:51 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.0.30
 
@@ -66,18 +66,19 @@ DELIMITER ;
 CREATE TABLE `gracz` (
   `idGracz` int(11) NOT NULL,
   `nazwa` varchar(30) NOT NULL,
-  `doswiadczenie` int(11) NOT NULL
+  `doswiadczenie` int(11) NOT NULL,
+  `pieniadze` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
 -- Dumping data for table `gracz`
 --
 
-INSERT INTO `gracz` (`idGracz`, `nazwa`, `doswiadczenie`) VALUES
-(1, '', 0),
-(4, '', 0),
-(5, 'kacper', 0),
-(6, 'jacek', 0);
+INSERT INTO `gracz` (`idGracz`, `nazwa`, `doswiadczenie`, `pieniadze`) VALUES
+(1, '', 0, 100),
+(4, '', 0, 0),
+(5, 'kacper', 0, 0),
+(6, 'jacek', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -97,7 +98,7 @@ CREATE TABLE `kolowrotek` (
 --
 
 INSERT INTO `kolowrotek` (`id`, `nazwa`, `wytrzymalosc`, `cena`) VALUES
-(1, 'Ręka', 30, 0),
+(1, 'Ręka', 30, 50),
 (2, 'Midako', 60, 0),
 (3, 'Robin', 90, 0);
 
