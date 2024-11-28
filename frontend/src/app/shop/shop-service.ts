@@ -13,4 +13,8 @@ export class ShopService{
     getItem(type : string, id : number){
         return this._http.get<Equip>(this._server+"api/get/equip?id=" + id + "&type=" + type);
     }
+
+    buyItem(type : string, id : number) : boolean{
+        //tutaj kupowanie
+    }
 }

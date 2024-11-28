@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter, Input, OnInit, inject } from '@angular
 import { Item } from '../ShopItems/item';
 import { BaseItem } from '../ShopItems/baseItem';
 import { ShopService } from './shop-service';
+import { itemState } from '../ShopItems/item';
 
 type equipmentType = "wedka" | "kolowrotek" | "zylka";
 const equipmentTypeArray : equipmentType[] = ["wedka", "kolowrotek", "zylka"];
@@ -22,39 +23,46 @@ export class ShopComponent{
     ["zylka", 1]
   ])
   currItems : Map<equipmentType, Item> = new Map([
-    ["wedka", new BaseItem("", 0, 0, "")],
+    ["wedka", new BaseItem("", 0, 0, "NotBought", "")],
     ["kolowrotek", new BaseItem("", 0, 0, "")],
     ["zylka", new BaseItem("", 0, 0, "")]
   ])
   loadedEquipment : equipmentType[] = []
 
-  //asking for item at current id of demanded type
-  @Output() demandItemEvent = new EventEmitter<string>();
-  demandItem(type : equipmentType, id? : number) : void{
-    this.demandItemEvent.emit(type.toString() +  "-|-" + (id != null ? id : this.currIds.get(type)));
-  }
-
-  @Output() buyItemEvent = new EventEmitter<string>();
+  @Output() equipItemEvent = new EventEmitter<number>();
   useItem(type : equipmentType) : void{
     if(this.checkItemState(type) == "EQUIP"){
-      //ekwipowanie
+      let durability = 0;
+      for(let i = 0; i < 3; i++){
+        durability += (this.currItems.get(equipmentTypeArray[i]) as BaseItem).getDurability();
+      }
+      this.equipItemEvent.emit(durability);
     }
     else if(this.checkItemState(type) == "BUY"){
-      this.buyItemEvent.emit(type.toString() + "-|-" + this.currIds.get(type));
+      this._service.buyItem(type.toString(), this.currIds.get(type) ?? 0).subscribe(
+        canBuy =>{
+          if(canBuy == null){
+            console.error("Wyjebało kupowanie");
+            return;
+          }
+          if(canBuy){
+            this.currItems.get(type)?.changeCurrState("Bought");
+          }
+        }
+      )
     }
   }
 
   checkItemState(type : equipmentType) : string{
-    if(this.currItems.get(type)?.getIsBought()){
-      if(this.currItems.get(type)?.getIsEquipped()){
-        return "EQUIPPED";
-      }
-      else{
+    switch(this.currItems.get(type)?.getState()){
+      case "Bought" :
         return "EQUIP";
-      }
-    }
-    else{
-      return "BUY";
+      case "NotBought":
+        return "BUY";
+      case "Equipped":
+        return "Equipped";
+      default:
+        return "Dolbajob";
     }
   }
 
@@ -63,8 +71,7 @@ export class ShopComponent{
     this.demandItem(type);
     this._service.getItem(type.toString(), this.currIds.get(type) ?? 0).subscribe(
       e => {
-        this.currItems.set(type, new BaseItem(e.nazwa, e.wytrzymalosc, e.cena, ""));
-
+        this.currItems.set(type, new BaseItem(e.nazwa, e.wytrzymalosc, e.status , e.cena, ""));
       }
     )
   }
