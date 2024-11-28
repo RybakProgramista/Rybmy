@@ -28,9 +28,6 @@ export class ShopComponent{
   ])
   loadedEquipment : equipmentType[] = []
 
-  //returned item
-  @Input() returnedItem : string[] = [];
-
   //asking for item at current id of demanded type
   @Output() demandItemEvent = new EventEmitter<string>();
   demandItem(type : equipmentType, id? : number) : void{
