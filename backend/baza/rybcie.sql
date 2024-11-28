@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lis 28, 2024 at 01:51 PM
+-- Generation Time: Lis 28, 2024 at 03:17 PM
 -- Wersja serwera: 10.4.32-MariaDB
--- Wersja PHP: 8.0.30
+-- Wersja PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -67,18 +67,21 @@ CREATE TABLE `gracz` (
   `idGracz` int(11) NOT NULL,
   `nazwa` varchar(30) NOT NULL,
   `doswiadczenie` int(11) NOT NULL,
-  `pieniadze` int(11) NOT NULL DEFAULT 0
+  `pieniadze` int(11) NOT NULL DEFAULT 0,
+  `wedka` text DEFAULT NULL,
+  `kolowrotek` varchar(11) DEFAULT NULL,
+  `zylka` varchar(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
 -- Dumping data for table `gracz`
 --
 
-INSERT INTO `gracz` (`idGracz`, `nazwa`, `doswiadczenie`, `pieniadze`) VALUES
-(1, '', 0, 100),
-(4, '', 0, 0),
-(5, 'kacper', 0, 0),
-(6, 'jacek', 0, 0);
+INSERT INTO `gracz` (`idGracz`, `nazwa`, `doswiadczenie`, `pieniadze`, `wedka`, `kolowrotek`, `zylka`) VALUES
+(1, '', 0, 100, NULL, NULL, NULL),
+(4, '', 0, 0, NULL, NULL, NULL),
+(5, 'kacper', 0, 0, NULL, NULL, NULL),
+(6, 'jacek', 0, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 

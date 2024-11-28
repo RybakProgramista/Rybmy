@@ -1,0 +1,7 @@
+SELECT wedka FROM `gracz` WHERE idGracz = '?';
+SELECT kolowrotek FROM `gracz` WHERE idGracz = '?';
+SELECT zylka FROM `gracz` WHERE idGracz = '?';
+
+update gracz set wedka = concat(wedka, ';?') where idGracz = ?
+update gracz set kolowrotek = concat(kolowrotek, ';?') where idGracz = ?
+update gracz set zylka = concat(zylka, ';?') where idGracz = ?
