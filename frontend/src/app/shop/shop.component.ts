@@ -24,8 +24,8 @@ export class ShopComponent{
   ])
   currItems : Map<equipmentType, Item> = new Map([
     ["wedka", new BaseItem("", 0, 0, "NotBought", "")],
-    ["kolowrotek", new BaseItem("", 0, 0, "")],
-    ["zylka", new BaseItem("", 0, 0, "")]
+    ["kolowrotek", new BaseItem("", 0, 0, "NotBought" ,"")],
+    ["zylka", new BaseItem("", 0, 0, "NotBought" ,"")]
   ])
   loadedEquipment : equipmentType[] = []
 
