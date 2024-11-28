@@ -1,9 +1,10 @@
-import { Component, Output, EventEmitter, numberAttribute, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit, inject } from '@angular/core';
 import { Item } from '../ShopItems/item';
 import { BaseItem } from '../ShopItems/baseItem';
+import { ShopService } from './shop-service';
 
-type equipmentType = "Wędka" | "Kołowrotek" | "Żyłka";
-const equipmentTypeArray : equipmentType[] = ["Wędka", "Kołowrotek", "Żyłka"];
+type equipmentType = "wedka" | "kolowrotek" | "zylka";
+const equipmentTypeArray : equipmentType[] = ["wedka", "kolowrotek", "zylka"];
 
 @Component({
   selector: 'app-shop',
@@ -13,20 +14,19 @@ const equipmentTypeArray : equipmentType[] = ["Wędka", "Kołowrotek", "Żyłka"
   styleUrl: './shop.component.css'
 })
 export class ShopComponent{
+  _service = inject(ShopService);
+
   currIds : Map<equipmentType, number> = new Map([
-    ["Wędka", 0],
-    ["Kołowrotek", 0],
-    ["Żyłka", 0]
+    ["wedka", 1],
+    ["kolowrotek", 1],
+    ["zylka", 1]
   ])
   currItems : Map<equipmentType, Item> = new Map([
-    ["Wędka", new BaseItem("", 0, 0, "")],
-    ["Kołowrotek", new BaseItem("", 0, 0, "")],
-    ["Żyłka", new BaseItem("", 0, 0, "")]
+    ["wedka", new BaseItem("", 0, 0, "")],
+    ["kolowrotek", new BaseItem("", 0, 0, "")],
+    ["zylka", new BaseItem("", 0, 0, "")]
   ])
   loadedEquipment : equipmentType[] = []
-
-  //returned item
-  @Input() returnedItem : String[] = [];
 
   //asking for item at current id of demanded type
   @Output() demandItemEvent = new EventEmitter<string>();
@@ -58,7 +58,23 @@ export class ShopComponent{
     }
   }
 
+  changeItem(type : equipmentType, val : number){
+    this.currIds.set(type, (this.currIds.get(type) ?? 0) + val);
+    this.demandItem(type);
+    this._service.getItem(type.toString(), this.currIds.get(type) ?? 0).subscribe(
+      e => {
+        this.currItems.set(type, new BaseItem(e.nazwa, e.wytrzymalosc, e.cena, ""));
+
+      }
+    )
+  }
   getItemName(type : equipmentType): string{
     return this.currItems.get(type)?.getName() ?? "ZJEBAŁO SIĘ";
+  }
+
+  ngOnInit(){
+    equipmentTypeArray.forEach(type => {
+      this.changeItem(type, 0);
+    });
   }
 }

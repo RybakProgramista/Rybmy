@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lis 06, 2024 at 05:17 PM
+-- Generation Time: Lis 22, 2024 at 02:35 PM
 -- Wersja serwera: 10.4.32-MariaDB
--- Wersja PHP: 8.2.12
+-- Wersja PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -86,7 +86,7 @@ INSERT INTO `gracz` (`idGracz`, `nazwa`, `doswiadczenie`) VALUES
 --
 
 CREATE TABLE `kolowrotek` (
-  `idKolowrotek` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `nazwa` varchar(50) NOT NULL,
   `wytrzymalosc` int(11) NOT NULL,
   `cena` int(11) NOT NULL
@@ -96,7 +96,7 @@ CREATE TABLE `kolowrotek` (
 -- Dumping data for table `kolowrotek`
 --
 
-INSERT INTO `kolowrotek` (`idKolowrotek`, `nazwa`, `wytrzymalosc`, `cena`) VALUES
+INSERT INTO `kolowrotek` (`id`, `nazwa`, `wytrzymalosc`, `cena`) VALUES
 (1, 'Ręka', 30, 0),
 (2, 'Midako', 60, 0),
 (3, 'Robin', 90, 0);
@@ -142,7 +142,7 @@ INSERT INTO `ryby` (`idRyby`, `nazwa`, `obrazek`, `minKg`, `maxKg`, `minWymiar`,
 --
 
 CREATE TABLE `wedka` (
-  `idWedka` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `nazwa` varchar(50) NOT NULL,
   `wytrzymalosc` int(11) NOT NULL,
   `cena` int(11) NOT NULL
@@ -152,7 +152,7 @@ CREATE TABLE `wedka` (
 -- Dumping data for table `wedka`
 --
 
-INSERT INTO `wedka` (`idWedka`, `nazwa`, `wytrzymalosc`, `cena`) VALUES
+INSERT INTO `wedka` (`id`, `nazwa`, `wytrzymalosc`, `cena`) VALUES
 (1, 'Patyk', 50, 0),
 (2, 'Midako', 100, 0),
 (3, 'Haxon', 150, 0);
@@ -173,7 +173,7 @@ CREATE TABLE `znajomi` (
 --
 
 INSERT INTO `znajomi` (`idGracz`, `idZnajomy`) VALUES
-(6, '0');
+(5, '6;5');
 
 -- --------------------------------------------------------
 
@@ -182,7 +182,7 @@ INSERT INTO `znajomi` (`idGracz`, `idZnajomy`) VALUES
 --
 
 CREATE TABLE `zylka` (
-  `idZylka` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `nazwa` varchar(50) NOT NULL,
   `wytrzymalosc` int(11) NOT NULL,
   `cena` int(11) NOT NULL
@@ -192,7 +192,7 @@ CREATE TABLE `zylka` (
 -- Dumping data for table `zylka`
 --
 
-INSERT INTO `zylka` (`idZylka`, `nazwa`, `wytrzymalosc`, `cena`) VALUES
+INSERT INTO `zylka` (`id`, `nazwa`, `wytrzymalosc`, `cena`) VALUES
 (1, 'Sznurek', 20, 0),
 (2, 'Midako', 40, 0),
 (3, 'Robin', 60, 0);
@@ -217,7 +217,7 @@ ALTER TABLE `gracz`
 -- Indeksy dla tabeli `kolowrotek`
 --
 ALTER TABLE `kolowrotek`
-  ADD PRIMARY KEY (`idKolowrotek`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeksy dla tabeli `ryby`
@@ -229,13 +229,13 @@ ALTER TABLE `ryby`
 -- Indeksy dla tabeli `wedka`
 --
 ALTER TABLE `wedka`
-  ADD PRIMARY KEY (`idWedka`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeksy dla tabeli `zylka`
 --
 ALTER TABLE `zylka`
-  ADD PRIMARY KEY (`idZylka`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -251,7 +251,7 @@ ALTER TABLE `dane`
 -- AUTO_INCREMENT for table `kolowrotek`
 --
 ALTER TABLE `kolowrotek`
-  MODIFY `idKolowrotek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ryby`
@@ -263,13 +263,13 @@ ALTER TABLE `ryby`
 -- AUTO_INCREMENT for table `wedka`
 --
 ALTER TABLE `wedka`
-  MODIFY `idWedka` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `zylka`
 --
 ALTER TABLE `zylka`
-  MODIFY `idZylka` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

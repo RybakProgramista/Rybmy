@@ -15,13 +15,13 @@ app.use('/api', equip)
 
 
 
-app.get('/fishes', (req, res) => {   //zamiast '/fishes' wpisujesz path, np z '/fishes' będziesz miał localhost:3000/fishes
-  const { login, password } = req.query; // to jest do pobierania wartości, one są wysyłane w postaci: localhost:3000/fishes?login=kacper&password=siema
-  let results //przykladowa zmienna
+// app.get('/fishes', (req, res) => {   //zamiast '/fishes' wpisujesz path, np z '/fishes' będziesz miał localhost:3000/fishes
+//   const { login, password } = req.query; // to jest do pobierania wartości, one są wysyłane w postaci: localhost:3000/fishes?login=kacper&password=siema
+//   let results //przykladowa zmienna
 
-  res.send(results) //zwraca plik html(np. tekst albo całą skladnie)
-  res.json(results) //zwraca plik json lub null/true/false
-})
+//   res.send(results) //zwraca plik html(np. tekst albo całą skladnie)
+//   res.json(results) //zwraca plik json lub null/true/false
+// })
 
 
 app.listen(port, () =>{
