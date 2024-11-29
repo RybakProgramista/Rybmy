@@ -7,11 +7,17 @@ export const equip = (req, res) =>{
         if (error) res.json(1)
         else{
             let result = results1[0]
+            console.log(results1);
+            
             database.query('SELECT `'+type+'` FROM `gracz` WHERE idGracz = ?;',[playerId], function (error, results2) {
                 if (error) res.json(2)
                 else{
-                    let wedki = results2[0]['wedka']
-                    if (wedki!=3) {
+            console.log(results2);
+            
+                    let wedki = (results2[0][type]+"").slice(0,-1)
+                    console.log(wedki);
+                    
+                    if (wedki.search(";") > -1) {
                         wedki = wedki.split(';')
                         let canBuy = false
                         wedki.forEach(wedka => {
@@ -19,11 +25,19 @@ export const equip = (req, res) =>{
                                 canBuy = true
                             }
                         });
-                        result['canBuy'] = canBuy
+                        result['isOwned'] = canBuy
                         console.log(result);
                         
                         res.json(result)
-                    }else res.json(4)
+                    }else {
+                        result['isOwned'] = false
+                        if (wedki==id) {
+                            result['isOwned'] = true
+                        }
+                        console.log(result);
+                        
+                        res.json(result)
+                    }
                 }
             })
         }
