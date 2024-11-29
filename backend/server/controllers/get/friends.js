@@ -15,7 +15,7 @@ export const friends =(req, res) =>{
         let tableOfFriends = table[0].idZnajomy.split(";")
         
         if (tableOfFriends.length>0) {
-          let query = 'SELECT * FROM `gracz` WHERE '
+          let query = 'SELECT idGracz, nazwa FROM `gracz` WHERE '
           let isFirst = true
     
           tableOfFriends.forEach(idFriend => {
