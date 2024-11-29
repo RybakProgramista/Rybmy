@@ -1,8 +1,8 @@
 import { Router } from "express";
-import {equip} from "../controllers/get/equip.js"
-import {equipT} from "../controllers/getTable/equipT.js"
-import {possibilityToBuy} from "../controllers/get/possibilityToBuy.js"
-import {buyEquip} from "../controllers/post/buyEquip.js"
+import { equip } from "../controllers/get/equip.js"
+import { equipT } from "../controllers/getTable/equipT.js"
+import { possibilityToBuy } from "../controllers/get/possibilityToBuy.js"
+import { buyEquip } from "../controllers/post/buyEquip.js"
 const router = Router()
 
 router.get('/get/equip', equip)

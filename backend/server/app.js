@@ -24,6 +24,6 @@ app.use('/api', equip)
 // })
 
 
-app.listen(port, () =>{
+app.listen(port, () => {
   console.log("Nasłuchuje na porcie " + port)
 })
