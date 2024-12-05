@@ -1,5 +1,4 @@
 import express from "express"
-// import mysql from "mysql"
 const app = express()
 import cors from "cors";
 const port = 3000

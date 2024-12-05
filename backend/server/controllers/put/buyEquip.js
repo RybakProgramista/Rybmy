@@ -3,6 +3,8 @@ import database from '../../database.js'
 
 export const buyEquip = (req, res) => {
     const { id, type, playerId } = req.query
+    console.log(req.query);
+    
 
 
     database.query('SELECT `cena` FROM `' + type + '` WHERE `id` = ?;', [id], function (error1, cenaRes) {
@@ -15,7 +17,8 @@ export const buyEquip = (req, res) => {
                 else {
 
                     let pieniadze = parseInt(pieniadzeGracza[0]['pieniadze'])
-                    if (pieniadze >= cena) {
+                    if (pieniadze < cena) res.json(false)
+                    else {
                         let pozostalo = pieniadze - cena
                         let newElement = id + ";"
                         database.query('update gracz set ' + type + ' = concat(' + type + ', ?) where idGracz = ?', [newElement, playerId], function (error3, result1) {
@@ -27,7 +30,7 @@ export const buyEquip = (req, res) => {
                                 })
                             }
                         })
-                    } else res.json(false)
+                    }
 
                 }
             })

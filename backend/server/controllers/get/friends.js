@@ -9,10 +9,11 @@ export const friends = (req, res) => {
     if (error) res.json(null)
     else {
 
-      let table = JSON.parse(JSON.stringify(results))
+      let list = JSON.parse(JSON.stringify(results))[0]["idZnajomy"]
+      list = list.slice(0, -1)
       //   console.log(table);
 
-      let tableOfFriends = table[0].idZnajomy.split(";")
+      let tableOfFriends = list.split(";")
 
       if (tableOfFriends.length > 0) {
         let query = 'SELECT * FROM `gracz` WHERE '
