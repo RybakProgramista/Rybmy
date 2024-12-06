@@ -1,4 +1,3 @@
-import { possibilityToBuy } from "./possibilityToBuy"
 
 const querys = {
     getEquip: {
