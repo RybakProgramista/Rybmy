@@ -4,7 +4,7 @@ import querys from './querys.js'
 
 export const equip = (req, res) => {
     const { type, playerId } = req.query
-    database.query(querys.getOwned[type], [playerId], function (error, equips) {
+    database.query(querys.getEquip[type], [playerId], function (error, equips) {
         if (error) res.json(error)
         else {
             let list = (equips[0]["kolowrotek"] + "").slice(0, -1).split(";")
@@ -18,7 +18,7 @@ export const equip = (req, res) => {
                 })
                 query = query.slice(0, -3)
             }
-            query += querys.getEquip[type]
+            query += querys.getOwned[type]
             database.query(query, function (error1, result) {
                 if (error1) res.json(error1)
                 else res.json(result)
