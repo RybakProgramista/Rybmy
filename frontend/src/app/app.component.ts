@@ -4,35 +4,22 @@ import { MainSceneComponent } from './main-scene/main-scene.component';
 import { ShopComponent } from './shop/shop.component';
 import { LineComponent } from './line/line.component';
 import { DataService } from './Client Handler/data.service';
-import { response } from 'express';
+import { FriendsComponent } from './Friends/Friends.component';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MainSceneComponent, LineComponent, ShopComponent],
+  imports: [RouterOutlet, MainSceneComponent, LineComponent, ShopComponent, FriendsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent{
 
   //SERWER
-  constructor(private dataService: DataService){}
-  ngOnInit(){
-    const server = 'http://localhost:3000/'
-    // this.dataService.getFishByID(0).subscribe(fish => console.log(fish));
-    //getting fishes
-    fetch(server+'fishes')
-      .then(response => response.json())
-      .then(fishes => console.log(fishes))
-
-    //login, if successfully it gives u id
-    let login = 'ja', password = 'ja'
-    fetch(server+'login/'+login+'.'+password)
-      .then(response => response.json())
-      .then(fishes => console.log(fishes))
-  }
-
+  constructor(private dataService: DataService, private http: HttpClient){}
+  server = 'http://localhost:3000/'
 
   //Reszta
   maxDurability : number = 0;
@@ -43,4 +30,32 @@ export class AppComponent{
   changeCurrDurability(newVal : number){
     this.currDurabilityPercent = newVal;
   }
+}
+
+
+interface Player {
+  id: number
+  nazwa: string
+  doswiadczenie: number
+}
+
+interface Fish {
+  id: number;
+  nazwa: string
+  obrazek: string
+  minKg: number
+  maxKg:  number
+  minWymiar: number
+  maxWymiar: number
+  cena: number
+  doswiadczenie: number
+  wystepowanie: string
+  opis: string
+}
+
+export interface Equip {
+  id: number
+  nazwa: string
+  wytrzymalosc: number
+  cena: number
 }
