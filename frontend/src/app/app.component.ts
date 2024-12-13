@@ -39,11 +39,6 @@ interface Player {
   doswiadczenie: number
 }
 
-export interface Znajomy{
-  id: number
-  nazwa: string
-}
-
 interface Fish {
   id: number;
   nazwa: string
