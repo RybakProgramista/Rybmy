@@ -7,7 +7,7 @@
     "@angular/common/http": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "23ec2551",
+      "fileHash": "6e0488f9",
       "needsInterop": false
     },
     "@angular/core": {
@@ -36,20 +36,32 @@
     }
   },
   "chunks": {
+    "WebGPURenderer-IO57YZTQ": {
+      "file": "WebGPURenderer-IO57YZTQ.js"
+    },
     "WebGLRenderer-XT5ELZWL": {
       "file": "WebGLRenderer-XT5ELZWL.js"
     },
-    "chunk-QIQS55LB": {
-      "file": "chunk-QIQS55LB.js"
+    "chunk-EMKP3YEF": {
+      "file": "chunk-EMKP3YEF.js"
     },
     "chunk-3JWMVLXI": {
       "file": "chunk-3JWMVLXI.js"
     },
-    "chunk-A3LTE4ZH": {
-      "file": "chunk-A3LTE4ZH.js"
+    "chunk-ZT4WG52D": {
+      "file": "chunk-ZT4WG52D.js"
     },
-    "chunk-LGGNAV7W": {
-      "file": "chunk-LGGNAV7W.js"
+    "chunk-ZS6ZUBQH": {
+      "file": "chunk-ZS6ZUBQH.js"
+    },
+    "chunk-IQVA6OF4": {
+      "file": "chunk-IQVA6OF4.js"
+    },
+    "chunk-6SIXLUFL": {
+      "file": "chunk-6SIXLUFL.js"
+    },
+    "chunk-OBCKPMKI": {
+      "file": "chunk-OBCKPMKI.js"
     },
     "browserAll-DGM6Z6KV": {
       "file": "browserAll-DGM6Z6KV.js"
@@ -65,15 +77,6 @@
     },
     "chunk-XYGGB2JN": {
       "file": "chunk-XYGGB2JN.js"
-    },
-    "WebGPURenderer-IO57YZTQ": {
-      "file": "WebGPURenderer-IO57YZTQ.js"
-    },
-    "chunk-EMKP3YEF": {
-      "file": "chunk-EMKP3YEF.js"
-    },
-    "chunk-ZT4WG52D": {
-      "file": "chunk-ZT4WG52D.js"
     },
     "chunk-REVMUJ3R": {
       "file": "chunk-REVMUJ3R.js"
