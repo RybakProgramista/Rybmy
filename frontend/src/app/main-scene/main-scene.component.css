@@ -4,10 +4,53 @@
     height: 80%;
 }
 
-.fish-window{
+/* okienko na złapaną rybę */
+/* .fish-window{ 
     position: absolute;
     width: 66.65%;
     height: 80%;
     background-color: purple;
     display: none;
+    text-align: center;
+    font: 50px bold;
+    padding-top: 3%;
+    color: black;
 }
+
+.title{
+    font: 80px bold;
+}
+
+.cost{
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+.accept{
+    margin-top: 2%;
+    border-radius: 360%;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(to bottom left, rgb(70, 28, 28), rgb(63, 63, 95), rgb(90, 90, 53));
+    border: 1px solid black;
+} */
+
+/* okienko na zerwany zestaw */
+/* .lost-fish{
+    position: absolute;
+    width: 66.65%;
+    height: 80%;
+    background-color: purple;
+    display: block;
+    text-align: center;
+    font: 50px bold;
+    color: black;
+}
+
+.accept2{
+    border-radius: 360%;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(to bottom left, rgb(70, 28, 28), rgb(63, 63, 95), rgb(90, 90, 53));
+    border: 1px solid black;
+} */
