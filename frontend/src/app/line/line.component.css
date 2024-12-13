@@ -1,46 +1,33 @@
 .gauge {
-    width: 40%;
-    height: 90%;
-    position: relative;
-    background-color: #ccc;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+  width: 60%;
+  height: 95%;
+  position: relative;
+  background-color: #5c4d00;
+  background-image: url("drewno.png");
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 20px;
+  /* http://www.transparenttextures.com/patterns/wood-pattern.png */
+ }
   
-  .gauge > * {
-    top:0;
-    right:0;
-    bottom:0;
-    left:0;
-    position: absolute;
-  }
+.gauge > * {
+  top:15px;
+  right:15px;
+  bottom:15px;
+  left:15px;
+  position: absolute;
+  border-radius: 20px;
+}
   
-  .meter-gauge {
-    background-image: linear-gradient(to top,
-        #70f600 20%,
-        #0e0 20%,
-        #0e0 40%,
-        #0d0 40%,
-        #0d0 60%,
-        #0c0 60%,
-        #0c0 80%,
-        #0b0 80%,
-        #0b0 100%);   
-  }
+.meter-gauge {
+  background: linear-gradient(red,orange, yellow, lightgreen, green, green, lightgreen, yellow, orange, red);  
+}
   
-  .negative-space {
-    background-image: linear-gradient(to top,
-        #ddd 20%,
-        #ccc 20%,
-        #ccc 40%,
-        #bbb 40%,
-        #bbb 60%,
-        #aaa 60%,
-        #aaa 80%,
-        #999 80%,
-        #999 100%);
-    clip-path: inset(0 0 var(--cos, 50%) 0); /*tu jest wartość do zmiany zapełnienia wskaźnika!!! */
-  }
+.negative-space {
+  background-image: url("marmur.png");
+  background-size: cover;
+  clip-path: inset(0 0 var(--cos, 50%) 0); /*tu jest wartość do zmiany zapełnienia wskaźnika!!! */
+}
 
   
   
