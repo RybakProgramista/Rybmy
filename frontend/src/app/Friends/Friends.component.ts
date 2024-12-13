@@ -11,7 +11,7 @@ import { FriendsService } from './friends.service';
 
 export class FriendsComponent implements OnInit{
   friends: any[] = []; //lista z znajomymi
-  idGracz: number = 1;
+  idGracz: number = 5;
 
   constructor(private friendsService: FriendsService) {}
   ngOnInit(): void {
