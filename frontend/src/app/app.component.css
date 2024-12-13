@@ -1,3 +1,7 @@
+/* body{
+    height: 960px;
+    width: 960px;
+} */
 .field{
    display: grid;
    grid-template-columns: 1fr 8fr 1fr 2fr;
@@ -7,23 +11,26 @@
    background-color: rgb(75, 118, 199);
    overflow: hidden;
    position: relative;
+   /* background-image: url("drewno.png");
+   background-size: 90%;
+   background-repeat: repeat; */
 }
  
 .middle-panel{
    display: grid;
    grid-template-rows: 10% 90%;
    background-color: cornflowerblue; 
+   /* background-image: url("drewno.png");
+   background-size: 20%;
+   background-repeat: repeat; */
 }
 
 .poppin{
    position: absolute;
    height: 100%;
    width: 67%;
-   background-color: antiquewhite;
-   display: block;
-   text-align: center;
-   transition: transform 0.3s ease-in-out;
-   transform: translateY(-100%);
+   background-color: red;
+   display: none;
 }
 
 .line-panel{
@@ -59,42 +66,5 @@
 .field:has(.left-panel>#test:checked) {
    &>.middle-panel>.poppin {
       display: block;
-      transform: translateY(0%);
    }
-}
-
-#login, #pw, #send{
-   
-}
-
-#login{
-   margin-top: 25%;
-}
-
-#login, #pw{
-   width: 25%;
-   height: 5%;
-}
-
-#pw, #send{
-   margin-top: 3%;
-}
-
-#send{
-   width: 10%;
-   height: 5%;
-   border-radius: 15%;
-}
-
-.menu-bar{
-   width: 35px;
-   height: 27px;
-   margin-left: 10px;
-}
-
-.bar{
-  width: 35px;
-  height: 5px;
-  background-color: black;
-  margin: 6px 0;
 }
