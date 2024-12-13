@@ -1,17 +1,17 @@
 import database from '../../database.js'
 
 
-export const friends =(req, res) =>{
-    const id = req.query.id;
-    // console.log(id);
-    
-    database.query('SELECT `idZnajomy` FROM `znajomi` WHERE `idGracz`= ?',[id], function (error, results) {  //pobiera liste znajomych
-      if (error) res.json(null)
-      else{
-  
-        let table = JSON.parse(JSON.stringify(results))
+export const friends = (req, res) => {
+  const id = req.query.id;
+  // console.log(id);
+
+  database.query('SELECT `idZnajomy` FROM `znajomi` WHERE `idGracz`= ?', [id], function (error, results) {  //pobiera liste znajomych
+    if (error) res.json(null)
+    else {
+
+      let list = JSON.parse(JSON.stringify(results))[0]["idZnajomy"]
+      list = list.slice(0, -1)
       //   console.log(table);
-        
         let tableOfFriends = table[0].idZnajomy.split(";")
         
         if (tableOfFriends.length>0) {
@@ -34,5 +34,9 @@ export const friends =(req, res) =>{
         else
           res.json(null)
       }
-    })
-  }
+
+      else
+        res.json(null)
+    }
+  })
+}

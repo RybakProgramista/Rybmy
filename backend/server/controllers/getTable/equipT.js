@@ -1,11 +1,11 @@
 import database from '../../database.js'
 
 
-export const equipT = (req, res) =>{
-    const {id, type} = req.query
-    database.query('SELECT * FROM `'+type+'` WHERE `id` = ?;',[id], function (error, results) {
+export const equipT = (req, res) => {
+    const { id, type } = req.query
+    database.query('SELECT * FROM `' + type + '` WHERE `id` = ?;', [id], function (error, results) {
         if (error) res.json(null)
-        else{
+        else {
             let result = []
             const data = results[0]
             let i = 0

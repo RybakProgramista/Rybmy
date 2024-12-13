@@ -1,5 +1,4 @@
 import express from "express"
-// import mysql from "mysql"
 const app = express()
 import cors from "cors";
 const port = 3000
@@ -24,6 +23,6 @@ app.use('/api', equip)
 // })
 
 
-app.listen(port, () =>{
+app.listen(port, () => {
   console.log("Nasłuchuje na porcie " + port)
 })

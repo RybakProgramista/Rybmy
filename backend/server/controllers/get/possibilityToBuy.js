@@ -1,13 +1,12 @@
 import database from '../../database.js'
+import querys from './querys.js'
 
-
-export const possibilityToBuy = (req, res) =>{
-    const {id, type, playerId} = req.query
-    let cena
-    database.query('SELECT `cena` FROM `'+type+'` WHERE `id` = ?;',[id], function (error, results) {
-        if (error) res.json(null)
-        else{
-            cena = results[0]
+export const possibilityToBuy = (req, res) => {
+    const { id, type, playerId } = req.query
+    database.query(querys.possibilityToBuy[type], [id, playerId], function (error, result) {
+        if (error1) res.json(error)
+        else {
+            res.json(result[0]["possib"])
         }
     })
 }
