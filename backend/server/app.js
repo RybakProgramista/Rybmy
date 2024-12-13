@@ -1,28 +1,53 @@
-import express from "express"
-const app = express()
-import cors from "cors";
+const express = require("express")
+const mysql = require('mysql');
+const app = express();
+const cors = require("cors");
 const port = 3000
-import fish from "./routes/fish.js"
-import player from "./routes/player.js"
-import equip from "./routes/equip.js"
 
-app.use(cors())
-app.use(express.json())
-app.use('/api', fish)
-app.use('/api', player)
-app.use('/api', equip)
+app.use(cors());
+app.use(express.json());
 
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'rybcie'
+});
 
+db.connect((err) => {
+  if (err) {
+    console.error('Error connecting to MySQL: ' + err.stack);
+    return;
+  }
+  console.log('Connected to MySQL as ID ' + db.threadId);
+});
 
-// app.get('/fishes', (req, res) => {   //zamiast '/fishes' wpisujesz path, np z '/fishes' będziesz miał localhost:3000/fishes
-//   const { login, password } = req.query; // to jest do pobierania wartości, one są wysyłane w postaci: localhost:3000/fishes?login=kacper&password=siema
-//   let results //przykladowa zmienna
+app.get('/fishes', (req, res) => {
+  db.query('SELECT * FROM `ryby`', function (error, results) {
+    if (error) throw error;
+    res.send(results);
+  })
+})
 
-//   res.send(results) //zwraca plik html(np. tekst albo całą skladnie)
-//   res.json(results) //zwraca plik json lub null/true/false
+app.get('/login/:login.:password', (req, res) => {
+  db.query('SELECT `id` FROM `dane` WHERE `login` = "'+req.params.login+'" AND `haslo` = "'+req.params.password+'";', function (error, results) {
+    if (error) throw error;
+    res.send(results);
+  })
+})
+
+// const fishes = ["karp", "lin", "leszcz"];
+
+// app.get('/fishes', (req, res) => {
+//     res.send(fishes)
+//   })
+
+// app.get('/fishes/:id', (req, res) => {
+//   let id = parseInt(req.params.id);
+//   res.send({rybka: fishes[id]})
 // })
 
-
-app.listen(port, () => {
-  console.log("Nasłuchuje na porcie " + port)
-})
+// const port = 2115;
+app.listen(port, () =>{
+    console.log("Nasłuchuje na porcie " + port);
+});

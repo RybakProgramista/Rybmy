@@ -1,11 +1,9 @@
-import { Component, Output, EventEmitter, Input, OnInit, inject } from '@angular/core';
+import { Component, Output, EventEmitter, numberAttribute } from '@angular/core';
 import { Item } from '../ShopItems/item';
 import { BaseItem } from '../ShopItems/baseItem';
-import { ShopService } from './shop-service';
-import { itemState } from '../ShopItems/item';
 
-type equipmentType = "wedka" | "kolowrotek" | "zylka";
-const equipmentTypeArray : equipmentType[] = ["wedka", "kolowrotek", "zylka"];
+type typEkwipunku = "Wędka" | "Kołowrotek" | "Żyłka";
+const equipmentTypeArray : typEkwipunku[] = ["Wędka", "Kołowrotek", "Żyłka"];
 
 @Component({
   selector: 'app-shop',
@@ -15,73 +13,100 @@ const equipmentTypeArray : equipmentType[] = ["wedka", "kolowrotek", "zylka"];
   styleUrl: './shop.component.css'
 })
 export class ShopComponent{
-  _service = inject(ShopService);
+  currIds: Map<typEkwipunku, number> = new Map(
+    [
+      ["Wędka", 0],
+      ["Kołowrotek", 0],
+      ["Żyłka", 0]
+    ]
+  )
 
-  currIds : Map<equipmentType, number> = new Map([
-    ["wedka", 1],
-    ["kolowrotek", 1],
-    ["zylka", 1]
-  ])
-  currItems : Map<equipmentType, Item> = new Map([
-    ["wedka", new BaseItem("", 0, 0, "NotBought", "")],
-    ["kolowrotek", new BaseItem("", 0, 0, "NotBought" ,"")],
-    ["zylka", new BaseItem("", 0, 0, "NotBought" ,"")]
-  ])
-  loadedEquipment : equipmentType[] = []
+  cash : number = 0;
 
-  @Output() equipItemEvent = new EventEmitter<number>();
-  useItem(type : equipmentType) : void{
-    if(this.checkItemState(type) == "EQUIP"){
-      let durability = 0;
-      for(let i = 0; i < 3; i++){
-        durability += (this.currItems.get(equipmentTypeArray[i]) as BaseItem).getDurability();
-      }
-      this.equipItemEvent.emit(durability);
-    }
-    else if(this.checkItemState(type) == "BUY"){
-      this._service.buyItem(type.toString(), this.currIds.get(type) ?? 0).subscribe(
-        canBuy =>{
-          if(canBuy == null){
-            console.error("Wyjebało kupowanie");
-            return;
-          }
-          if(canBuy){
-            this.currItems.get(type)?.changeCurrState("Bought");
-          }
+  itemList : Map<typEkwipunku, Array<Item>> = new Map(
+    [
+      ["Wędka", new Array<BaseItem>(
+        new BaseItem("Bambus", 50, 0),
+        new BaseItem("Zafirrka", 80, 20)
+      )],
+      ["Kołowrotek", new Array<BaseItem>(
+        new BaseItem("Ręka", 30, 0),
+        new BaseItem("Jaxon Bonzo PRI 300", 60, 20)
+      )],
+      ["Żyłka", new Array<BaseItem>(
+        new BaseItem("Sznurówka", 20, 0),
+        new BaseItem("Dragon CARP MONO", 30, 20)
+      )]
+    ]
+  );
+  @Output() onMaxDurabilityChanged = new EventEmitter<number>();
+  calculateMaxDurability() : void{
+    let outVal : number = 0;
+
+    for(let x = 0; x < 3 ; x++){
+      for(let y = 0; y < (this.itemList.get(equipmentTypeArray[x])?.length ?? 0); y++){
+        if((this.itemList.get(equipmentTypeArray[x]) ?? new Array<BaseItem>)[y].getIsEquipped()){
+          outVal += ((this.itemList.get(equipmentTypeArray[x]) ?? new Array<BaseItem>)[y] as BaseItem).getDurability();
+          continue;
         }
-      )
-    }
-  }
-
-  checkItemState(type : equipmentType) : string{
-    switch(this.currItems.get(type)?.getState()){
-      case "Bought" :
-        return "EQUIP";
-      case "NotBought":
-        return "BUY";
-      case "Equipped":
-        return "Equipped";
-      default:
-        return "Dolbajob";
-    }
-  }
-
-  changeItem(type : equipmentType, val : number){
-    this.currIds.set(type, (this.currIds.get(type) ?? 0) + val);
-    this.demandItem(type);
-    this._service.getItem(type.toString(), this.currIds.get(type) ?? 0).subscribe(
-      e => {
-        this.currItems.set(type, new BaseItem(e.nazwa, e.wytrzymalosc, e.status , e.cena, ""));
       }
-    )
+    }
+    
+    this.onMaxDurabilityChanged.emit(outVal);
   }
-  getItemName(type : equipmentType): string{
-    return this.currItems.get(type)?.getName() ?? "ZJEBAŁO SIĘ";
+  checkItemState(type : typEkwipunku) : string{
+    let returnVal : string;
+    let temp = this.getItemOfTypeAtID(type);
+
+    if(temp.getIsBought()){
+      if(temp.getIsEquipped()){
+        returnVal = "EQUIPPED";
+      }
+      else{
+        returnVal = "EQUIP";
+      }
+    }
+    else{
+      returnVal = temp.getVal() + "zł"; 
+    }
+
+    return returnVal;
   }
 
-  ngOnInit(){
-    equipmentTypeArray.forEach(type => {
-      this.changeItem(type, 0);
-    });
+  changeItem(type : typEkwipunku, val : number) : void{
+    let newID = (this.currIds.get(type) ?? 0) + val;
+    console.log(newID);
+    if(newID >= (this.itemList.get(type)?.length ?? 0)){
+      newID = 0;
+    }
+    else if(newID < 0){
+      newID = (this.itemList.get(type)?.length ?? 0) - 1;
+    }
+    this.currIds.set(type, newID);
+    console.log(newID);
+  }
+
+  getItemOfTypeAtID(type : typEkwipunku, id? : number) : Item{ //jeśli puste to pobiera obecnie wybrany
+    let itemListForType = this.itemList.get(type) ?? [];
+    let currIdForType =  id ?? this.currIds.get(type) ?? 0;
+
+    return itemListForType[currIdForType];
+  }
+
+  useItem(type : typEkwipunku) : void{
+    let temp = this.checkItemState(type);
+    let currItem = this.getItemOfTypeAtID(type);
+    if(temp == "EQUIP"){
+      currItem.changeIsEquipped(true);
+      this.calculateMaxDurability();
+    }
+    else if(temp.endsWith("zł") && this.cash >= Number.parseInt(temp.substring(0, temp.length - 2))){
+      currItem.buy();
+      this.cash -= currItem.getVal();
+    }
+    else if(temp == "EQUIPPED"){
+      currItem.changeIsEquipped(false);
+      this.calculateMaxDurability;
+    }
   }
 }
