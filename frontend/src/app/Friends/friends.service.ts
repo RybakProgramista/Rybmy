@@ -2,18 +2,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
-import { Znajomy } from '../app.component';
-
 @Injectable({
   providedIn: 'root'
 })
 
 export class FriendsService {
-  private apiUrl = 'http://localhost:3000/';
+  private apiUrl = 'http://localhost:2115/';
 
   constructor(private http: HttpClient) { }
 
   getFriends(idGracz: number): Observable <any> {
-    return this.http.get<Znajomy>((this.apiUrl+"api/get/znajomi?id=" + idGracz));
+    
+    const mockFriends = [
+      { id: '2', name: 'aaf'},
+      { id: '3', name: 'debil'},
+    ];
+    
+    return of (mockFriends);
+    //this.http.get(`${this.apiUrl}/${idGracz}`);
   }
 }
