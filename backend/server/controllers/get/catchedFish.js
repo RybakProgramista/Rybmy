@@ -13,7 +13,7 @@ export const catchedFish = (req, res) => {
             
 
             let random = wytrzymalosc/200+zaneta/200+przyneta/200
-            random += (1 - random)/3*luck
+            random += (1 - random)/4*luck
 
 
             console.log(random);
