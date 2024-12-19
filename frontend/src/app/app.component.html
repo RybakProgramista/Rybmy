@@ -19,9 +19,11 @@
   </div>
   <div class="middle-panel">
     <div class="poppin">
-      <input id="login" type="text" placeholder="login"><br>
-      <input id="pw" type="password" placeholder="password"><br>
-      <button id="send" type="button">WYŚLIJ</button>
+      <form (submit)="tryLogginIn()">
+        <input [(ngModel)]="playerLogin" type="text" placeholder="login" name="login"><br>
+        <input [(ngModel)]="playerPassword" type="password" placeholder="password" name="password"><br>
+        <button id="send" type="submit">WYŚLIJ</button> 
+      </form>
     </div>
     <div class="top-panel">
       RYBMY

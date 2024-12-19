@@ -60,12 +60,15 @@
    }
 }
 
-.field:has(.left-panel>#test:checked) {
+:host{
+   &.loged .field{
    &>.middle-panel>.poppin {
       display: block;
       transform: translateY(0%);
    }
 }
+}
+
 
 #login,
 #pw,
