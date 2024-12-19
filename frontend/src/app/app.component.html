@@ -1,24 +1,35 @@
-<div class="container-fluid">
-    <div class="row">
-      <div class="col-1 blue">
-        ZNAJOMI
-      </div>
-      <div class="col-9">
-        <div class="row">
-          <div class="col-10 green">
-            <app-main-scene [maxDurability]="maxDurability" (calculatePercentOnDurabilityChanged)="changeCurrDurability($event)"></app-main-scene>
-          </div>
-          <div class="col-2 yellow">
-            PASEK KACPRA
-            <app-line [durabilityPercent]="currDurabilityPercent"></app-line>
-          </div>
-        </div>
-      </div>
-      <div class="col-2 red">
-        <app-shop (equipItemEvent)="maxDurabilityChanged($event)">
-        </app-shop>
-      </div>
+<div class="field">
+  <div class="left-panel">
+    ZNAJOMI<br>
+    <input type="checkbox" id="test">
+    <input type="checkbox" id="menu-button">
+    <div class="menu-content ">
+      <p>xdd</p>
+      <p>xdd</p>
+      <p>xdd</p>
+      <p>xdd</p>
+      <p>xdd</p>
     </div>
+    <p>lol</p>
+  </div>
+  <div class="middle-panel">
+    <div class="poppin"></div>
+    <div class="top-panel">
+      RYBMY
+    </div>
+    <div class="game-window">
+      <app-main-scene [maxDurability]="maxDurability"
+        (calculatePercentOnDurabilityChanged)="changeCurrDurability($event)"></app-main-scene>
+    </div>
+    <!-- <div class="bottom-panel">
+      xdd
+    </div> -->
+  </div>
+  <div class="line-panel">
+    PASEK KACPRA<br>
+    <app-line [durabilityPercent]="currDurabilityPercent"></app-line>
+  </div>
+  <div class="store-panel">
+    <app-shop (equipItemEvent)="maxDurabilityChanged($event)"></app-shop>
+  </div>
 </div>
-
-<app-Friends></app-Friends>
