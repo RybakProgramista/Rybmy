@@ -1,6 +1,11 @@
 <div class="field">
   <div class="left-panel">
     ZNAJOMI<br>
+    <div class="menu-bar">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
     <input type="checkbox" id="test">
     <input type="checkbox" id="menu-button">
     <div class="menu-content ">
@@ -13,7 +18,11 @@
     <p>lol</p>
   </div>
   <div class="middle-panel">
-    <div class="poppin"></div>
+    <div class="poppin">
+      <input id="login" type="text" placeholder="login"><br>
+      <input id="pw" type="password" placeholder="password"><br>
+      <button id="send" type="button">WYŚLIJ</button>
+    </div>
     <div class="top-panel">
       RYBMY
     </div>
@@ -30,6 +39,6 @@
     <app-line [durabilityPercent]="currDurabilityPercent"></app-line>
   </div>
   <div class="store-panel">
-    <app-shop (equipItemEvent)="maxDurabilityChanged($event)"></app-shop>
+    <app-shop (onMaxDurabilityChanged)="maxDurabilityChanged($event)"></app-shop>
   </div>
 </div>
