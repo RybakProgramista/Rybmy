@@ -1,0 +1,22 @@
+SELECT wedka FROM `gracz` WHERE idGracz = '?';
+SELECT kolowrotek FROM `gracz` WHERE idGracz = '?';
+SELECT zylka FROM `gracz` WHERE idGracz = '?';
+
+update gracz set wedka = concat(wedka, ';?') where idGracz = ?
+update gracz set kolowrotek = concat(kolowrotek, ';?') where idGracz = ?
+update gracz set zylka = concat(zylka, ';?') where idGracz = ?
+
+
+
+UPDATE `gracz` SET
+`pieniadze`= CASE WHEN `gracz`.`pieniadze` > `zylka`.`cena` THEN `pieniadze`=`gracz`.`pieniadze` > `zylka`.`cena` ELSE `pieniadze` END,
+`zylka`='[value-7]'
+WHERE `gracz`.`idGracz`=1 `zylka`.`id`=2
+
+
+
+SELECT IF(`gracz`.`pieniadze` >= `zylka`.`cena`, true, false) FROM `gracz`,`zylka` WHERE `zylka`.`id`=1 AND `gracz`.`idGracz` = 1;
+UPDATE `gracz`, `zylka` SET 
+`gracz`.`pieniadze`= CASE WHEN `gracz`.`pieniadze` >= `zylka`.`cena` THEN `gracz`.`pieniadze` - `zylka`.`cena` ELSE `gracz`.`pieniadze` END,
+`gracz`.`zylka` = CASE WHEN `gracz`.`pieniadze` >= `zylka`.`cena` THEN concat(`gracz`.`zylka`, "1;") ELSE `gracz`.`zylka` END
+WHERE `gracz`.`idGracz`=1 AND `zylka`.`id`=1;
