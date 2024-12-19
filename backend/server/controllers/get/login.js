@@ -44,7 +44,9 @@ export const login = async (req, res) => {
       })
     }
     else if(data['licznik']==3){
-      const date = new Date().toISOString().slice(0, 19).replace('T', ' ')
+      const date = new Date(new Date().getTime()* 60000).toISOString()
+      console.log(date);
+      // date = date.replace("T","")
       database.query('UPDATE `dane` SET `dataBlokady`=? WHERE `login`=?',[date,login],  function (error, results) {
         if (error) res.json(null)
         else authentication(data)
