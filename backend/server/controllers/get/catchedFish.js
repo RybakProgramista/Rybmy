@@ -2,8 +2,8 @@ import database from '../../database.js'
 
 
 export const catchedFish = (req, res) => {
-    const { wytrzymalosc, zaneta, przyneta } = req.query;
-    database.query('SELECT * FROM `ryby` ORDER BY RAND( ) LIMIT 1', function (error, results) {
+    const { wytrzymalosc, zaneta, przyneta, wystepowanie } = req.query;
+    database.query('SELECT * FROM `ryby` WHERE `wystepowanie` LIKE ? ORDER BY RAND( ) LIMIT 1;', ["%"+wystepowanie+"%"], function (error, results) {
         if (error) res.json(null)
         else{
             results = JSON.parse(JSON.stringify(results))[0]
@@ -12,7 +12,9 @@ export const catchedFish = (req, res) => {
             const luck = Math.random()-Math.random()
             
 
-            let random = wytrzymalosc/200+zaneta/200+przyneta/200
+            let random = wytrzymalosc/200+zaneta/200+przyneta/200 
+            console.log(random);
+            
             random += (1 - random)/4*luck
 
 
