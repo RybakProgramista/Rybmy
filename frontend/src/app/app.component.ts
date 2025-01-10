@@ -58,4 +58,34 @@ export class AppComponent{  //SERWER
   changeCurrDurability(newVal : number){
     this.currDurabilityPercent = newVal;
   }
+  
+}
+
+
+
+interface Player {
+  id: number
+  nazwa: string
+  doswiadczenie: number
+}
+
+interface Fish {
+  id: number;
+  nazwa: string
+  obrazek: string
+  minKg: number
+  maxKg:  number
+  minWymiar: number
+  maxWymiar: number
+  cena: number
+  doswiadczenie: number
+  wystepowanie: string
+  opis: string
+}
+
+export interface Equip {
+  id: number
+  nazwa: string
+  wytrzymalosc: number
+  cena: number
 }
