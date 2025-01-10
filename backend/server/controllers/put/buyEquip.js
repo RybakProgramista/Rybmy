@@ -10,8 +10,4 @@ export const buyEquip = (req, res) => {
         if (error) res.json(false)
         else res.json(true)
     })
-
-
-
-    
 }

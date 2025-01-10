@@ -18,27 +18,19 @@ import { response } from 'express';
 export class AppComponent{  //SERWER
   playerLogin : string = "";
   playerPassword : string = "";
+  id : number = -1;
+  server : string = 'http://localhost:3000/'
   @HostBinding("class.loged") get isLogged() { return !this.isLoggedIn; }
   isLoggedIn : boolean = false;
   constructor(private dataService: DataService){}
-  ngOnInit(){
-    const server = 'http://localhost:3000/'
-    // this.dataService.getFishByID(0).subscribe(fish => console.log(fish));
-    //getting fishes
-    fetch(server+'fishes')
-      .then(response => response.json())
-      .then(fishes => console.log(fishes))
-
-    //login, if successfully it gives u id
-    let login = 'ja', password = 'ja'
-    fetch(server+'login/'+login+'.'+password)
-      .then(response => response.json())
-      .then(fishes => console.log(fishes))
-  }
+  ngOnInit(){}
 
   tryLogginIn(){
-    let id = 1; //wstaw tu returna od twojego logowania, jako login masz zmienną this.playerLogin, a jako hasło masz this.playerPassword
-    if(id == -1){
+    fetch(this.server+'api/login?login='+this.playerLogin+'&password='+this.playerPassword)
+    .then(response => response.json())
+    .then(id => this.id = id)
+    console.log(this.id + "");
+    if(this.id == -1){
       //niezalogowano
     }
     else{
@@ -58,17 +50,13 @@ export class AppComponent{  //SERWER
   changeCurrDurability(newVal : number){
     this.currDurabilityPercent = newVal;
   }
-  
 }
-
-
 
 interface Player {
   id: number
   nazwa: string
   doswiadczenie: number
 }
-
 interface Fish {
   id: number;
   nazwa: string
@@ -82,10 +70,10 @@ interface Fish {
   wystepowanie: string
   opis: string
 }
-
 export interface Equip {
   id: number
   nazwa: string
   wytrzymalosc: number
+  status : number
   cena: number
 }

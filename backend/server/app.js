@@ -27,8 +27,8 @@ app.use('/api', equip)
 
 
 app.listen(port, () => {
-  console.log(dotenv.config())
-  console.log(jwt.sign({userId: "4"},process.env.TOKEN_SECRET,{expiresIn: '20s'}));
+  // console.log(dotenv.config())
+  // console.log(jwt.sign({userId: "4"},process.env.TOKEN_SECRET,{expiresIn: '20s'}));
 
   console.log("Nasłuchuje na porcie " + port)
 })
