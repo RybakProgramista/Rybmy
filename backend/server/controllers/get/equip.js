@@ -7,7 +7,7 @@ export const equip = (req, res) => {
     database.query(querys.getEquip[type], [playerId], function (error, equips) {
         if (error) res.json(error)
         else {
-            let list = (equips[0]["kolowrotek"] + "").slice(0, -1).split(";")
+            let list = (equips[0][type] + "").slice(0, -1).split(";")
             let query
             if (list[0] == '') {
                 query = 'SELECT *, IF(1>2'
