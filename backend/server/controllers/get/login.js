@@ -5,7 +5,7 @@ export const login = async (req, res) => {
   const { login, password } = req.query;
   // const salt = await bcrypt.genSalt(); for reg
   // const hashedPassword = await bcrypt.hash(password, salt);
-  
+  //$2b$10$s0xNRNq9BS5C7TELhTvXreOe/RJuHi1jVoJIWq5GYSHPnX/F7FG.G
   
 
   database.query('SELECT `id`,`haslo`,`licznik`, (UNIX_TIMESTAMP(`dataBlokady`)*1000) AS "date", (UNIX_TIMESTAMP(NOW())*1000) AS "now" FROM `dane` WHERE `login`=?',[login], async function (error, results) {
