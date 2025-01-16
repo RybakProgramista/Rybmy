@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MainSceneComponent } from './main-scene/main-scene.component';
 import { ShopComponent } from './shop/shop.component';
@@ -18,8 +18,31 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent{
 
   //SERWER
-  constructor(private dataService: DataService, private http: HttpClient){}
-  server = 'http://localhost:3000/'
+  playerLogin : string = "";
+  playerPassword : string = "";
+  id : number = -1;
+  server : string = 'http://localhost:3000/'
+  @HostBinding("class.loged") get isLogged() { return !this.isLoggedIn; }
+  isLoggedIn : boolean = false;
+
+  constructor(private dataService: DataService, httpClient : HttpClient){}
+
+  ngOnInit(){}
+
+  tryLogginIn(){
+    fetch(this.server+'api/login?login='+this.playerLogin+'&password='+this.playerPassword)
+    .then(response => response.json())
+    .then(id => this.id = id)
+    console.log(this.id + "");
+    if(this.id == -1){
+      //niezalogowano
+    }
+    else{
+      //zalogowano
+      this.isLoggedIn = true;
+      console.log(this.playerLogin);
+    }
+  }
 
   //Reszta
   maxDurability : number = 0;
