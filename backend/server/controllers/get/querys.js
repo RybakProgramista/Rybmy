@@ -8,7 +8,7 @@ const querys = {
     getOwned: {
         zylka: ',true,false) AS "isOwned" FROM `zylka`',
         kolowrotek: ',true,false) AS "isOwned" FROM `kolowrotek`',
-        wedka: ',true,false) AS "isOwned" FROM `wedka',
+        wedka: ',true,false) AS "isOwned" FROM `wedka`',
     },
     possibilityToBuy: {
         zylka: "SELECT IF(`gracz`.`pieniadze` >= `zylka`.`cena`, true, false) AS 'possib' FROM `gracz`,`zylka` WHERE `zylka`.`id`=? AND `gracz`.`idGracz` = ?;",

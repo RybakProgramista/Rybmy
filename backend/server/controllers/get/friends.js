@@ -12,27 +12,25 @@ export const friends = (req, res) => {
       let list = JSON.parse(JSON.stringify(results))[0]["idZnajomy"]
       list = list.slice(0, -1)
       //   console.log(table);
-        let tableOfFriends = table[0].idZnajomy.split(";")
-        
-        if (tableOfFriends.length>0) {
-          let query = 'SELECT idGracz, nazwa FROM `gracz` WHERE '
-          let isFirst = true
-    
-          tableOfFriends.forEach(idFriend => {
-            if (!isFirst) {
-              query += 'OR'
-            }
-            isFirst = false
-            query += '`idGracz`="'+idFriend+'"'
-          });
-    
-          database.query(query, function (error, results) {
-            if (error) res.json(null)
-            else res.json(results)
-          })}
-    
-        else
-          res.json(null)
+
+      let tableOfFriends = list.split(";")
+
+      if (tableOfFriends.length > 0) {
+        let query = 'SELECT * FROM `gracz` WHERE '
+        let isFirst = true
+
+        tableOfFriends.forEach(idFriend => {
+          if (!isFirst) {
+            query += 'OR'
+          }
+          isFirst = false
+          query += '`idGracz`="' + idFriend + '"'
+        });
+
+        database.query(query, function (error, results) {
+          if (error) res.json(null)
+          else res.json(results)
+        })
       }
 
       else

@@ -5,6 +5,9 @@ const port = 3000
 import fish from "./routes/fish.js"
 import player from "./routes/player.js"
 import equip from "./routes/equip.js"
+import crypto from 'crypto'
+import dotenv from 'dotenv'
+import jwt from 'jsonwebtoken'
 
 app.use(cors())
 app.use(express.json())
@@ -24,5 +27,8 @@ app.use('/api', equip)
 
 
 app.listen(port, () => {
+  // console.log(dotenv.config())
+  // console.log(jwt.sign({userId: "4"},process.env.TOKEN_SECRET,{expiresIn: '20s'}));
+
   console.log("Nasłuchuje na porcie " + port)
 })
