@@ -10,7 +10,6 @@ export const testLogin = (req, res) => {
         console.log(jwt.verify(token, process.env.TOKEN_SECRET));
     } catch (error) {
         console.log("token expire");
-        
     }
 
 
