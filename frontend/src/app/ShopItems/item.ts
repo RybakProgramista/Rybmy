@@ -10,7 +10,9 @@ export abstract class Item{
         this.name = name;
         this.value = price;
         this.currState = currState
-
+        if(this.value < 0){
+            console.error("Item cannot be worth less than 0 you dumb fuck");
+        }
     }
     public changeCurrState(newState : itemState) : void{
         this.currState = newState;
@@ -24,5 +26,4 @@ export abstract class Item{
     public getState() : itemState{
         return this.currState;
     }
-
 }
