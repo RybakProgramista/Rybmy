@@ -16,9 +16,56 @@ const equipmentTypeArray : equipmentType[] = ["wedka", "kolowrotek", "zylka"];
 })
 export class ShopComponent{
   _service = inject(ShopService);
-  items : Map<equipmentType, Array<BaseItem>> = new Map<equipmentType, Array<BaseItem>>();
-
+  items : Map<equipmentType, Array<Item>> = new Map<equipmentType, Array<Item>>();
+  currIds: Map<equipmentType, number> = new Map([
+    ["wedka", 0],
+    ["kolowrotek", 0],
+    ["zylka", 0]
+  ]);
   ngOnInit(){
-    
+    this.items.forEach(list => {
+      list = new Array<BaseItem>();//wstaw tutaj to co Olek zrobi
+    });
+  }
+  
+  changeCurrItem(type : equipmentType, val : number){
+    this.currIds.set(type, this.currIds.get(type) ?? 0 + val);
+  }
+
+  private getCurrItem(type : equipmentType) : Item{
+    return (this.items.get(type) ?? new Array<Item>)[this.currIds.get(type) ?? 0] ?? new BaseItem("chuj", 0, "Equipped");
+  }
+  getItemName(type : equipmentType) : string{
+    return this.getCurrItem(type).getName();
+  }
+  getItemState(type : equipmentType) : string{
+    let target : Item = this.getCurrItem(type);
+    switch (target.getState()){
+      case "NotBought":
+        return target.getVal() + "ZŁ";
+      case "Bought":
+        return "EQUIP";
+      case "Equipped":
+        return "UNEQUIP";
+      default:
+        return "Powieś się";
+    }
+  }
+  useItem(type : equipmentType){
+    let target : Item = this.getCurrItem(type);
+    switch (target.getState()){
+      case "NotBought":
+        //BUY
+        break;
+      case "Bought":
+        //EQUIP
+        break;
+      case "Equipped":
+        //UNEQUIP
+        break;
+      default:
+        //ERROR
+        break;
+    }
   }
 }
