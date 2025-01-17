@@ -12,10 +12,11 @@ export class ShopService{
     server = 'http://localhost:3000/'
 
 
-    public getList(type: String, id: number){
-        let res = this._http.get<BaseItem>(this.server+"api/equip?playerId=" + id + "&type=" + type)
+    public getList(type: String, id: number) : Array<BaseItem>{
+        let res = this._http.get<Array<BaseItem>>(this.server+"api/equip?playerId=" + id + "&type=" + type)
         res.subscribe(
             e => {return(e)})
+        return new Array<BaseItem>();
     }
     
 
