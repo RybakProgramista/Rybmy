@@ -1,4 +1,4 @@
-export type itemState = "Equipped" | "Bought" | "NotBought";
+export type itemState = "Equipped" | "NotBought" | "Bought";
 
 export abstract class Item{
 
@@ -6,10 +6,10 @@ export abstract class Item{
     private value : number;
     private currState : itemState;
 
-    constructor(name : string, value : number, currState : itemState){
+    constructor(name : string, price : number, currState : itemState){
         this.name = name;
-        this.value = value;
-        this.currState = currState;
+        this.value = price;
+        this.currState = currState
         if(this.value < 0){
             console.error("Item cannot be worth less than 0 you dumb fuck");
         }
