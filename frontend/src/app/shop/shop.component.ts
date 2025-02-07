@@ -47,17 +47,17 @@ export class ShopComponent {
       }
       this.equipItemEvent.emit(durability);
     } else if (this.checkItemState(type) == 'BUY') {
-      this._service
-        .buyItem(type.toString(), this.currIds.get(type) ?? 0)
-        .subscribe((canBuy) => {
-          if (canBuy == null) {
-            console.error('Wyjebało kupowanie');
-            return;
-          }
-          if (canBuy) {
-            this.currItems.get(type)?.changeCurrState('Bought');
-          }
-        });
+      this._service;
+      // .buyItem(type.toString(), this.currIds.get(type) ?? 0)
+      // .subscribe((canBuy) => {
+      //   if (canBuy == null) {
+      //     console.error('Wyjebało kupowanie');
+      //     return;
+      //   }
+      //   if (canBuy) {
+      //     this.currItems.get(type)?.changeCurrState('Bought');
+      //   }
+      // });
     }
   }
 
@@ -76,15 +76,14 @@ export class ShopComponent {
 
   changeItem(type: equipmentType, val: number) {
     this.currIds.set(type, (this.currIds.get(type) ?? 0) + val);
-    this.demandItem(type);
-    this._service
-      .getItem(type.toString(), this.currIds.get(type) ?? 0)
-      .subscribe((e) => {
-        this.currItems.set(
-          type,
-          new BaseItem(e.nazwa, e.wytrzymalosc, e.status, e.cena, '')
-        );
-      });
+    // this.demandItem(type);
+    this._service.getItem(type.toString(), this.currIds.get(type) ?? 0);
+    // .subscribe((e) => {
+    //   this.currItems.set(
+    //     type,
+    //     new BaseItem(e.nazwa, e.wytrzymalosc, e.status, e.cena, '')
+    //   );
+    // });
   }
   getItemName(type: equipmentType): string {
     return this.currItems.get(type)?.getName() ?? 'ZJEBAŁO SIĘ';

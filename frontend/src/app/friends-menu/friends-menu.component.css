@@ -1,0 +1,6 @@
+.bg {
+    background-color: green;
+    display: grid;
+    height: 100%;
+    grid-template-rows: repeat(20, 1fr);
+}

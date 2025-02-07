@@ -6,38 +6,51 @@ import { LineComponent } from './line/line.component';
 import { DataService } from './Client Handler/data.service';
 import { FriendsComponent } from './Friends/Friends.component';
 import { HttpClient } from '@angular/common/http';
-
+import { FriendsMenuComponent } from './friends-menu/friends-menu.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MainSceneComponent, LineComponent, ShopComponent, FriendsComponent],
+  imports: [
+    RouterOutlet,
+    MainSceneComponent,
+    LineComponent,
+    ShopComponent,
+    FriendsComponent,
+    FriendsMenuComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent{
-
+export class AppComponent {
   //SERWER
-  playerLogin : string = "";
-  playerPassword : string = "";
-  id : number = -1;
-  server : string = 'http://localhost:3000/'
-  @HostBinding("class.loged") get isLogged() { return !this.isLoggedIn; }
-  isLoggedIn : boolean = false;
+  playerLogin: string = '';
+  playerPassword: string = '';
+  id: number = -1;
+  server: string = 'http://localhost:3000/';
+  @HostBinding('class.loged') get isLogged() {
+    return !this.isLoggedIn;
+  }
+  isLoggedIn: boolean = false;
 
-  constructor(private dataService: DataService, httpClient : HttpClient){}
+  constructor(private dataService: DataService, httpClient: HttpClient) {}
 
-  ngOnInit(){}
+  ngOnInit() {}
 
-  tryLogginIn(){
-    fetch(this.server+'api/login?login='+this.playerLogin+'&password='+this.playerPassword)
-    .then(response => response.json())
-    .then(id => this.id = id)
-    console.log(this.id + "");
-    if(this.id == -1){
+  tryLogginIn() {
+    fetch(
+      this.server +
+        'api/login?login=' +
+        this.playerLogin +
+        '&password=' +
+        this.playerPassword
+    )
+      .then((response) => response.json())
+      .then((id) => (this.id = id));
+    console.log(this.id + '');
+    if (this.id == -1) {
       //niezalogowano
-    }
-    else{
+    } else {
       //zalogowano
       this.isLoggedIn = true;
       console.log(this.playerLogin);
@@ -45,45 +58,44 @@ export class AppComponent{
   }
 
   //Reszta
-  maxDurability : number = 0;
-  currDurabilityPercent : number = 0;
-  maxDurabilityChanged(newVal : number){
+  maxDurability: number = 0;
+  currDurabilityPercent: number = 0;
+  maxDurabilityChanged(newVal: number) {
     this.maxDurability = newVal;
   }
-  changeCurrDurability(newVal : number){
+  changeCurrDurability(newVal: number) {
     this.currDurabilityPercent = newVal;
   }
 }
 
-
 interface Player {
-  id: number
-  nazwa: string
-  doswiadczenie: number
+  id: number;
+  nazwa: string;
+  doswiadczenie: number;
 }
 
-export interface Znajomy{
-  id: number
-  nazwa: string
+export interface Znajomy {
+  id: number;
+  nazwa: string;
 }
 
 interface Fish {
   id: number;
-  nazwa: string
-  obrazek: string
-  minKg: number
-  maxKg:  number
-  minWymiar: number
-  maxWymiar: number
-  cena: number
-  doswiadczenie: number
-  wystepowanie: string
-  opis: string
+  nazwa: string;
+  obrazek: string;
+  minKg: number;
+  maxKg: number;
+  minWymiar: number;
+  maxWymiar: number;
+  cena: number;
+  doswiadczenie: number;
+  wystepowanie: string;
+  opis: string;
 }
 
 export interface Equip {
-  id: number
-  nazwa: string
-  wytrzymalosc: number
-  cena: number
+  id: number;
+  nazwa: string;
+  wytrzymalosc: number;
+  cena: number;
 }
