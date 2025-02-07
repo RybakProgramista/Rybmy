@@ -20,13 +20,17 @@ export class ShopService{
         let result: Array<BaseItem>
         let res = this._http.get<Array<BaseItem>>(this.server+"api/equip?playerId=" + id + "&type=" + type)
         res.subscribe(
-            e => {
+            (e : any) => {
                 // /*this.result = e*/ console.log(e[0])
-                e.forEach(element => {
-                    result.push(new BaseItem(element))
-                })
-                console.log(result);
-                
+
+                if(e.code == "ER_EMPTY_QUERY"){
+                    alert("błąd z bazą danych " + type);
+                }
+                else{
+                    (e as Array<any>).forEach(element => {
+                        result.push(new BaseItem(element))
+                    })
+                }
                 return result
             })
         // return this.result

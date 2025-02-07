@@ -2,7 +2,6 @@ import { Component, Output, EventEmitter, Input, OnInit, inject } from '@angular
 import { Item } from '../ShopItems/item';
 import { BaseItem } from '../ShopItems/baseItem';
 import { ShopService } from './shop-service';
-import { itemState } from '../ShopItems/item';
 
 type equipmentType = "wedka" | "kolowrotek" | "zylka";
 const equipmentTypeArray : equipmentType[] = ["wedka", "kolowrotek", "zylka"];
@@ -23,18 +22,20 @@ export class ShopComponent{
     ["zylka", 0]
   ]);
   ngOnInit(){
-    for(let a : number = 0; a <= equipmentTypeArray.length; a++){
-      this.items.set(equipmentTypeArray[a], this._service.getList(equipmentTypeArray[a], 1));
+    for(let a : number = 0; a < equipmentTypeArray.length; a++){
+        this.items.set(equipmentTypeArray[a], this._service.getList(equipmentTypeArray[a], 1));
     }
-    console.log(this.items);
   }
   
   changeCurrItem(type : equipmentType, val : number){
-    this.currIds.set(type, this.currIds.get(type) ?? 0 + val);
+    let newId  = (this.currIds.get(type) ?? 0) + val;
+    if(newId < 0) newId = (this.items.get(type)?.length ?? 0) - 1;
+    else if (newId > (this.items.get(type)?.length ?? 0) - 1) newId = 0;
+    this.currIds.set(type, newId);
   }
 
   private getCurrItem(type : equipmentType) : Item{
-    return (this.items.get(type) ?? new Array<Item>)[this.currIds.get(type) ?? 0] ?? new BaseItem("chuj", 0, "Equipped");
+    return this.items.get(type)?.at(this.currIds.get(type) ?? -1) ?? new BaseItem(null);
   }
   getItemName(type : equipmentType) : string{
     return this.getCurrItem(type).getName();
