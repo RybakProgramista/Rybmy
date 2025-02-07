@@ -4,6 +4,10 @@ import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
 
 export const login = async (req, res) => {
+  if(!(res.locals.id == null)){
+    res.cookie("accessToken", res.locals.accessToken).cookie("refreshToken", res.locals.refreshToken).json(res.locals.id)
+    res.end()
+  }else{
   const { login, password } = req.query;
   // const salt = await bcrypt.genSalt(); for reg
   // const hashedPassword = await bcrypt.hash(password, salt);
@@ -11,15 +15,13 @@ export const login = async (req, res) => {
   
 
   database.query('SELECT `id`,`haslo`,`licznik`, (UNIX_TIMESTAMP(`dataBlokady`)*1000) AS "date", (UNIX_TIMESTAMP(NOW())*1000) AS "now" FROM `dane` WHERE `login`=?',[login], async function (error, results) {
-    if (error) res.json(-1)
-    else{
+    if (error) {
+      res.json(-1)
+      res.end()
+    }else{
       const data = JSON.parse(JSON.stringify(results))[0]
-      // console.log(data);
       if(data){
         if(data['date']!=null){
-          // console.log(data['now']);
-          
-          // console.log(data['now']-data['date']);
           if(data['now']-data['date']<15000)  res.json(-1)
           else{
             database.query('UPDATE `dane` SET `licznik`=0,`dataBlokady`=null WHERE `login`=?',[login],  function (error, results) {
@@ -34,7 +36,8 @@ export const login = async (req, res) => {
       }else{
         res.json(-1)
       }
-      }
+    }
+      
   })
   
   const authentication = async (data) =>{
@@ -45,18 +48,17 @@ export const login = async (req, res) => {
         if (error) res.json(-1)
         else {
           dotenv.config()
-          const accessToken = jwt.sign({userId: data['id']},process.env.TOKEN_SECRET,{expiresIn: '900s'})
+          const accessToken = jwt.sign({userId: data['id']},process.env.TOKEN_SECRET,{expiresIn: '86400s'})
+          console.log(accessToken);
+          
           const refreshToken = jwt.sign({userId: data['id']},process.env.TOKEN_SECRET,{expiresIn: '2592000s'})
-          res.cookie('refreshToken', refreshToken, {httpOnly: true}).header('AccessToken', accessToken).json(data['id'])
+          res.cookie('refreshToken', refreshToken).cookie('accessToken', accessToken).json(data['id'])
       
         }
         
       })
     }
     else if(data['licznik']==3){
-      // let date = new Date().toISOString().slice(0, 19)
-      // date = date.replace("T"," ")
-      // console.log("server: "+Date.now());
       
       database.query('UPDATE `dane` SET `dataBlokady`=NOW(), `licznik`=0 WHERE `login`=?',[login],  function (error, results) {
         if (error) res.json(-1)
@@ -72,4 +74,4 @@ export const login = async (req, res) => {
     }
   }
 
-}
+}}
