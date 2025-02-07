@@ -10,13 +10,28 @@ import { BaseItem } from "../ShopItems/baseItem";
 export class ShopService{
     _http = inject(HttpClient)
     server = 'http://localhost:3000/'
+    // result: Array<BaseItem> = []
 
-    res = this._http.get<BaseItem>(this.server+"api/equip?playerId=" + 1 + "&type=" + "wedka").subscribe(
-        e => {console.log(e)})
-    public getList(type: String, id: number){
+    // res = this._http.get<BaseItem>(this.server+"api/equip?playerId=" + 1 + "&type=" + "wedka").subscribe(
+    //     e => {console.log(e)})
+    // b = this.getList("wedka",1)
+
+    getList(type: String, id: number): Array<BaseItem>{
+        let result: Array<BaseItem>
         let res = this._http.get<Array<BaseItem>>(this.server+"api/equip?playerId=" + id + "&type=" + type)
         res.subscribe(
-            e => {return(e)})
+            e => {
+                // /*this.result = e*/ console.log(e[0])
+                e.forEach(element => {
+                    result.push(new BaseItem(element))
+                })
+                console.log(result);
+                
+                return result
+            })
+        // return this.result
+        result = []
+        return result
     }
     
 
