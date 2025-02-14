@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2024 at 03:20 PM
+-- Generation Time: Feb 14, 2025 at 03:00 PM
 -- Wersja serwera: 10.4.32-MariaDB
--- Wersja PHP: 8.0.30
+-- Wersja PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -54,7 +54,7 @@ INSERT INTO `dane` (`id`, `login`, `haslo`, `licznik`, `dataBlokady`) VALUES
 DELIMITER $$
 CREATE TRIGGER `dodawanie` AFTER INSERT ON `dane` FOR EACH ROW BEGIN
         INSERT INTO gracz(gracz.idGracz, gracz.nazwa)
-        VALUES(new.id, new.login) ;
+        VALUES(new.id, new.login);
         
         INSERT INTO znajomi(znajomi.idGracz)
         VALUES (new.id);
@@ -116,6 +116,31 @@ INSERT INTO `kolowrotek` (`id`, `nazwa`, `wytrzymalosc`, `cena`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `poziom`
+--
+
+CREATE TABLE `poziom` (
+  `id` int(11) NOT NULL,
+  `iloscXP` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `poziom`
+--
+
+INSERT INTO `poziom` (`id`, `iloscXP`) VALUES
+(1, 0),
+(2, 200),
+(3, 350),
+(4, 650),
+(5, 800),
+(6, 1200),
+(7, 1650),
+(8, 2200);
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `ryby`
 --
 
@@ -128,7 +153,7 @@ CREATE TABLE `ryby` (
   `minWymiar` int(11) NOT NULL,
   `maxWymiar` int(11) NOT NULL,
   `cena` int(11) NOT NULL,
-  `doswiadczenie` int(11) NOT NULL,
+  `doswiadczenie` double NOT NULL,
   `wystepowanie` varchar(100) NOT NULL,
   `opis` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
@@ -138,14 +163,14 @@ CREATE TABLE `ryby` (
 --
 
 INSERT INTO `ryby` (`idRyby`, `nazwa`, `obrazek`, `minKg`, `maxKg`, `minWymiar`, `maxWymiar`, `cena`, `doswiadczenie`, `wystepowanie`, `opis`) VALUES
-(1, 'Karp', 'karp1.png', 700, 22000, 15, 120, 20, 0, 'Odra,', 'Karp to duża, słodkowodna ryba z rodziny karpiowatych. Jako gatunek, powstał na drodze naturalnej poliploidyzacji na przełomie trzeciorzędu i czwartorzędu w okolicach Morza Kaspijskiego i wschodniej Anatolii. Forma dzika (sazan) występowała pierwotnie w Europie południowo-wschodniej i Azji zachodniej w zlewiskach mórz Egejskiego, Czarnego, Kaspijskiego i Aralskiego. Obecnie na wolności występuje praktycznie w całej Europie, Bliskim Wschodzie i Północnej Afryce. '),
-(2, 'Płoć', '', 300, 2300, 6, 50, 10, 0, 'Odra,', 'Płoć to gatunek niedużej ryby słodkowodnej z rodziny karpiowatych występującej w całej Europie z wyjątkiem Półwyspu Iberyjskiego, zlewiska Adriatyku, Grecji oraz północnej Skandynawii, indukowana w wielu miejscach - na wschodzie - np. jej habitat sięga daleko w głąb Azji. '),
-(3, 'Leszcz', '', 600, 6200, 13, 85, 17, 0, 'Odra,', 'Leszcz to gatunek średniej wielkości ryby słodkowodnej z rodziny karpiowatych. Występuje w niemal całej Europie z wyjątkiem fragmentów Półwyspu Iberyjskiego, Apenińskiego, zachodniej Francji, południowej części Półwyspu Bałkańskiego, północnej Szkocji oraz północnej Skandynawii. Występuje także w zachodniej Azji, został również zaaklimatyzowany na wielu obszarach Syberii. '),
-(4, 'Sandacz', '', 900, 16000, 18, 140, 28, 0, 'Odra,', 'Sandacz to gatunek słodkowodnej, drapieżnej ryby z rodziny okoniowatych zamieszkujący Europę od dorzecza Renu i Rodanu po Morze Kaspijskie oraz południowa Anglia. Brak go w północnej Skandynawii, północnej Rosji oraz na półwyspach Apenińskim i Bałkańskim. '),
-(5, 'Okoń', '', 400, 4500, 11, 65, 16, 0, 'Odra, ', 'Okoń to gatunek średniej wielkości, drapieżnej ryby słodkowodnej zamieszkującej Europę z wyjątkiem Półwyspu Iberyjskiego, Szkocji, zachodniej Skandynawii, południowych i środkowych Włoch i zachodniej części Bałkanów oraz Azję aż do rzeki Kołymy. Aklimatyzowany w Australii. '),
-(6, 'Sum', '', 1000, 30000, 23, 470, 23, 0, 'Odra, ', 'Sum europejski to gatunek dużej, drapieżnej ryby z rodziny sumowatych zamieszkujący głównie duże rzeki o miękkim podłożu, starorzecza oraz ciepłe jeziora w Europie Środkowej i Wschodniej. Liczny w zlewisku Bałtyku i Morza Czarnego, gdzie spotykany bywa również w wodach słonawych. Został sztucznie introdukowany we Włoszech, na terenie Francji oraz na Półwyspie Iberyjskim. '),
-(7, 'Brzana', '', 800, 12000, 16, 120, 14, 0, 'Odra, ', 'Brzana to średniej wielkości, typowa rzeczna ryba z rodziny karpiowatych. Występuje w dorzeczach Loary, Rodanu, Renu, Dunaju, Łaby, Odry, Wisły, Tamizy, Niemna, Dniestru i Dniepru oraz na Półwyspie Iberyjskim. Introdukowana we Włoszech i Maroku. '),
-(8, 'Jesiotr', '', 1200, 230, 21, 275, 80, 0, 'Odra, ', 'Jesiotry pojawiły się na Ziemi jeszcze przed dinozaurami, około 300 milionów lat temu. Bezpośredni przodek jesiotrów, które znamy dziś, pojawił się we wczesnej Jurze, około 200 milionów lat temu i od tego czasu ryby te praktycznie się nie zmieniły. Warto podkreślić, że jesiotry przetrwały wymieranie dinozaurów.W wyniku działalności człowieka populacja jesiotrów zaczęła gwałtownie spadać.');
+(1, 'Karp', 'karp1.png', 700, 22000, 15, 120, 20, 0.0055, 'Odra,', 'Karp to duża, słodkowodna ryba z rodziny karpiowatych. Jako gatunek, powstał na drodze naturalnej poliploidyzacji na przełomie trzeciorzędu i czwartorzędu w okolicach Morza Kaspijskiego i wschodniej Anatolii. Forma dzika (sazan) występowała pierwotnie w Europie południowo-wschodniej i Azji zachodniej w zlewiskach mórz Egejskiego, Czarnego, Kaspijskiego i Aralskiego. Obecnie na wolności występuje praktycznie w całej Europie, Bliskim Wschodzie i Północnej Afryce. '),
+(2, 'Płoć', '', 300, 2300, 6, 50, 10, 0.0055, 'Odra,', 'Płoć to gatunek niedużej ryby słodkowodnej z rodziny karpiowatych występującej w całej Europie z wyjątkiem Półwyspu Iberyjskiego, zlewiska Adriatyku, Grecji oraz północnej Skandynawii, indukowana w wielu miejscach - na wschodzie - np. jej habitat sięga daleko w głąb Azji. '),
+(3, 'Leszcz', '', 600, 6200, 13, 85, 17, 0.0055, 'Odra,', 'Leszcz to gatunek średniej wielkości ryby słodkowodnej z rodziny karpiowatych. Występuje w niemal całej Europie z wyjątkiem fragmentów Półwyspu Iberyjskiego, Apenińskiego, zachodniej Francji, południowej części Półwyspu Bałkańskiego, północnej Szkocji oraz północnej Skandynawii. Występuje także w zachodniej Azji, został również zaaklimatyzowany na wielu obszarach Syberii. '),
+(4, 'Sandacz', '', 900, 16000, 18, 140, 28, 0.0055, 'Odra,', 'Sandacz to gatunek słodkowodnej, drapieżnej ryby z rodziny okoniowatych zamieszkujący Europę od dorzecza Renu i Rodanu po Morze Kaspijskie oraz południowa Anglia. Brak go w północnej Skandynawii, północnej Rosji oraz na półwyspach Apenińskim i Bałkańskim. '),
+(5, 'Okoń', '', 400, 4500, 11, 65, 16, 0.0055, 'Odra, ', 'Okoń to gatunek średniej wielkości, drapieżnej ryby słodkowodnej zamieszkującej Europę z wyjątkiem Półwyspu Iberyjskiego, Szkocji, zachodniej Skandynawii, południowych i środkowych Włoch i zachodniej części Bałkanów oraz Azję aż do rzeki Kołymy. Aklimatyzowany w Australii. '),
+(6, 'Sum', '', 1000, 30000, 23, 470, 23, 0.0055, 'Odra, ', 'Sum europejski to gatunek dużej, drapieżnej ryby z rodziny sumowatych zamieszkujący głównie duże rzeki o miękkim podłożu, starorzecza oraz ciepłe jeziora w Europie Środkowej i Wschodniej. Liczny w zlewisku Bałtyku i Morza Czarnego, gdzie spotykany bywa również w wodach słonawych. Został sztucznie introdukowany we Włoszech, na terenie Francji oraz na Półwyspie Iberyjskim. '),
+(7, 'Brzana', '', 800, 12000, 16, 120, 14, 0.0055, 'Odra, ', 'Brzana to średniej wielkości, typowa rzeczna ryba z rodziny karpiowatych. Występuje w dorzeczach Loary, Rodanu, Renu, Dunaju, Łaby, Odry, Wisły, Tamizy, Niemna, Dniestru i Dniepru oraz na Półwyspie Iberyjskim. Introdukowana we Włoszech i Maroku. '),
+(8, 'Jesiotr', '', 1200, 23000, 21, 275, 80, 0.0095, 'Odra, ', 'Jesiotry pojawiły się na Ziemi jeszcze przed dinozaurami, około 300 milionów lat temu. Bezpośredni przodek jesiotrów, które znamy dziś, pojawił się we wczesnej Jurze, około 200 milionów lat temu i od tego czasu ryby te praktycznie się nie zmieniły. Warto podkreślić, że jesiotry przetrwały wymieranie dinozaurów.W wyniku działalności człowieka populacja jesiotrów zaczęła gwałtownie spadać.');
 
 -- --------------------------------------------------------
 
@@ -235,6 +260,12 @@ ALTER TABLE `kolowrotek`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeksy dla tabeli `poziom`
+--
+ALTER TABLE `poziom`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeksy dla tabeli `ryby`
 --
 ALTER TABLE `ryby`
@@ -245,6 +276,12 @@ ALTER TABLE `ryby`
 --
 ALTER TABLE `wedka`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `znajomi`
+--
+ALTER TABLE `znajomi`
+  ADD UNIQUE KEY `idGracz` (`idGracz`);
 
 --
 -- Indeksy dla tabeli `zylka`
@@ -267,6 +304,12 @@ ALTER TABLE `dane`
 --
 ALTER TABLE `kolowrotek`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `poziom`
+--
+ALTER TABLE `poziom`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `ryby`
