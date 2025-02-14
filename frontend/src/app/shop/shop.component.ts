@@ -1,6 +1,5 @@
 import { Component, Output, EventEmitter, Input, OnInit, inject } from '@angular/core';
 import { Item } from '../ShopItems/item';
-import { BaseItem } from '../ShopItems/baseItem';
 import { ShopService } from './shop-service';
 
 type equipmentType = "wedka" | "kolowrotek" | "zylka";
@@ -35,7 +34,7 @@ export class ShopComponent{
   }
 
   private getCurrItem(type : equipmentType) : Item{
-    return this.items.get(type)?.at(this.currIds.get(type) ?? -1) ?? new BaseItem(null);
+    return this.items.get(type)?.at(this.currIds.get(type) ?? -1) ?? new Item(null);
   }
   getItemName(type : equipmentType) : string{
     return this.getCurrItem(type).getName();
