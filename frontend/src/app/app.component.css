@@ -1,21 +1,21 @@
-.field{
+.field {
    display: grid;
    grid-template-columns: 1fr 8fr 1fr 2fr;
 }
 
-.left-panel{
+.left-panel {
    background-color: rgb(75, 118, 199);
    overflow: hidden;
    position: relative;
 }
- 
-.middle-panel{
+
+.middle-panel {
    display: grid;
    grid-template-rows: 10% 90%;
-   background-color: cornflowerblue; 
+   background-color: cornflowerblue;
 }
 
-.poppin{
+.poppin {
    position: absolute;
    height: 100%;
    width: 67%;
@@ -26,16 +26,16 @@
    transform: translateY(-100%);
 }
 
-.line-panel{
+.line-panel {
    background-color: rgb(75, 118, 199);
    text-align: center;
 }
 
-.store-panel{
+.store-panel {
    background-color: rgb(65, 103, 173);
 }
 
-.menu-content{
+.menu-content {
    width: 100%;
    transition: transform 0.3s ease-in-out;
    transform: translateX(-100%);
@@ -44,16 +44,20 @@
    background: red;
 }
 
-#menu-button:checked + .menu-content{
+#menu-button:checked+.menu-content {
    transform: translateX(0%);
 }
 
 @-webkit-keyframes slide {
-   100% { left: 0; }
+   100% {
+      left: 0;
+   }
 }
 
 @keyframes slide {
-   100% { left: 0; }
+   100% {
+      left: 0;
+   }
 }
 
 .field:has(.left-panel>#test:checked) {
@@ -63,38 +67,40 @@
    }
 }
 
-#login, #pw, #send{
-   
-}
+#login,
+#pw,
+#send {}
 
-#login{
+#login {
    margin-top: 25%;
 }
 
-#login, #pw{
+#login,
+#pw {
    width: 25%;
    height: 5%;
 }
 
-#pw, #send{
+#pw,
+#send {
    margin-top: 3%;
 }
 
-#send{
+#send {
    width: 10%;
    height: 5%;
    border-radius: 15%;
 }
 
-.menu-bar{
+.menu-bar {
    width: 35px;
    height: 27px;
    margin-left: 10px;
 }
 
-.bar{
-  width: 35px;
-  height: 5px;
-  background-color: black;
-  margin: 6px 0;
+.bar {
+   width: 35px;
+   height: 5px;
+   background-color: black;
+   margin: 6px 0;
 }

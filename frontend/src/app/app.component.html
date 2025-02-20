@@ -8,14 +8,12 @@
     </div>
     <input type="checkbox" id="test">
     <input type="checkbox" id="menu-button">
+
     <div class="menu-content ">
-      <p>xdd</p>
-      <p>xdd</p>
-      <p>xdd</p>
-      <p>xdd</p>
-      <p>xdd</p>
+      MENU SZMATO
     </div>
-    <p>lol</p>
+    <!-- <p>lol</p> -->
+    <app-friends-menu></app-friends-menu>
   </div>
   <div class="middle-panel">
     <div class="poppin">
@@ -39,6 +37,6 @@
     <app-line [durabilityPercent]="currDurabilityPercent"></app-line>
   </div>
   <div class="store-panel">
-    <app-shop (equipItemEvent)="maxDurabilityChanged($event)"></app-shop>
+    <app-shop></app-shop>
   </div>
 </div>
