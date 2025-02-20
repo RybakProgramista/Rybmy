@@ -1,11 +1,11 @@
-import { HttpClient } from "@angular/common/http"
-import { inject, Injectable } from "@angular/core"
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 
 import { Equip } from '../app.component';
 import { Item } from "../ShopItems/item";
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class ShopService{
     _http = inject(HttpClient)

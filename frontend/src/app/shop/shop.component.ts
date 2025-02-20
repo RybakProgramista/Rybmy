@@ -1,18 +1,25 @@
-import { Component, Output, EventEmitter, Input, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  Input,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { Item } from '../ShopItems/item';
 import { ShopService } from './shop-service';
 
-type equipmentType = "wedka" | "kolowrotek" | "zylka";
-const equipmentTypeArray : equipmentType[] = ["wedka", "kolowrotek", "zylka"];
+type equipmentType = 'wedka' | 'kolowrotek' | 'zylka';
+const equipmentTypeArray: equipmentType[] = ['wedka', 'kolowrotek', 'zylka'];
 
 @Component({
   selector: 'app-shop',
   standalone: true,
   imports: [],
   templateUrl: './shop.component.html',
-  styleUrl: './shop.component.css'
+  styleUrl: './shop.component.css',
 })
-export class ShopComponent{
+export class ShopComponent {
   _service = inject(ShopService);
   items : Map<equipmentType, Array<Item>> = new Map<equipmentType, Array<Item>>();
   currIds: Map<equipmentType, number> = new Map([
