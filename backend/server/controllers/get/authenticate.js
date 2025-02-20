@@ -22,7 +22,7 @@ export const authenticate = async (req, res, next) => {
         id = jwt.verify(accessToken, process.env.TOKEN_SECRET)["userId"];
         res.locals.accessToken = accessToken
         res.locals.refreshToken = refreshToken
-        res.cookie("accessToken", res.locals.accessToken).cookie("refreshToken", res.locals.refreshToken)
+        // res.cookie("accessToken", res.locals.accessToken).cookie("refreshToken", res.locals.refreshToken)
         res.locals.id = id
         next()
     } catch (error) {
@@ -33,7 +33,7 @@ export const authenticate = async (req, res, next) => {
             let newRefreshToken = jwt.sign({userId: id},process.env.TOKEN_SECRET,{expiresIn: '2592000s'})
             res.locals.accessToken = newAccessToken
             res.locals.refreshToken = newRefreshToken
-            res.cookie("accessToken", res.locals.accessToken).cookie("refreshToken", res.locals.refreshToken)
+            // res.cookie("accessToken", res.locals.accessToken).cookie("refreshToken", res.locals.refreshToken)
             res.locals.id = id
             next()
 
