@@ -4,8 +4,8 @@ import { MainSceneComponent } from './main-scene/main-scene.component';
 import { ShopComponent } from './shop/shop.component';
 import { LineComponent } from './line/line.component';
 import { DataService } from './Client Handler/data.service';
-import { FriendsComponent } from './Friends/Friends.component';
 import { HttpClient } from '@angular/common/http';
+import { ShopService } from './shop/shop-service';
 import { FriendsMenuComponent } from './friends-menu/friends-menu.component';
 
 @Component({
@@ -16,7 +16,6 @@ import { FriendsMenuComponent } from './friends-menu/friends-menu.component';
     MainSceneComponent,
     LineComponent,
     ShopComponent,
-    FriendsComponent,
     FriendsMenuComponent,
   ],
   templateUrl: './app.component.html',
@@ -24,14 +23,15 @@ import { FriendsMenuComponent } from './friends-menu/friends-menu.component';
 })
 export class AppComponent {
   //SERWER
-  playerLogin: string = '';
-  playerPassword: string = '';
-  id: number = -1;
-  server: string = 'http://localhost:3000/';
-  @HostBinding('class.loged') get isLogged() {
-    return !this.isLoggedIn;
-  }
-  isLoggedIn: boolean = false;
+  a = new ShopService()
+  b = this.a.getList("wedka",1)
+
+  playerLogin : string = "";
+  playerPassword : string = "";
+  id : number = -1;
+  server : string = 'http://localhost:3000/'
+  @HostBinding("class.loged") get isLogged() { return !this.isLoggedIn; }
+  isLoggedIn : boolean = false;
 
   constructor(private dataService: DataService, httpClient: HttpClient) {}
 

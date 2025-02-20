@@ -2,33 +2,33 @@
     <div class="row flex-fill">
       <! ODTĄD>
       <div class="col border d-flex">
-        <button (click)="changeItem('wedka', -1)">prev</button> <! POPRZEDNI ITEM>
+        <button (click)="changeCurrItem('wedka', -1)">prev</button> <! POPRZEDNI ITEM>
         <p>{{getItemName('wedka')}}</p> <! OBECNY ITEM, TU BĘDZIE ZDJĘCIE JAK DRZAŁA JE OGARNIE>
-        <button (click)="changeItem('wedka', 1)">next</button> <! NASTĘPNY ITEM>
+        <button (click)="changeCurrItem('wedka', 1)">next</button> <! NASTĘPNY ITEM>
         <br>
-        <button (click)="useItem('wedka')">{{checkItemState('wedka')}}</button> <! KUPOWANIE/UŻYWANiE>
+        <button (click)="useItem('wedka')">{{getItemState('wedka')}}</button> <! KUPOWANIE/UŻYWANiE>
       </div>
     </div>
     <! DOTĄD>
     <div class="row flex-fill">
       <div class="col border d-flex justify-content-center align-items-center">
         <div class="col border d-flex">
-          <button (click)="changeItem('kolowrotek', -1)">prev</button> <! POPRZEDNI ITEM>
+          <button (click)="changeCurrItem('kolowrotek', -1)">prev</button> <! POPRZEDNI ITEM>
           <p>{{getItemName('kolowrotek')}}</p> <! OBECNY ITEM, TU BĘDZIE ZDJĘCIE JAK DRZAŁA JE OGARNIE>
-          <button (click)="changeItem('kolowrotek', 1)">next</button> <! NASTĘPNY ITEM>
+          <button (click)="changeCurrItem('kolowrotek', 1)">next</button> <! NASTĘPNY ITEM>
           <br>
-          <button (click)="useItem('kolowrotek')">{{checkItemState('kolowrotek')}}</button> <! KUPOWANIE/UŻYWANiE>
+          <button (click)="useItem('kolowrotek')">{{getItemState('kolowrotek')}}</button> <! KUPOWANIE/UŻYWANiE>
         </div>
       </div>
     </div>
     <div class="row flex-fill">
       <div class="col border d-flex justify-content-center align-items-center">
         <div class="col border d-flex">
-          <button (click)="changeItem('zylka', -1)">prev</button> <! POPRZEDNI ITEM>
+          <button (click)="changeCurrItem('zylka', -1)">prev</button> <! POPRZEDNI ITEM>
           <p>{{getItemName('zylka')}}</p> <! OBECNY ITEM, TU BĘDZIE ZDJĘCIE JAK DRZAŁA JE OGARNIE>
-          <button (click)="changeItem('zylka', 1)">next</button> <! NASTĘPNY ITEM>
+          <button (click)="changeCurrItem('zylka', 1)">next</button> <! NASTĘPNY ITEM>
           <br>
-          <button (click)="useItem('zylka')">{{checkItemState('zylka')}}</button> <! KUPOWANIE/UŻYWANiE>
+          <button (click)="useItem('zylka')">{{getItemState('zylka')}}</button> <! KUPOWANIE/UŻYWANiE>
         </div>
       </div>
     </div>
