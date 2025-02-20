@@ -11,7 +11,7 @@ export class Item{
         this.value = (list ? list["cena"] : -1);
         this.currState = (list ? list["isOwned"] : "NotBought");
         if(this.value < 0){
-            console.error("Item cannot be worth less than 0 you dumb fuck");
+            //console.error("Item cannot be worth less than 0 you dumb fuck");
         }
     }
     public changeCurrState(newState : itemState) : void{

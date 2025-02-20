@@ -23,6 +23,7 @@ export class ShopComponent{
   ngOnInit(){
     for(let a : number = 0; a < equipmentTypeArray.length; a++){
         this.items.set(equipmentTypeArray[a], this._service.getList(equipmentTypeArray[a], 1));
+        console.log(this.items.get(equipmentTypeArray[a]));
     }
   }
   
