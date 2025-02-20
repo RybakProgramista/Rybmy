@@ -40,37 +40,41 @@ export class ShopComponent {
     else if (newId > (this.items.get(type)?.length ?? 0) - 1) newId = 0;
     this.currIds.set(type, newId);
   }
-  checkItemState(type: equipmentType): string {
-    switch (this.currItems.get(type)?.getState()) {
-      case 'Bought':
-        return 'EQUIP';
-      case 'NotBought':
-        return 'BUY';
-      case 'Equipped':
-        return 'Equipped';
+
+  private getCurrItem(type : equipmentType) : Item{
+    return this.items.get(type)?.at(this.currIds.get(type) ?? -1) ?? new Item(null);
+  }
+  getItemName(type : equipmentType) : string{
+    return this.getCurrItem(type).getName();
+  }
+  getItemState(type : equipmentType) : string{
+    let target : Item = this.getCurrItem(type);
+    switch (target.getState()){
+      case "NotBought":
+        return target.getVal() + "ZŁ";
+      case "Bought":
+        return "EQUIP";
+      case "Equipped":
+        return "UNEQUIP";
       default:
-        return 'Dolbajob';
+        return "Powieś się";
     }
   }
-
-  changeItem(type: equipmentType, val: number) {
-    this.currIds.set(type, (this.currIds.get(type) ?? 0) + val);
-    // this.demandItem(type);
-    this._service.getItem(type.toString(), this.currIds.get(type) ?? 0);
-    // .subscribe((e) => {
-    //   this.currItems.set(
-    //     type,
-    //     new BaseItem(e.nazwa, e.wytrzymalosc, e.status, e.cena, '')
-    //   );
-    // });
-  }
-  getItemName(type: equipmentType): string {
-    return this.currItems.get(type)?.getName() ?? 'ZJEBAŁO SIĘ';
-  }
-
-  ngOnInit() {
-    equipmentTypeArray.forEach((type) => {
-      this.changeItem(type, 0);
-    });
+  useItem(type : equipmentType){
+    let target : Item = this.getCurrItem(type);
+    switch (target.getState()){
+      case "NotBought":
+        //BUY
+        break;
+      case "Bought":
+        //EQUIP
+        break;
+      case "Equipped":
+        //UNEQUIP
+        break;
+      default:
+        //ERROR
+        break;
+    }
   }
 }
