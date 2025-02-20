@@ -5,9 +5,7 @@ import jwt from 'jsonwebtoken'
 
 export const login = async (req, res) => {
   if(res.locals.id != null){
-    res.cookie("accessToken", res.locals.accessToken).cookie("refreshToken", res.locals.refreshToken).json(res.locals.id)
-    console.log(1);
-    
+    res.json(res.locals.id)
     res.end()
   }else{
     const { login, password } = req.query;
@@ -19,7 +17,6 @@ export const login = async (req, res) => {
     database.query('SELECT `id`,`haslo`,`licznik`, (UNIX_TIMESTAMP(`dataBlokady`)*1000) AS "date", (UNIX_TIMESTAMP(NOW())*1000) AS "now" FROM `dane` WHERE `login`=?',[login], async function (error, results) {
       if (error) {
         res.json(-1)
-        console.log(2);
         res.end()
       }else{
         const data = JSON.parse(JSON.stringify(results))[0]
@@ -27,14 +24,12 @@ export const login = async (req, res) => {
           if(data['date']!=null){
             if(data['now']-data['date']<15000)  {
               res.json(-1)
-              console.log(3);
               res.end()
             }
             else{
               database.query('UPDATE `dane` SET `licznik`=0,`dataBlokady`=null WHERE `login`=?',[login],  function (error, results) {
                 if (error) {
                   res.json(-1)
-                  console.log(4);
                   res.end()
                 }
                 else authentication(data)
@@ -46,7 +41,6 @@ export const login = async (req, res) => {
           }
         }else{
           res.json(-1)
-          console.log(5);
           res.end()
         }
       }
@@ -60,7 +54,6 @@ export const login = async (req, res) => {
         database.query('UPDATE `dane` SET `licznik`=0 WHERE `login`=?',[login],  function (error, results) {
           if (error) {
             res.json(-1)
-            console.log(6);
             res.end()
           }
           else {
@@ -70,7 +63,6 @@ export const login = async (req, res) => {
             
             const refreshToken = jwt.sign({userId: data['id']},process.env.TOKEN_SECRET,{expiresIn: '2592000s'})
             res.cookie('refreshToken', refreshToken).cookie('accessToken', accessToken).json(data['id'])
-            console.log(7);
             res.end()
         
           }
@@ -82,13 +74,11 @@ export const login = async (req, res) => {
         database.query('UPDATE `dane` SET `dataBlokady`=NOW(), `licznik`=0 WHERE `login`=?',[login],  function (error, results) {
           if (error) {
             res.json(-1)
-            console.log(8);
             res.end()
           }
             
           else {
             res.json(-1)
-            console.log(9);
             res.end()
           }
         })
@@ -97,12 +87,10 @@ export const login = async (req, res) => {
         database.query('UPDATE `dane` SET `licznik`=`licznik`+1 WHERE `login`=?',[login], async function (error, results) {
           if (error) {
             res.json(-1)
-            console.log(10);
             res.end()
           }
           else {
             res.json(-1)
-            console.log(11);
             res.end()
           }
         })
