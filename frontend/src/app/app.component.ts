@@ -6,6 +6,7 @@ import { LineComponent } from './line/line.component';
 import { DataService } from './Client Handler/data.service';
 import { FriendsComponent } from './Friends/Friends.component';
 import { HttpClient } from '@angular/common/http';
+import { ShopService } from './shop/shop-service';
 
 
 @Component({
@@ -18,6 +19,9 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent{
 
   //SERWER
+  a = new ShopService()
+  b = this.a.getList("wedka",1)
+
   playerLogin : string = "";
   playerPassword : string = "";
   id : number = -1;

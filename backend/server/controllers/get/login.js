@@ -1,5 +1,7 @@
 import database from '../../database.js'
 import bcrypt from 'bcrypt';
+import dotenv from 'dotenv'
+import jwt from 'jsonwebtoken'
 
 export const login = async (req, res) => {
   const { login, password } = req.query;
@@ -12,12 +14,12 @@ export const login = async (req, res) => {
     if (error) res.json(-1)
     else{
       const data = JSON.parse(JSON.stringify(results))[0]
-      console.log(data);
+      // console.log(data);
       if(data){
         if(data['date']!=null){
-          console.log(data['now']);
+          // console.log(data['now']);
           
-          console.log(data['now']-data['date']);
+          // console.log(data['now']-data['date']);
           if(data['now']-data['date']<15000)  res.json(-1)
           else{
             database.query('UPDATE `dane` SET `licznik`=0,`dataBlokady`=null WHERE `login`=?',[login],  function (error, results) {
@@ -41,7 +43,14 @@ export const login = async (req, res) => {
     if(passwordMatched) {
       database.query('UPDATE `dane` SET `licznik`=0 WHERE `login`=?',[login],  function (error, results) {
         if (error) res.json(-1)
-        else res.json(data['id'])
+        else {
+          dotenv.config()
+          const accessToken = jwt.sign({userId: data['id']},process.env.TOKEN_SECRET,{expiresIn: '900s'})
+          const refreshToken = jwt.sign({userId: data['id']},process.env.TOKEN_SECRET,{expiresIn: '2592000s'})
+          res.cookie('refreshToken', refreshToken, {httpOnly: true}).header('AccessToken', accessToken).json(data['id'])
+      
+        }
+        
       })
     }
     else if(data['licznik']==3){

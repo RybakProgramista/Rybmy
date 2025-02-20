@@ -1,20 +1,18 @@
-export type itemState = "Equipped" | "Bought" | "NotBought";
+export type itemState = "Equipped" | "NotBought" | "Bought";
 
-export abstract class Item{
+export class Item{
 
     private name : string;
     private value : number;
     private currState : itemState;
-    private imageURL : string;
 
-    constructor(name : string, value : number, currState : itemState, imageURL : string){
-        this.name = name;
-        this.value = value;
-        this.currState = currState;
+    constructor(list : any){
+        this.name = (list ? list["nazwa"] : "nazwa");
+        this.value = (list ? list["cena"] : -1);
+        this.currState = (list ? list["isOwned"] : "NotBought");
         if(this.value < 0){
-            console.error("Item cannot be worth less than 0 you dumb fuck");
+            //console.error("Item cannot be worth less than 0 you dumb fuck");
         }
-        this.imageURL = imageURL;
     }
     public changeCurrState(newState : itemState) : void{
         this.currState = newState;
@@ -28,8 +26,4 @@ export abstract class Item{
     public getState() : itemState{
         return this.currState;
     }
-    public getImageURL() : string{
-        return this.imageURL;
-    }
-
 }
