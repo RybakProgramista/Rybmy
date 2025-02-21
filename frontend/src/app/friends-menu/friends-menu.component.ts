@@ -14,7 +14,7 @@ export class FriendsMenuComponent {
   
     constructor(private friendsService: FriendsService) {}
     ngOnInit(): void {
-      //this.loadFriends();
+      this.loadFriends();
     }
   
     //ładowanie znajomych
