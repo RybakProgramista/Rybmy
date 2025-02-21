@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FriendsService } from './friends.service';
+import { FriendsService } from '../friends-menu/friends.service';
 
 describe('FriendsService', () => {
   let service: FriendsService;
