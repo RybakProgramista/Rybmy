@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { FriendsService } from './friends.service';
+import { FriendsService } from '../friends-menu/friends.service';
 
 @Component({
   selector: 'app-Friends',
