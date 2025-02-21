@@ -4,7 +4,7 @@ import { MainSceneComponent } from './main-scene/main-scene.component';
 import { ShopComponent } from './shop/shop.component';
 import { LineComponent } from './line/line.component';
 import { DataService } from './Client Handler/data.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ShopService } from './shop/shop-service';
 import { FriendsMenuComponent } from './friends-menu/friends-menu.component';
 
@@ -35,7 +35,7 @@ export class AppComponent {
   ngOnInit() {}
 
   tryLogginIn(playerLogin : string, playerPassword : string) {
-    console.log(playerLogin + " " + playerPassword)
+    console.log(playerLogin + " " + playerPassword, httpOptions)
     fetch(
       this.server +
         'api/login?login=' +
@@ -97,3 +97,8 @@ export interface Equip {
   wytrzymalosc: number;
   cena: number;
 }
+
+export const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  withCredentials: true 
+};

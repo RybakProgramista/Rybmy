@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 
-import { Equip } from '../app.component';
+import { Equip, httpOptions } from '../app.component';
 import { Item } from "../ShopItems/item";
 
 @Injectable({
@@ -18,10 +18,6 @@ export class ShopService{
 
     getList(type: String, id: number): Array<Item>{
         let result: Array<Item>
-        const httpOptions = {
-            headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-            withCredentials: true 
-          };
         let res = this._http.get<Array<Item>>(this.server+"api/equip?playerId=" + id + "&type=" + type, httpOptions)
         res.subscribe(
             (e : any) => {
