@@ -3,7 +3,8 @@ import querys from './querys.js'
 
 
 export const equip = (req, res) => {
-    const { type, playerId } = req.query
+    const { type } = req.query
+    const playerId = res.locals.id
     database.query(querys.getEquip[type], [playerId], function (error, equips) {
         if (error) res.json(error)
         else {

@@ -2,7 +2,7 @@ import database from '../../database.js'
 
 
 export const friends = (req, res) => {
-  const id = req.query.id;
+  const id = res.locals.id
   // console.log(id);
 
   database.query('SELECT `idZnajomy` FROM `znajomi` WHERE `idGracz`= ?', [id], function (error, results) {  //pobiera liste znajomych
