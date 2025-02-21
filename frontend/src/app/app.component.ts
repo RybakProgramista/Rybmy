@@ -26,24 +26,22 @@ export class AppComponent {
   a = new ShopService()
   b = this.a.getList("wedka",1)
 
-  playerLogin : string = "";
-  playerPassword : string = "";
   id : number = -1;
   server : string = 'http://localhost:3000/'
-  @HostBinding("class.loged") get isLogged() { return !this.isLoggedIn; }
   isLoggedIn : boolean = false;
 
   constructor(private dataService: DataService, httpClient: HttpClient) {}
 
   ngOnInit() {}
 
-  tryLogginIn() {
+  tryLogginIn(playerLogin : string, playerPassword : string) {
+    console.log(playerLogin + " " + playerPassword)
     fetch(
       this.server +
         'api/login?login=' +
-        this.playerLogin +
+        playerLogin +
         '&password=' +
-        this.playerPassword
+        playerPassword
     )
       .then((response) => response.json())
       .then((id) => (this.id = id));
@@ -53,7 +51,7 @@ export class AppComponent {
     } else {
       //zalogowano
       this.isLoggedIn = true;
-      console.log(this.playerLogin);
+      console.log(playerLogin);
     }
   }
 

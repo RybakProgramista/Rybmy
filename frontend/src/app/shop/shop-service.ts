@@ -40,10 +40,13 @@ export class ShopService{
         result = []
         return result
     }
-    
-
-    
-    
-    // Array<BaseItem>
-    
+    buyItem(itemID : number, itemType : String, playerID : number) : boolean{
+        let res: boolean = false
+        this._http.get<Boolean>(this.server+"api/possibilityToBuy?id=" + itemID + "&type=" + itemType + "&playerId=" + playerID).subscribe(
+            (e : any) =>{
+                res =  e==1;
+            }
+        )
+        return res;
+    }
 }

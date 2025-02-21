@@ -64,7 +64,7 @@ export class ShopComponent {
     let target : Item = this.getCurrItem(type);
     switch (target.getState()){
       case "NotBought":
-        //BUY
+        console.log(this._service.buyItem(this.currIds.get(type) ?? -1, type, 5))
         break;
       case "Bought":
         //EQUIP
