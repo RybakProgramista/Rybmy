@@ -1,0 +1,7 @@
+.bg {
+    background-color: green;
+    display: grid;
+    height: 91.5%;
+    grid-template-rows: repeat(10, 1fr);
+    position: static;
+}
