@@ -6,14 +6,15 @@ import { signup } from "../controllers/post/signup.js"
 import { money } from "../controllers/get/money.js"
 import { moneyChange } from "../controllers/put/moneyChange.js"
 import testLogin from "../controllers/get/testLogin.js"
+import authenticate from "../controllers/get/authenticate.js";
 const router = Router()
 
-router.get('/login', login)
-router.get('/testLogin', testLogin)
+router.get('/login', authenticate, login)
+router.get('/authenticate', authenticate)
 router.post('/signup', signup)  //zmienić na post
-router.get('/znajomi', friends)
+router.get('/znajomi', authenticate, friends)
 router.put('/znajomi', friendsChange)
-router.get('/money', money)
-router.put('/money', moneyChange)
+router.get('/money', authenticate, money)
+router.put('/money', authenticate, moneyChange)
 
 export default router
