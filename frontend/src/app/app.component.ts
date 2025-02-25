@@ -34,9 +34,9 @@ export class AppComponent {
 
   ngOnInit() {}
 
-  tryLogginIn(playerLogin : string, playerPassword : string) {
+  async tryLogginIn(playerLogin : string, playerPassword : string) {
     console.log(playerLogin + " " + playerPassword, httpOptions)
-    fetch(
+    await fetch(
       this.server +
         'api/login?login=' +
         playerLogin +
