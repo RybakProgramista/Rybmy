@@ -18,7 +18,9 @@ export class FriendsComponent implements OnInit{
     this.loadFriends();
   }
 
-  //ładowanie znajomych
+  /**
+   * Funkcja, która ładuje listę znajomych
+   */
   loadFriends(): void{
     this.friendsService.getFriends(this.idGracz).subscribe(
       (data) => {

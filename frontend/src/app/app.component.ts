@@ -35,7 +35,11 @@ export class AppComponent {
   constructor(private dataService: DataService, httpClient: HttpClient) {}
 
   ngOnInit() {}
-
+  /**
+   * Dokonuje próby zalogowania się przez gracza 
+   * @param playerLogin - login gracza
+   * @param playerPassword - hasło gracza
+   */
   tryLogginIn(playerLogin : string, playerPassword : string) {
     console.log(playerLogin + " " + playerPassword)
     fetch(
