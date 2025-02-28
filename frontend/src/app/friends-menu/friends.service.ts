@@ -13,6 +13,11 @@ export class FriendsService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * Funkcja zwracająca kurwa nie wiem co to nawet jest
+   * @param idGracz - gówno
+   * @returns 
+   */
   getFriends(idGracz: number): Observable <any> {
     return this.http.get<Znajomy>((this.apiUrl+"api/get/znajomi?id=" + idGracz));
   }

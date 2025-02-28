@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { FriendsService } from './friends.service';
+import { FriendsService } from '../friends-menu/friends.service';
 
 @Component({
   selector: 'app-Friends',
@@ -18,7 +18,9 @@ export class FriendsComponent implements OnInit{
     this.loadFriends();
   }
 
-  //ładowanie znajomych
+  /**
+   * Funkcja, która ładuje listę znajomych
+   */
   loadFriends(): void{
     this.friendsService.getFriends(this.idGracz).subscribe(
       (data) => {

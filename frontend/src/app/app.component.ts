@@ -1,10 +1,10 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, inject, Injectable, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MainSceneComponent } from './main-scene/main-scene.component';
 import { ShopComponent } from './shop/shop.component';
 import { LineComponent } from './line/line.component';
 import { DataService } from './Client Handler/data.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ShopService } from './shop/shop-service';
 import { FriendsMenuComponent } from './friends-menu/friends-menu.component';
 
@@ -25,35 +25,39 @@ export class AppComponent {
   //SERWER
   a = new ShopService()
   b = this.a.getList("wedka",1)
+  //Co z tym u góry zrobić?
 
-  playerLogin : string = "";
-  playerPassword : string = "";
-  id : number = -1;
+  @ViewChild(ShopComponent) shop! : ShopComponent;
+  _id : number = -1;
   server : string = 'http://localhost:3000/'
-  @HostBinding("class.loged") get isLogged() { return !this.isLoggedIn; }
   isLoggedIn : boolean = false;
 
   constructor(private dataService: DataService, httpClient: HttpClient) {}
 
   ngOnInit() {}
-
-  tryLogginIn() {
+  /**
+   * Dokonuje próby zalogowania się przez gracza 
+   * @param playerLogin - login gracza
+   * @param playerPassword - hasło gracza
+   */
+  tryLogginIn(playerLogin : string, playerPassword : string) {
+    console.log(playerLogin + " " + playerPassword)
     fetch(
       this.server +
         'api/login?login=' +
-        this.playerLogin +
+        playerLogin +
         '&password=' +
-        this.playerPassword
+        playerPassword
     )
       .then((response) => response.json())
-      .then((id) => (this.id = id));
-    console.log(this.id + '');
-    if (this.id == -1) {
+      .then((id) => (this._id = id));
+    console.log(this._id + '');
+    if (this._id == -1) {
       //niezalogowano
     } else {
       //zalogowano
       this.isLoggedIn = true;
-      console.log(this.playerLogin);
+      this.shop.sendID.emit(this._id);
     }
   }
 
@@ -99,3 +103,8 @@ export interface Equip {
   wytrzymalosc: number;
   cena: number;
 }
+
+export const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  withCredentials: true 
+};

@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 
-import { Equip } from '../app.component';
+import { Equip, httpOptions } from '../app.component';
 import { Item } from "../ShopItems/item";
 
 @Injectable({
@@ -15,10 +15,15 @@ export class ShopService{
     // res = this._http.get<BaseItem>(this.server+"api/equip?playerId=" + 1 + "&type=" + "wedka").subscribe(
     //     e => {console.log(e)})
     // b = this.getList("wedka",1)
-
+    /**
+     * Pobiera listę WSZYSTKICH przedmiotów z serwera
+     * @param type - typ przedmiotów, które mają zostać pobrane
+     * @param id - id gracza
+     * @returns zwraca listę obiektów typu item
+     */
     getList(type: String, id: number): Array<Item>{
         let result: Array<Item>
-        let res = this._http.get<Array<Item>>(this.server+"api/equip?playerId=" + id + "&type=" + type)
+        let res = this._http.get<Array<Item>>(this.server+"api/equip?playerId=" + id + "&type=" + type, httpOptions)
         res.subscribe(
             (e : any) => {
                 // /*this.result = e*/ console.log(e[0])
@@ -36,10 +41,20 @@ export class ShopService{
         result = []
         return result
     }
-    
-
-    
-    
-    // Array<BaseItem>
-    
+    /**
+     * Dokonuje zakupu przedmiotu
+     * @param itemID - id przedmiotu, który ma zostać kupiony
+     * @param itemType - typ przedmiotu, który ma zostać kupiony
+     * @param playerID - id gracza, który kupuje przedmiot
+     * @returns - zwraca zmienną boolean, odpowiadającą temu, czy dany przedmiot udało się zakupić
+     */
+    buyItem(itemID : number, itemType : String, playerID : number) : boolean{
+        let res: boolean = false
+        this._http.get<Boolean>(this.server+"api/possibilityToBuy?id=" + itemID + "&type=" + itemType + "&playerId=" + playerID).subscribe(
+            (e : any) =>{
+                res =  e==1;
+            }
+        )
+        return res;
+    }
 }
