@@ -16,20 +16,20 @@ export const login = async (req, res) => {
 
     database.query('SELECT `id`,`haslo`,`licznik`, (UNIX_TIMESTAMP(`dataBlokady`)*1000) AS "date", (UNIX_TIMESTAMP(NOW())*1000) AS "now" FROM `dane` WHERE `login`=?',[login], async function (error, results) {
       if (error) {
-        res.json(-11)
+        res.json(-1)
         res.end()
       }else{
         const data = JSON.parse(JSON.stringify(results))[0]
         if(data){
           if(data['date']!=null){
             if(data['now']-data['date']<15000)  {
-              res.json(-2)
+              res.json(-1)
               res.end()
             }
             else{
               database.query('UPDATE `dane` SET `licznik`=0,`dataBlokady`=null WHERE `login`=?',[login],  function (error, results) {
                 if (error) {
-                  res.json(-3)
+                  res.json(-1)
                   res.end()
                 }
                 else authentication(data)
@@ -40,7 +40,7 @@ export const login = async (req, res) => {
             authentication(data)
           }
         }else{
-          res.json(-4)
+          res.json(-1)
           res.end()
         }
       }
@@ -53,7 +53,7 @@ export const login = async (req, res) => {
       if(passwordMatched) {
         database.query('UPDATE `dane` SET `licznik`=0 WHERE `login`=?',[login],  function (error, results) {
           if (error) {
-            res.json(-10)
+            res.json(-1)
             res.end()
           }
           else {
@@ -73,12 +73,12 @@ export const login = async (req, res) => {
         
         database.query('UPDATE `dane` SET `dataBlokady`=NOW(), `licznik`=0 WHERE `login`=?',[login],  function (error, results) {
           if (error) {
-            res.json(-19)
+            res.json(-1)
             res.end()
           }
             
           else {
-            res.json(-18)
+            res.json(-1)
             res.end()
           }
         })
@@ -86,11 +86,11 @@ export const login = async (req, res) => {
       else{
         database.query('UPDATE `dane` SET `licznik`=`licznik`+1 WHERE `login`=?',[login], async function (error, results) {
           if (error) {
-            res.json(-17)
+            res.json(-1)
             res.end()
           }
           else {
-            res.json(-16)
+            res.json(-1)
             res.end()
           }
         })
