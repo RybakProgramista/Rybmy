@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, inject, Injectable, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MainSceneComponent } from './main-scene/main-scene.component';
 import { ShopComponent } from './shop/shop.component';
@@ -25,8 +25,10 @@ export class AppComponent {
   //SERWER
   a = new ShopService()
   b = this.a.getList("wedka",1)
+  //Co z tym u góry zrobić?
 
-  id : number = -1;
+  @ViewChild(ShopComponent) shop! : ShopComponent;
+  _id : number = -1;
   server : string = 'http://localhost:3000/'
   isLoggedIn : boolean = false;
 
@@ -44,14 +46,14 @@ export class AppComponent {
         playerPassword
     )
       .then((response) => response.json())
-      .then((id) => (this.id = id));
-    console.log(this.id + '');
-    if (this.id == -1) {
+      .then((id) => (this._id = id));
+    console.log(this._id + '');
+    if (this._id == -1) {
       //niezalogowano
     } else {
       //zalogowano
       this.isLoggedIn = true;
-      console.log(playerLogin);
+      this.shop.sendID.emit(this._id);
     }
   }
 

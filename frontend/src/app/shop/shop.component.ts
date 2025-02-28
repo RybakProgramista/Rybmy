@@ -21,19 +21,28 @@ const equipmentTypeArray: equipmentType[] = ['wedka', 'kolowrotek', 'zylka'];
 })
 export class ShopComponent {
   _service = inject(ShopService);
+  _playerID : number = -1;
   items : Map<equipmentType, Array<Item>> = new Map<equipmentType, Array<Item>>();
   currIds: Map<equipmentType, number> = new Map([
     ["wedka", 0],
     ["kolowrotek", 0],
     ["zylka", 0]
   ]);
-  ngOnInit(){
-    for(let a : number = 0; a < equipmentTypeArray.length; a++){
-        this.items.set(equipmentTypeArray[a], this._service.getList(equipmentTypeArray[a], 1));
-        console.log(this.items.get(equipmentTypeArray[a]));
-    }
+  @Output() sendID = new EventEmitter<number>();
+  constructor(){
+    this.sendID.subscribe(id => {
+      this._playerID = id;
+      this.initialize();
+    })
   }
-  
+
+  initialize(){
+    for(let a : number = 0; a < equipmentTypeArray.length; a++){
+      this.items.set(equipmentTypeArray[a], this._service.getList(equipmentTypeArray[a], this._playerID));
+      console.log(this.items.get(equipmentTypeArray[a]));
+  }
+  }
+
   changeCurrItem(type : equipmentType, val : number){
     let newId  = (this.currIds.get(type) ?? 0) + val;
     if(newId < 0) newId = (this.items.get(type)?.length ?? 0) - 1;
@@ -64,7 +73,7 @@ export class ShopComponent {
     let target : Item = this.getCurrItem(type);
     switch (target.getState()){
       case "NotBought":
-        console.log(this._service.buyItem(this.currIds.get(type) ?? -1, type, 5))
+        console.log(this._service.buyItem(this.currIds.get(type) ?? -1, type, this._playerID))
         break;
       case "Bought":
         //EQUIP
