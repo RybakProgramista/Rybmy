@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 
-import { Equip } from '../app.component';
+import { Equip, httpOptions } from '../app.component';
 import { Item } from "../ShopItems/item";
 
 @Injectable({
@@ -23,7 +23,7 @@ export class ShopService{
      */
     getList(type: String, id: number): Array<Item>{
         let result: Array<Item>
-        let res = this._http.get<Array<Item>>(this.server+"api/equip?playerId=" + id + "&type=" + type)
+        let res = this._http.get<Array<Item>>(this.server+"api/equip?playerId=" + id + "&type=" + type, httpOptions)
         res.subscribe(
             (e : any) => {
                 // /*this.result = e*/ console.log(e[0])
