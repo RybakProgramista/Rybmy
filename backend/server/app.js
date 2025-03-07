@@ -9,11 +9,14 @@ import crypto from 'crypto'
 import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
 
-app.use(cors())
+// app.use(cors({credentials: true, origin: 'http://localhost:4200'}));
+
 app.use(express.json())
-app.use('/api', fish)
-app.use('/api', player)
-app.use('/api', equip)
+app.use('/api',cors({credentials: true, origin: 'http://localhost:4200'}), fish)
+app.use('/api',cors({credentials: true, origin: 'http://localhost:4200'}), player)
+app.use('/api',cors({credentials: true, origin: 'http://localhost:4200'}), equip)
+// app.use();
+
 
 
 

@@ -7,7 +7,6 @@ import { money } from "../controllers/get/money.js"
 import authenticate from "../controllers/get/authenticate.js";
 import { moneyChange } from "../controllers/put/moneyChange.js"
 import testLogin from "../controllers/get/testLogin.js"
-import authenticate from "../controllers/get/authenticate.js";
 const router = Router()
 
 router.get('/login', authenticate, login)
