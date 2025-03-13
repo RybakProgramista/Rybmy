@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
-import { Znajomy } from '../app.component';
+import { httpOptions, Znajomy } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class FriendsService {
    * @param idGracz - gówno
    * @returns 
    */
-  getFriends(idGracz: number): Observable <any> {
-    return this.http.get<Znajomy>((this.apiUrl+"api/get/znajomi?id=" + idGracz));
+  getFriends(): Observable <any> {
+    return this.http.get<Znajomy>((this.apiUrl+"api/get/znajomi"), httpOptions);
   }
 }
