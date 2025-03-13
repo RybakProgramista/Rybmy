@@ -119,7 +119,6 @@ interface Player {
 }
 
 export interface Znajomy {
-  id: number;
   nazwa: string;
 }
 
