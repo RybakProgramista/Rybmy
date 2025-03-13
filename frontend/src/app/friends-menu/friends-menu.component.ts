@@ -21,7 +21,7 @@ export class FriendsMenuComponent {
   
     //ładowanie znajomych
     loadFriends(): void{
-      this.friendsService.getFriends(this._idGracz).subscribe(
+      this.friendsService.getFriends().subscribe(
         (data) => {
           this.friends = data;  // przypisanie znajomych
           console.log(data);
