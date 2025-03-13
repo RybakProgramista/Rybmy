@@ -1,4 +1,4 @@
-import { Component, HostBinding, inject, OnInit } from '@angular/core';
+import { Component, HostBinding, inject, Injectable, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MainSceneComponent } from './main-scene/main-scene.component';
 import { ShopComponent } from './shop/shop.component';
@@ -12,7 +12,6 @@ import { FriendsMenuComponent } from './friends-menu/friends-menu.component';
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet,
     MainSceneComponent,
     LineComponent,
     ShopComponent,
@@ -49,20 +48,24 @@ export class AppComponent {
 
 
   //SERWER
-  a = new ShopService()
-  b = this.a.getList("wedka",1)
   headers = new HttpHeaders();
   _http = inject(HttpClient)
   // options = new RequestOptions({ headers: this.headers, withCredentials: true });
 
-  id : number = -1;
+  @ViewChild(ShopComponent) shop! : ShopComponent;
+  @ViewChild(FriendsMenuComponent) friends! : FriendsMenuComponent;
+  _id : number = -1;
   server : string = 'http://localhost:3000/'
   isLoggedIn : boolean = false;
 
   constructor(private dataService: DataService, httpClient: HttpClient) {}
 
   ngOnInit() {}
-
+  /**
+   * Dokonuje próby zalogowania się przez gracza 
+   * @param playerLogin - login gracza
+   * @param playerPassword - hasło gracza
+   */
   async tryLogginIn(playerLogin : string, playerPassword : string) {
     console.log(playerLogin + " " + playerPassword, httpOptions)
 
@@ -73,14 +76,13 @@ export class AppComponent {
       '&password=' +
       playerPassword, httpOptions).subscribe(
         async (id: number) => {
-          this.id = id
-          await this.id
-          if (this.id == -1) {
+          this._id = id
+          await this._id
+          if (this._id == -1) {
             //niezalogowano
           } else {
             //zalogowano
             this.isLoggedIn = true;
-            console.log(playerLogin);
           }
         }
       )
@@ -98,7 +100,6 @@ export class AppComponent {
     //   .then((response) => response.json())
     //   .then((id) => (this.id = id));
     // await console.log(this.id + '');
-    
   }
 
   //Reszta
