@@ -16,8 +16,13 @@ export class ShopService{
     // b = this.getList("wedka",1)
     
     headers = new HttpHeaders();
-    
-
+  
+    /**
+     * Pobiera listę WSZYSTKICH przedmiotów z serwera
+     * @param type - typ przedmiotów, które mają zostać pobrane
+     * @param id - id gracza
+     * @returns zwraca listę obiektów typu item
+     */
     getList(type: String, id: number): Array<Item>{
         let result: Array<Item>
         let res = this._http.get<Array<Item>>(this.server+"api/equip?playerId=" + id + "&type=" + "wedka", httpOptions)
@@ -38,6 +43,13 @@ export class ShopService{
         result = []
         return result
     }
+    /**
+     * Dokonuje zakupu przedmiotu
+     * @param itemID - id przedmiotu, który ma zostać kupiony
+     * @param itemType - typ przedmiotu, który ma zostać kupiony
+     * @param playerID - id gracza, który kupuje przedmiot
+     * @returns - zwraca zmienną boolean, odpowiadającą temu, czy dany przedmiot udało się zakupić
+     */
     buyItem(itemID : number, itemType : String, playerID : number) : boolean{
         let res: boolean = false
         this._http.get<Boolean>(this.server+"api/possibilityToBuy?id=" + itemID + "&type=" + itemType + "&playerId=" + playerID).subscribe(

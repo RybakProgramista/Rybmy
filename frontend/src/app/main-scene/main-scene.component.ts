@@ -66,6 +66,9 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
       });
     });
   }
+  /**
+   * Funkcja odpowiadająca za interakcję gracza ze światem gry, zależna od obecnego stanu rozgrywki
+   */
   interact() : void{
     if(this.currState == "ZARZUĆ"){ //zarzucenie
       this.durability = this.maxDurability;
@@ -83,25 +86,34 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
       this.fishOn = true;
       this.currState = "CIĄGNIJ";
       this.timer = 0;
-      Ryba: String;
+      //Sprawdzanie co to za ryba
       
-
-
-
-
-
     }
   }
+  /**
+   * Funkcja, która zmienia status ciągnięcia ryby
+   * @param newState - nowy status, odpowiadający temu czy ryba jest ciągnięta
+   */
   changePulling(newState : boolean) : void{
     if(this.fishOn){
       this.pullingFish = newState;
     }
   }
+  /**
+   * Funkcja, która wykonuje podebranie ryby
+   */
   podbierz() : void{
     if(this.isPodbierable){
       this.fishPulledOut();
     }
   }
+  /**
+   * Funkcja odpowiedzialna za załadowanie Spritea z folderu Sprites i stworzenie go w świecie gry
+   * @param path - ścieżka do Spritea, poczynając od olderu Sprites
+   * @param x - pozycja X w świecie gry, na której ma się pojawić Sprite
+   * @param y - pozycja Y w świecie gry, na której ma się pojawić Sprite
+   * @param isVisible - ustawienbie, czy Sprite ma być widoczny po załadowaniu
+   */
   loadSprite(path : string, x : number, y : number, isVisible : boolean): void{ //funkcja do ładowania spriteu na scenę
     PIXI.Assets.load("../assets/Sprites/" + path).then(temp =>{
       let loadedSprite = new PIXI.Sprite(temp);
@@ -113,9 +125,18 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
       console.log("załadowało " + path);
     });
   }
+  /**
+   * Funkcja losująca liczbę z zakresu
+   * @param min - minimalna wartość
+   * @param max - maksymalna wartość
+   * @returns zwraca zmienną typu number
+   */
   random(min : number, max : number):number{ //random dla leniwych fiutów jak ja
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
+  /**
+   * Funkcja wywoływana po złowieniu ryby
+   */
   fishPulledOut() : void{ //ryba złowiona
     alert("Złowiłeś karasia");
     this.gameObjManager.findGameObject("spławik").setYPos(this.idleSplawikY)
@@ -124,6 +145,9 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
     this.currState = "ZARZUĆ";
     this.fishOn = false;
   }
+  /**
+   * Funkcja wywoływana po zerwaniu ryby
+   */
   fishLost(): void{
     alert("Zerwałeś Zestaw");
     this.gameObjManager.findGameObject("spławik").setYPos(this.idleSplawikY)
@@ -132,6 +156,10 @@ export class MainSceneComponent implements OnInit, AfterViewInit  {
     this.currState = "ZARZUĆ";
     this.fishOn = false;
   }
+  /**
+   * Funkcja update, która wykonywana jest co ticka
+   * @param time 
+   */
   update(time : any) : void{ //WAŻNE GÓWNO FUNKCJA CO SIĘ ROBI CO TICKA
     this.gameObjManager.findGameObject("spławik").setSize(this.gameObjManager.findGameObject("spławik").getSprite().position.y / this.idleSplawikY * 64);
     if(this.currState == "CIĄGNIJ" && !this.fishOn){

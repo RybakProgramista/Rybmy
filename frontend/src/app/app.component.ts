@@ -1,4 +1,4 @@
-import { Component, HostBinding, inject, OnInit } from '@angular/core';
+import { Component, HostBinding, inject, Injectable, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MainSceneComponent } from './main-scene/main-scene.component';
 import { ShopComponent } from './shop/shop.component';
@@ -56,14 +56,19 @@ export class AppComponent {
   _http = inject(HttpClient)
   // options = new RequestOptions({ headers: this.headers, withCredentials: true });
 
-  id : number = -1;
+  @ViewChild(ShopComponent) shop! : ShopComponent;
+  _id : number = -1;
   server : string = 'http://localhost:3000/'
   isLoggedIn : boolean = false;
 
   constructor(private dataService: DataService, httpClient: HttpClient) {}
 
   ngOnInit() {}
-
+  /**
+   * Dokonuje próby zalogowania się przez gracza 
+   * @param playerLogin - login gracza
+   * @param playerPassword - hasło gracza
+   */
   async tryLogginIn(playerLogin : string, playerPassword : string) {
     console.log(playerLogin + " " + playerPassword, httpOptions)
 
@@ -99,7 +104,6 @@ export class AppComponent {
     //   .then((response) => response.json())
     //   .then((id) => (this.id = id));
     // await console.log(this.id + '');
-    
   }
 
   //Reszta
