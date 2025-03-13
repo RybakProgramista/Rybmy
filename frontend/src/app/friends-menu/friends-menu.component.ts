@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FriendsService } from './friends.service';
 
 @Component({
@@ -10,15 +10,8 @@ import { FriendsService } from './friends.service';
 })
 export class FriendsMenuComponent {
   friends: any[] = []; //lista z znajomymi
-    _idGracz: number = -1;
-    @Output() sendID = new EventEmitter<number>(); 
     constructor(private friendsService: FriendsService) {
-      this.sendID.subscribe(id => {
-        this._idGracz = id;
-        this.loadFriends();
-      })
     }
-  
     //ładowanie znajomych
     loadFriends(): void{
       this.friendsService.getFriends().subscribe(

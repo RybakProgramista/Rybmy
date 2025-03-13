@@ -5,6 +5,8 @@ import {
   Input,
   OnInit,
   inject,
+  OnChanges,
+  SimpleChanges
 } from '@angular/core';
 import { Item } from '../ShopItems/item';
 import { ShopService } from './shop-service';
@@ -21,28 +23,22 @@ const equipmentTypeArray: equipmentType[] = ['wedka', 'kolowrotek', 'zylka'];
 })
 export class ShopComponent {
   _service = inject(ShopService);
-  _playerID : number = -1;
+  _playerID! : number;
   items : Map<equipmentType, Array<Item>> = new Map<equipmentType, Array<Item>>();
   currIds: Map<equipmentType, number> = new Map([
     ["wedka", 0],
     ["kolowrotek", 0],
     ["zylka", 0]
   ]);
-  @Output() sendID = new EventEmitter<number>();
-  constructor(){
-    this.sendID.subscribe(id => {
-      this._playerID = id;
-      this.initialize();
-    })
-  }
   /**
    * Inicjalizuje zawartość sklepu, po zalogowaniu się przez gracza
    */
-  initialize(){
+  initialize() : number{
     for(let a : number = 0; a < equipmentTypeArray.length; a++){
       this.items.set(equipmentTypeArray[a], this._service.getList(equipmentTypeArray[a]));
       console.log(this.items.get(equipmentTypeArray[a]));
-  }
+    }
+    return 0;
   }
   /**
    * Zmienia wyświetlany obecnie przez gracza przedmiot po interakcji gracza
