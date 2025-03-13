@@ -37,6 +37,6 @@
     <app-line [durabilityPercent]="currDurabilityPercent"></app-line>
   </div>
   <div class="store-panel">
-    <app-shop></app-shop>
+    <app-shop (durabilityChanged)="maxDurabilityChanged($event)"></app-shop>
   </div>
 </div>
