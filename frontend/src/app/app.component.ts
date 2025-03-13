@@ -7,7 +7,6 @@ import { DataService } from './Client Handler/data.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ShopService } from './shop/shop-service';
 import { FriendsMenuComponent } from './friends-menu/friends-menu.component';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
