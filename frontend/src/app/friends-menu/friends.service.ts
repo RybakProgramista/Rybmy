@@ -21,6 +21,6 @@ export class FriendsService {
    * @returns 
    */
   getFriends(): Observable <any> {
-    return this.http.get<Znajomy[]>((this.apiUrl+"api/znajomi"), httpOptions);
+    return this.http.get<Array<Znajomy>>((this.apiUrl+"api/znajomi"), httpOptions);
   }
 }
