@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FriendsService } from './friends.service';
+import { Znajomy } from '../app.component';
 
 @Component({
   selector: 'app-friends-menu',
@@ -15,9 +16,8 @@ export class FriendsMenuComponent {
     //ładowanie znajomych
     loadFriends(): void{
       this.friendsService.getFriends().subscribe(
-        (data) => {
-          this.friends = data;  // przypisanie znajomych
-          console.log(data);
+        (data:Znajomy[]) => {
+          this.friends = data;
         },
         (error) => {
           console.error("coś nie działa", error);
