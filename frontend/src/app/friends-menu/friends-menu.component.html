@@ -1,3 +1,5 @@
 <div class="bg">
-    
+    @for (item of friends; track $index) {
+        <div>{{item.nazwa}}</div>
+    }
 </div>

@@ -20,7 +20,7 @@ export class FriendsService {
    * @param idGracz - gówno
    * @returns 
    */
-  getFriends(): Observable <any> {
-    return this.http.get<Array<Znajomy>>((this.apiUrl+"api/znajomi"), httpOptions);
+  getFriends(): Observable <Znajomy[]> {
+    return this.http.get<Znajomy[]>((this.apiUrl+"api/znajomi"), httpOptions);
   }
 }
