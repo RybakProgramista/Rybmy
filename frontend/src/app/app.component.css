@@ -68,6 +68,14 @@
    }
 }
 
+/* 
+.field:has(.left-panel>.menu-bar:hover) {
+   &>.middle-panel>.poppin {
+      display: block;
+      transform: translateY(0%);
+   }
+} */
+
 #login {
    margin-top: 25%;
 }
@@ -102,4 +110,4 @@
    margin: 6px 0;
 }
 
-.menu-bar: {}
+.menu-bar {}
