@@ -16,8 +16,9 @@ export class FriendsMenuComponent {
     loadFriends(): void{
       this.friendsService.getFriends().subscribe(
         (data) => {
-          this.friends = data;  // przypisanie znajomych
-          console.log(data);
+          data.forEach(element => {
+            console.log(element);
+          });
         },
         (error) => {
           console.error("coś nie działa", error);
