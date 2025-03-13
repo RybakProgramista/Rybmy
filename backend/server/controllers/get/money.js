@@ -2,7 +2,7 @@ import database from '../../database.js'
 
 
 export const money = (req, res) => {
-  const id = req.query.id;
+  const id = res.locals.id;
 
 
   database.query('SELECT `pieniadze` FROM `gracz` WHERE `idGracz`=?;', [id], function (error, pieniadzeGracza) {

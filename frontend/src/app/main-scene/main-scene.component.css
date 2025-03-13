@@ -10,7 +10,7 @@
     width: 66.65%;
     height: 80%;
     background-color: purple;
-    display: block;
+    display: none;
     /*zmień na block, aby okno było widoczne*/
     text-align: center;
     font: 50px bold;

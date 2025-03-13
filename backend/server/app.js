@@ -9,11 +9,14 @@ import crypto from 'crypto'
 import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
 
-app.use(cors())
+// app.use(cors({credentials: true, origin: 'http://localhost:4200'}));
+
 app.use(express.json())
-app.use('/api', fish)
-app.use('/api', player)
-app.use('/api', equip)
+app.use('/api',cors({credentials: true, origin: 'http://localhost:4200'}), fish)
+app.use('/api',cors({credentials: true, origin: 'http://localhost:4200'}), player)
+app.use('/api',cors({credentials: true, origin: 'http://localhost:4200'}), equip)
+// app.use();
+
 
 
 
@@ -27,8 +30,8 @@ app.use('/api', equip)
 
 
 app.listen(port, () => {
-  // console.log(dotenv.config())
-  // console.log(jwt.sign({userId: "4"},process.env.TOKEN_SECRET,{expiresIn: '20s'}));
+  // dotenv.config()
+  // console.log(jwt.sign({userId: "4"},process.env.TOKEN_SECRET,{expiresIn: '100s'}));
 
   console.log("Nasłuchuje na porcie " + port)
 })
