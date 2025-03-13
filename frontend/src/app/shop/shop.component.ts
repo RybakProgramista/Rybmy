@@ -25,6 +25,7 @@ export class ShopComponent {
   _service = inject(ShopService);
   _playerID! : number;
   items : Map<equipmentType, Array<Item>> = new Map<equipmentType, Array<Item>>();
+  equipedItems : Map<equipmentType, Item> = new Map<equipmentType, Item>();
   currIds: Map<equipmentType, number> = new Map([
     ["wedka", 0],
     ["kolowrotek", 0],
@@ -96,7 +97,7 @@ export class ShopComponent {
         console.log(this._service.buyItem(this.currIds.get(type) ?? -1, type, this._playerID))
         break;
       case "Bought":
-        //EQUIP
+        this.equipedItems.set(type, target);
         break;
       case "Equipped":
         //UNEQUIP
@@ -105,5 +106,13 @@ export class ShopComponent {
         //ERROR
         break;
     }
+  }
+  @Output() durabilityChanged = new EventEmitter<number>;
+  calculateDurability() : void{
+    let out : number = 0;
+    for(let a : number = 0; a < equipmentTypeArray.length; a++){
+      out += (this.equipedItems.get(equipmentTypeArray[a]) ?? new Item(null)).getDurability();
+    }
+    this.durabilityChanged.emit(out);
   }
 }
