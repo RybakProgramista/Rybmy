@@ -23,9 +23,9 @@ export class ShopService{
      * @param id - id gracza
      * @returns zwraca listę obiektów typu item
      */
-    getList(type: String, id: number): Array<Item>{
+    getList(type: String): Array<Item>{
         let result: Array<Item>
-        let res = this._http.get<Array<Item>>(this.server+"api/equip?playerId=" + id + "&type=" + "wedka", httpOptions)
+        let res = this._http.get<Array<Item>>(this.server+"api/equip?" + "&type=" + type, httpOptions)
         res.subscribe(
             (e : any) => {
                 // /*this.result = e*/ console.log(e[0])

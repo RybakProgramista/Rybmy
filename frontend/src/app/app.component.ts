@@ -7,13 +7,11 @@ import { DataService } from './Client Handler/data.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ShopService } from './shop/shop-service';
 import { FriendsMenuComponent } from './friends-menu/friends-menu.component';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet,
     MainSceneComponent,
     LineComponent,
     ShopComponent,
@@ -50,13 +48,12 @@ export class AppComponent {
 
 
   //SERWER
-  a = new ShopService()
-  b = this.a.getList("wedka",1)
   headers = new HttpHeaders();
   _http = inject(HttpClient)
   // options = new RequestOptions({ headers: this.headers, withCredentials: true });
 
   @ViewChild(ShopComponent) shop! : ShopComponent;
+  @ViewChild(FriendsMenuComponent) friends! : FriendsMenuComponent;
   _id : number = -1;
   server : string = 'http://localhost:3000/'
   isLoggedIn : boolean = false;
@@ -79,14 +76,13 @@ export class AppComponent {
       '&password=' +
       playerPassword, httpOptions).subscribe(
         async (id: number) => {
-          this.id = id
-          await this.id
-          if (this.id == -1) {
+          this._id = id
+          await this._id
+          if (this._id == -1) {
             //niezalogowano
           } else {
             //zalogowano
             this.isLoggedIn = true;
-            console.log(playerLogin);
           }
         }
       )
