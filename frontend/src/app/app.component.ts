@@ -23,15 +23,21 @@ import { FriendsMenuComponent } from './friends-menu/friends-menu.component';
 })
 export class AppComponent {
   //SERWER
-  a = new ShopService()
-  b = this.a.getList("wedka",1)
+  a = new ShopService();
+  b = this.a.getList('wedka', 1);
+  state = false;
+  @HostBinding('class.isOpen') get isMenuOn() {
+    return this.state;
+  }
 
-  playerLogin : string = "";
-  playerPassword : string = "";
-  id : number = -1;
-  server : string = 'http://localhost:3000/'
-  @HostBinding("class.loged") get isLogged() { return !this.isLoggedIn; }
-  isLoggedIn : boolean = false;
+  playerLogin: string = '';
+  playerPassword: string = '';
+  id: number = -1;
+  server: string = 'http://localhost:3000/';
+  @HostBinding('class.loged') get isLogged() {
+    return !this.isLoggedIn;
+  }
+  isLoggedIn: boolean = false;
 
   constructor(private dataService: DataService, httpClient: HttpClient) {}
 
@@ -65,6 +71,10 @@ export class AppComponent {
   }
   changeCurrDurability(newVal: number) {
     this.currDurabilityPercent = newVal;
+  }
+
+  menuOn() {
+    this.state = !this.state;
   }
 }
 
