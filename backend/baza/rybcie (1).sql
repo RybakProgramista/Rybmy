@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2025 at 03:24 PM
+-- Generation Time: Mar 14, 2025 at 03:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,7 +42,7 @@ CREATE TABLE `dane` (
 INSERT INTO `dane` (`id`, `login`, `haslo`, `licznik`, `dataBlokady`) VALUES
 (1, '[value-2]', '[value-3]', 0, NULL),
 (4, 'ja', 'ja', 0, NULL),
-(5, 'kacper', '$2b$10$EinMgT8.Ig526mLVGcRj.Oe7uKSXA9ovTkEYjt/6ERMB0.tKutSzS', 2, NULL),
+(5, 'kacper', '$2b$10$2Lbqy7yNHvieFRLegzcQ1.BQEI7AE0l5D2jZPHGjDvWyXlyjYqr3y', 0, '2025-03-14 15:29:09'),
 (6, 'jacek', '123', 0, NULL),
 (7, '123', 'asd', 0, NULL),
 (8, '4566', 'qwe', 0, NULL),
