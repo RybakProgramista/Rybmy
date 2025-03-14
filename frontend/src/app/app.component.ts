@@ -60,7 +60,9 @@ export class AppComponent {
 
   constructor(private dataService: DataService, httpClient: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.tryLogginIn("", "")
+  }
   /**
    * Dokonuje próby zalogowania się przez gracza 
    * @param playerLogin - login gracza

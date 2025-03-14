@@ -90,11 +90,18 @@ export class ShopComponent {
    * Wykonuje akcję związaną z obecnie wyświetlanym przedmiotem, odpowiednią jej stanowi (np jeśli przedmiot jest nie kupiony, to go kupuje)
    * @param type - typ przedmiotu, z którym ma zostać wykonana akcja
    */
-  useItem(type : equipmentType){
+  async useItem(type : equipmentType){
     let target : Item = this.getCurrItem(type);
     switch (target.getState()){
       case "NotBought":
-        console.log(this._service.buyItem(this.currIds.get(type) ?? -1, type, this._playerID))
+        let isBought  = await this._service.buyEquip(this.currIds.get(type) ?? -1, type)
+        if (isBought) {
+          console.log("true");
+        }else{
+          console.log("false");
+          
+        }
+        
         break;
       case "Bought":
         this.equipedItems.set(type, target);

@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 
 import { Equip, httpOptions } from '../app.component';
 import { Item } from "../ShopItems/item";
+import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
 @Injectable({
   providedIn: 'root',
 })
@@ -47,16 +48,11 @@ export class ShopService{
      * Dokonuje zakupu przedmiotu
      * @param itemID - id przedmiotu, który ma zostać kupiony
      * @param itemType - typ przedmiotu, który ma zostać kupiony
-     * @param playerID - id gracza, który kupuje przedmiot
      * @returns - zwraca zmienną boolean, odpowiadającą temu, czy dany przedmiot udało się zakupić
      */
-    buyItem(itemID : number, itemType : String, playerID : number) : boolean{
-        let res: boolean = false
-        this._http.get<Boolean>(this.server+"api/possibilityToBuy?id=" + itemID + "&type=" + itemType + "&playerId=" + playerID).subscribe(
-            (e : any) =>{
-                res =  e==1;
-            }
-        )
+    async buyEquip(itemID : number, itemType : String) {
+        let res = firstValueFrom(await this._http.get<Boolean>(this.server+"api/buyEquip?id=" + itemID + "&type=" + itemType , httpOptions))
+        // console.log(res);
         return res;
     }
 }
