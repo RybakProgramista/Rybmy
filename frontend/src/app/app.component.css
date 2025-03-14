@@ -46,7 +46,7 @@
 }
 
 
-:host .isOpen {
+:host.isOpen {
    .menu-content {
       transform: translateX(0%);
    }
