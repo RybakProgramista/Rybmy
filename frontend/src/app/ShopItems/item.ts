@@ -19,7 +19,6 @@ export class Item{
         if(this.value < 0){
             //console.error("Item cannot be worth less than 0 you dumb fuck");
         }
-        console.log(this.durability);
         
     }
     /**
