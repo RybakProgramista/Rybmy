@@ -30,8 +30,8 @@ app.use('/api',cors({credentials: true, origin: 'http://localhost:4200'}), equip
 
 
 app.listen(port, () => {
-  dotenv.config()
-  console.log(jwt.sign({userId: "4"},process.env.TOKEN_SECRET,{expiresIn: '100s'}));
+  // dotenv.config()
+  // console.log(jwt.sign({userId: "4"},process.env.TOKEN_SECRET,{expiresIn: '100s'}));
 
   console.log("Nasłuchuje na porcie " + port)
 })

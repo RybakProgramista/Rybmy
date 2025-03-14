@@ -12,9 +12,9 @@ export const equip = (req, res) => {
             try {
                 let list = (equips[0][type] + "").slice(0, -1).split(";")
             if (list[0] == '' || list == "nul") {
-                query = 'SELECT `nazwa`,`cena`, IF(1>2'
+                query = 'SELECT `nazwa`,`cena`, `wytrzymalosc`, IF(1>2'
             } else {
-                query = 'SELECT `nazwa`,`cena`, IF('
+                query = 'SELECT `nazwa`,`cena`, `wytrzymalosc`, IF('
                 list.forEach(id => {
                     query += '`id`=' + id + ' OR '
                 })
