@@ -107,7 +107,11 @@ export class ShopComponent {
         break;
     }
   }
+  //output dla wytrzymalosc, do app.component
   @Output() durabilityChanged = new EventEmitter<number>;
+  /**
+   * Oblicza wytrzymałość sprzętu gracza, którą następnie emituje do app.component
+   */
   calculateDurability() : void{
     let out : number = 0;
     for(let a : number = 0; a < equipmentTypeArray.length; a++){
