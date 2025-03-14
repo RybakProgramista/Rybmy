@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2024 at 03:20 PM
--- Wersja serwera: 10.4.32-MariaDB
--- Wersja PHP: 8.0.30
+-- Generation Time: Mar 14, 2025 at 03:24 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `dane`
+-- Table structure for table `dane`
 --
 
 CREATE TABLE `dane` (
@@ -42,14 +42,15 @@ CREATE TABLE `dane` (
 INSERT INTO `dane` (`id`, `login`, `haslo`, `licznik`, `dataBlokady`) VALUES
 (1, '[value-2]', '[value-3]', 0, NULL),
 (4, 'ja', 'ja', 0, NULL),
-(5, 'kacper', '$2b$10$EinMgT8.Ig526mLVGcRj.Oe7uKSXA9ovTkEYjt/6ERMB0.tKutSzS', 0, '2024-12-19 14:32:51'),
+(5, 'kacper', '$2b$10$EinMgT8.Ig526mLVGcRj.Oe7uKSXA9ovTkEYjt/6ERMB0.tKutSzS', 2, NULL),
 (6, 'jacek', '123', 0, NULL),
 (7, '123', 'asd', 0, NULL),
 (8, '4566', 'qwe', 0, NULL),
-(9, 'zzz5e2', 'g34wg', 0, NULL);
+(9, 'zzz5e2', 'g34wg', 0, NULL),
+(10, 'aAaAa', '$2b$10$2Lbqy7yNHvieFRLegzcQ1.BQEI7AE0l5D2jZPHGjDvWyXlyjYqr3y', 0, NULL);
 
 --
--- Wyzwalacze `dane`
+-- Triggers `dane`
 --
 DELIMITER $$
 CREATE TRIGGER `dodawanie` AFTER INSERT ON `dane` FOR EACH ROW BEGIN
@@ -65,7 +66,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `gracz`
+-- Table structure for table `gracz`
 --
 
 CREATE TABLE `gracz` (
@@ -83,18 +84,19 @@ CREATE TABLE `gracz` (
 --
 
 INSERT INTO `gracz` (`idGracz`, `nazwa`, `doswiadczenie`, `pieniadze`, `wedka`, `kolowrotek`, `zylka`) VALUES
-(1, '', 0, 15, '1;3;', '', '1;1;1;\'2\';11;3;'),
-(4, '', 0, 70, NULL, NULL, NULL),
-(5, 'kacper', 0, 0, '2;', NULL, NULL),
-(6, 'jacek', 0, 0, NULL, NULL, NULL),
-(7, '123', 0, 0, NULL, NULL, NULL),
-(8, '4566', 0, 0, NULL, NULL, NULL),
-(9, 'zzz5e2', 0, 0, NULL, NULL, NULL);
+(1, '', 0, 15, '1;3;', '', '1;2;'),
+(4, '', 0, 70, NULL, NULL, '1;2;'),
+(5, 'kacper', 0, 0, '2;', NULL, '1;2;'),
+(6, 'jacek', 0, 0, NULL, NULL, '1;2;'),
+(7, '123', 0, 0, NULL, NULL, '1;2;'),
+(8, '4566', 0, 0, NULL, NULL, '1;2;'),
+(9, 'zzz5e2', 0, 0, NULL, NULL, '1;2;'),
+(10, 'aAaAa', 0, 110, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `kolowrotek`
+-- Table structure for table `kolowrotek`
 --
 
 CREATE TABLE `kolowrotek` (
@@ -116,7 +118,7 @@ INSERT INTO `kolowrotek` (`id`, `nazwa`, `wytrzymalosc`, `cena`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `ryby`
+-- Table structure for table `ryby`
 --
 
 CREATE TABLE `ryby` (
@@ -150,7 +152,7 @@ INSERT INTO `ryby` (`idRyby`, `nazwa`, `obrazek`, `minKg`, `maxKg`, `minWymiar`,
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `wedka`
+-- Table structure for table `wedka`
 --
 
 CREATE TABLE `wedka` (
@@ -172,7 +174,7 @@ INSERT INTO `wedka` (`id`, `nazwa`, `wytrzymalosc`, `cena`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `znajomi`
+-- Table structure for table `znajomi`
 --
 
 CREATE TABLE `znajomi` (
@@ -188,12 +190,13 @@ INSERT INTO `znajomi` (`idGracz`, `idZnajomy`) VALUES
 (5, '6;5'),
 (7, ''),
 (8, '7;'),
-(9, '');
+(9, ''),
+(10, '');
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `zylka`
+-- Table structure for table `zylka`
 --
 
 CREATE TABLE `zylka` (
@@ -213,41 +216,41 @@ INSERT INTO `zylka` (`id`, `nazwa`, `wytrzymalosc`, `cena`) VALUES
 (3, 'Robin', 60, 0);
 
 --
--- Indeksy dla zrzutów tabel
+-- Indexes for dumped tables
 --
 
 --
--- Indeksy dla tabeli `dane`
+-- Indexes for table `dane`
 --
 ALTER TABLE `dane`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `gracz`
+-- Indexes for table `gracz`
 --
 ALTER TABLE `gracz`
   ADD KEY `idGracz` (`idGracz`);
 
 --
--- Indeksy dla tabeli `kolowrotek`
+-- Indexes for table `kolowrotek`
 --
 ALTER TABLE `kolowrotek`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `ryby`
+-- Indexes for table `ryby`
 --
 ALTER TABLE `ryby`
   ADD PRIMARY KEY (`idRyby`);
 
 --
--- Indeksy dla tabeli `wedka`
+-- Indexes for table `wedka`
 --
 ALTER TABLE `wedka`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `zylka`
+-- Indexes for table `zylka`
 --
 ALTER TABLE `zylka`
   ADD PRIMARY KEY (`id`);
@@ -260,7 +263,7 @@ ALTER TABLE `zylka`
 -- AUTO_INCREMENT for table `dane`
 --
 ALTER TABLE `dane`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `kolowrotek`
