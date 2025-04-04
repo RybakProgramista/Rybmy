@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 import { Item } from '../ShopItems/item';
 import { ShopService } from './shop-service';
-import { debug } from 'console';
 
 type equipmentType = 'wedka' | 'kolowrotek' | 'zylka';
 const equipmentTypeArray: equipmentType[] = ['wedka', 'kolowrotek', 'zylka'];

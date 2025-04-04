@@ -19,7 +19,6 @@ export const buyEquip = (req, res) => {
             res.json(result[0]["possib"])
         }
     })
-    console.log(querys.buyEquip[type]);
     database.query(querys.buyEquip[type], data, function (error, result) {
         if (error) {
             console.log(error);

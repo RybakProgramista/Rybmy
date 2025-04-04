@@ -1,12 +1,13 @@
 import database from '../../database.js'
 
 
-export const moneyChange = (req, res) => {
-  const { change } = req.query;
+export const moneyChange = (req, res, next) => {
+  
   const id = res.locals.id
+  const change = res.locals.moneyChange
 
   database.query('UPDATE `gracz` SET `pieniadze`= `pieniadze` + ? WHERE `idGracz`=?;', [change, id], function (error, results) {
-    if (error) res.json(false)
-    else res.json(true)
+    
+    res.end()
   })
 }
