@@ -14,10 +14,10 @@
     <app-friends-menu></app-friends-menu>
   </div>
   <div class="middle-panel">
-    <div class="poppin">
-      <input id="login" type="text" placeholder="login"><br>
-      <input id="pw" type="password" placeholder="password"><br>
-      <button id="send" type="button">WYŚLIJ</button>
+    <div class="poppin" [hidden]="isLoggedIn"> 
+      <input id="login" type="text" placeholder="login" #login><br>
+      <input id="pw" type="password" placeholder="password" #pass><br>
+      <button id="send" type="button" (click)="tryLogginIn(login.value, pass.value)">WYŚLIJ</button>
     </div>
     <div class="top-panel">
       RYBMY
@@ -35,6 +35,6 @@
     <app-line [durabilityPercent]="currDurabilityPercent"></app-line>
   </div>
   <div class="store-panel">
-    <app-shop></app-shop>
+    <app-shop (durabilityChanged)="maxDurabilityChanged($event)"></app-shop>
   </div>
 </div>

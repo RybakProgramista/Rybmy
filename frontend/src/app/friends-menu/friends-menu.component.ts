@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FriendsService } from './friends.service';
+import { Znajomy } from '../app.component';
 
 @Component({
   selector: 'app-friends-menu',
@@ -10,19 +11,13 @@ import { FriendsService } from './friends.service';
 })
 export class FriendsMenuComponent {
   friends: any[] = []; //lista z znajomymi
-    idGracz: number = 5;
-  
-    constructor(private friendsService: FriendsService) {}
-    ngOnInit(): void {
-      this.loadFriends();
+    constructor(private friendsService: FriendsService) {
     }
-  
     //ładowanie znajomych
     loadFriends(): void{
-      this.friendsService.getFriends(this.idGracz).subscribe(
-        (data) => {
-          this.friends = data;  // przypisanie znajomych
-          console.log(data);
+      this.friendsService.getFriends().subscribe(
+        (data:Znajomy[]) => {
+          this.friends = data;
         },
         (error) => {
           console.error("coś nie działa", error);
