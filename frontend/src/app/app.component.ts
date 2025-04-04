@@ -1,10 +1,10 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, inject, Injectable, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MainSceneComponent } from './main-scene/main-scene.component';
 import { ShopComponent } from './shop/shop.component';
 import { LineComponent } from './line/line.component';
 import { DataService } from './Client Handler/data.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ShopService } from './shop/shop-service';
 import { FriendsMenuComponent } from './friends-menu/friends-menu.component';
 
@@ -12,7 +12,6 @@ import { FriendsMenuComponent } from './friends-menu/friends-menu.component';
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet,
     MainSceneComponent,
     LineComponent,
     ShopComponent,
@@ -22,6 +21,32 @@ import { FriendsMenuComponent } from './friends-menu/friends-menu.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  //COOKIE
+  // cookieValue?: string;
+  // objectCookieValue?: object;
+  // hasCookieTrue!: boolean;
+  // hasCookieFalse!: boolean;
+
+  // private key = 'myCookie';
+  // private objectKey = 'myObjectCookie';
+
+  // constructor(private cookieService: CookieService) {}
+
+  // setCookies(): void {
+  //   this.cookieService.set("accessToken", 'myValue');
+  //   // this.cookieService.putObject(this.objectKey, {myKey: 'myValue'});
+  // }
+
+  // getCookies(): void {
+  //   this.cookieValue = this.cookieService.get(this.key);
+  //   // this.objectCookieValue = this.cookieService.getObject(this.objectKey);
+  //   // this.hasCookieTrue = this.cookieService.hasKey(this.key) && this.cookieService.hasKey(this.objectKey);
+  //   // this.hasCookieFalse = this.cookieService.hasKey('nonExistentKey');
+  // }
+
+
+
+
   //SERWER
   a = new ShopService();
   b = this.a.getList('wedka', 1);
@@ -41,26 +66,47 @@ export class AppComponent {
 
   constructor(private dataService: DataService, httpClient: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.tryLogginIn("", "")
+  }
+  /**
+   * Dokonuje próby zalogowania się przez gracza 
+   * @param playerLogin - login gracza
+   * @param playerPassword - hasło gracza
+   */
+  async tryLogginIn(playerLogin : string, playerPassword : string) {
+    await this._http.get<number>(this.server +
+      'api/login?login=' +
+      playerLogin +
+      '&password=' +
+      playerPassword, httpOptions).subscribe(
+        async (id: number) => {
+          this._id = id
+          await this._id
+          if (this._id == -1) {
+            //niezalogowano
+            console.log(111);
+            
+          } else {
+            console.log(2222);
+            //zalogowano
+            this.isLoggedIn = true;
+            this.shop.initialize();
+            this.friends.loadFriends();
+          }
+        }
+      )
 
-  tryLogginIn() {
-    fetch(
-      this.server +
-        'api/login?login=' +
-        this.playerLogin +
-        '&password=' +
-        this.playerPassword
-    )
-      .then((response) => response.json())
-      .then((id) => (this.id = id));
-    console.log(this.id + '');
-    if (this.id == -1) {
-      //niezalogowano
-    } else {
-      //zalogowano
-      this.isLoggedIn = true;
-      console.log(this.playerLogin);
-    }
+    // await fetch(
+    //   this.server +
+    //     'api/login?login=' +
+    //     playerLogin +
+    //     '&password=' +
+    //     playerPassword
+    // )
+    //   .then((response) => response.json())
+    //   .then((id) => (this.id = id));
+    // await console.log(this.id + '');
   }
 
   //Reszta
@@ -85,7 +131,6 @@ interface Player {
 }
 
 export interface Znajomy {
-  id: number;
   nazwa: string;
 }
 
@@ -103,9 +148,16 @@ interface Fish {
   opis: string;
 }
 
+export let headers = new HttpHeaders();
+
 export interface Equip {
   id: number;
   nazwa: string;
   wytrzymalosc: number;
   cena: number;
 }
+
+export const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  withCredentials: true 
+};

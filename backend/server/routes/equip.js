@@ -12,7 +12,7 @@ router.get('/getTable/equip', equipT)
 
 router.get('/possibilityToBuy', authenticate, possibilityToBuy)
 
-router.put('/buyEquip', authenticate, buyEquip)
+router.get('/buyEquip', authenticate, buyEquip)
 
 
 
