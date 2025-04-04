@@ -112,6 +112,10 @@ export class AppComponent {
   changeCurrDurability(newVal: number) {
     this.currDurabilityPercent = newVal;
   }
+
+  menuOn() {
+    this.state = !this.state;
+  }
 }
 
 interface Player {

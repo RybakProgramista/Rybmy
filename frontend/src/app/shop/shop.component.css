@@ -1,24 +1,22 @@
 .full-height {
-    height: 100vh; /* 100% wysokości widoku */
-  }
-
-.upper-row{
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
+  height: 100vh;
+  /* 100% wysokości widoku */
 }
 
-.bottom-row{
+.tyl_sklepu {
+  height: 100vh;
+  background-color: chartreuse;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-rows: repeat(5, 1fr);
 }
 
-.containers-placement{
+.blok_sklep {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 20%;
-  height: 100vh; 
+  grid-template-columns: 25% 50% 25%;
+  grid-template-rows: 70% 30%;
 }
 
-.containero{
-  display: grid;
+.zakup {
+  display: block;
+  width: 400%;
 }
