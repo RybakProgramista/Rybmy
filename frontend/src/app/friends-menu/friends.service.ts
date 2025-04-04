@@ -11,14 +11,16 @@ import { httpOptions, Znajomy } from '../app.component';
 export class FriendsService {
   private apiUrl = 'http://localhost:3000/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    
+  }
 
   /**
    * Funkcja zwracająca kurwa nie wiem co to nawet jest
    * @param idGracz - gówno
    * @returns 
    */
-  getFriends(): Observable <any> {
-    return this.http.get<Znajomy>((this.apiUrl+"api/get/znajomi"), httpOptions);
+  getFriends(): Observable <Znajomy[]> {
+    return this.http.get<Znajomy[]>((this.apiUrl+"api/znajomi"), httpOptions);
   }
 }

@@ -60,16 +60,15 @@ export class AppComponent {
 
   constructor(private dataService: DataService, httpClient: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.tryLogginIn("", "")
+  }
   /**
    * Dokonuje próby zalogowania się przez gracza 
    * @param playerLogin - login gracza
    * @param playerPassword - hasło gracza
    */
   async tryLogginIn(playerLogin : string, playerPassword : string) {
-    console.log(playerLogin + " " + playerPassword, httpOptions)
-
-
     await this._http.get<number>(this.server +
       'api/login?login=' +
       playerLogin +
@@ -80,15 +79,17 @@ export class AppComponent {
           await this._id
           if (this._id == -1) {
             //niezalogowano
+            console.log(111);
+            
           } else {
+            console.log(2222);
             //zalogowano
             this.isLoggedIn = true;
+            this.shop.initialize();
+            this.friends.loadFriends();
           }
         }
       )
-
-
-
 
     // await fetch(
     //   this.server +
@@ -120,7 +121,6 @@ interface Player {
 }
 
 export interface Znajomy {
-  id: number;
   nazwa: string;
 }
 

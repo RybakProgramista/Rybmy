@@ -5,6 +5,7 @@ export class Item{
     private name : string;
     private value : number;
     private currState : itemState;
+    private durability : number;
 
     /**
      * Konstruktor klasy Item
@@ -14,9 +15,11 @@ export class Item{
         this.name = (list ? list["nazwa"] : "nazwa");
         this.value = (list ? list["cena"] : -1);
         this.currState = (list ? list["isOwned"] : "NotBought");
+        this.durability = (list ? list["wytrzymalosc"] : -1);
         if(this.value < 0){
             //console.error("Item cannot be worth less than 0 you dumb fuck");
         }
+        
     }
     /**
      * Funkcja, któa zmienia stan obiektu
@@ -45,5 +48,12 @@ export class Item{
      */
     public getState() : itemState{
         return this.currState;
+    }
+    /**
+     * Funkcja zwracająca wytrzymałość sprzętu
+     * @returns - zwraca zmienną typu number
+     */
+    public getDurability() : number{
+        return this.durability;
     }
 }

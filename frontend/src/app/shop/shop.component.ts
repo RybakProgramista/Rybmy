@@ -5,9 +5,12 @@ import {
   Input,
   OnInit,
   inject,
+  OnChanges,
+  SimpleChanges
 } from '@angular/core';
 import { Item } from '../ShopItems/item';
 import { ShopService } from './shop-service';
+import { debug } from 'console';
 
 type equipmentType = 'wedka' | 'kolowrotek' | 'zylka';
 const equipmentTypeArray: equipmentType[] = ['wedka', 'kolowrotek', 'zylka'];
@@ -21,28 +24,22 @@ const equipmentTypeArray: equipmentType[] = ['wedka', 'kolowrotek', 'zylka'];
 })
 export class ShopComponent {
   _service = inject(ShopService);
-  _playerID : number = -1;
+  _playerID! : number;
   items : Map<equipmentType, Array<Item>> = new Map<equipmentType, Array<Item>>();
+  equipedItems : Map<equipmentType, Item> = new Map<equipmentType, Item>();
   currIds: Map<equipmentType, number> = new Map([
     ["wedka", 0],
     ["kolowrotek", 0],
     ["zylka", 0]
   ]);
-  @Output() sendID = new EventEmitter<number>();
-  constructor(){
-    this.sendID.subscribe(id => {
-      this._playerID = id;
-      this.initialize();
-    })
-  }
   /**
    * Inicjalizuje zawartość sklepu, po zalogowaniu się przez gracza
    */
-  initialize(){
+  initialize() : number{
     for(let a : number = 0; a < equipmentTypeArray.length; a++){
       this.items.set(equipmentTypeArray[a], this._service.getList(equipmentTypeArray[a]));
-      console.log(this.items.get(equipmentTypeArray[a]));
-  }
+    }
+    return 0;
   }
   /**
    * Zmienia wyświetlany obecnie przez gracza przedmiot po interakcji gracza
@@ -93,21 +90,38 @@ export class ShopComponent {
    * Wykonuje akcję związaną z obecnie wyświetlanym przedmiotem, odpowiednią jej stanowi (np jeśli przedmiot jest nie kupiony, to go kupuje)
    * @param type - typ przedmiotu, z którym ma zostać wykonana akcja
    */
-  useItem(type : equipmentType){
+  async useItem(type : equipmentType){
     let target : Item = this.getCurrItem(type);
     switch (target.getState()){
       case "NotBought":
-        console.log(this._service.buyItem(this.currIds.get(type) ?? -1, type, this._playerID))
+        let isBought  = await this._service.buyEquip(this.currIds.get(type) ?? -1, type)
+        if (isBought) {
+          this.getCurrItem(type).changeCurrState("Bought");
+        }else{
+          console.log("plebs");
+        }
+        
         break;
       case "Bought":
-        //EQUIP
+        this.getCurrItem(type).changeCurrState("Equipped");
+        this.equipedItems.set(type, target);
+        this.calculateDurability();
         break;
       case "Equipped":
-        //UNEQUIP
+        this.getCurrItem(type).changeCurrState("Bought");
         break;
       default:
         //ERROR
         break;
     }
+  }
+  @Output() durabilityChanged = new EventEmitter<number>;
+  calculateDurability() : void{
+    let out : number = 0;
+    for(let a : number = 0; a < equipmentTypeArray.length; a++){
+      out += (this.equipedItems.get(equipmentTypeArray[a]) ?? new Item(null)).getDurability();
+    }
+    this.durabilityChanged.emit(out);
+    console.log(out);
   }
 }
