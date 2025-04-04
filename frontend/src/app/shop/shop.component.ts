@@ -38,7 +38,6 @@ export class ShopComponent {
   initialize() : number{
     for(let a : number = 0; a < equipmentTypeArray.length; a++){
       this.items.set(equipmentTypeArray[a], this._service.getList(equipmentTypeArray[a]));
-      console.log(this.items.get(equipmentTypeArray[a]));
     }
     return 0;
   }
