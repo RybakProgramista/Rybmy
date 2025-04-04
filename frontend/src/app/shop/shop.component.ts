@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { Item } from '../ShopItems/item';
 import { ShopService } from './shop-service';
+import { debug } from 'console';
 
 type equipmentType = 'wedka' | 'kolowrotek' | 'zylka';
 const equipmentTypeArray: equipmentType[] = ['wedka', 'kolowrotek', 'zylka'];
@@ -96,18 +97,19 @@ export class ShopComponent {
       case "NotBought":
         let isBought  = await this._service.buyEquip(this.currIds.get(type) ?? -1, type)
         if (isBought) {
-          console.log("true");
+          this.getCurrItem(type).changeCurrState("Bought");
         }else{
-          console.log("false");
-          
+          console.log("plebs");
         }
         
         break;
       case "Bought":
+        this.getCurrItem(type).changeCurrState("Equipped");
         this.equipedItems.set(type, target);
+        this.calculateDurability();
         break;
       case "Equipped":
-        //UNEQUIP
+        this.getCurrItem(type).changeCurrState("Bought");
         break;
       default:
         //ERROR
@@ -121,5 +123,6 @@ export class ShopComponent {
       out += (this.equipedItems.get(equipmentTypeArray[a]) ?? new Item(null)).getDurability();
     }
     this.durabilityChanged.emit(out);
+    console.log(out);
   }
 }
